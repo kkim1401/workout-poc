@@ -1,2 +1,2 @@
-export { Hamburger } from './hamburger'
-export { Topbar } from './topbar'
+export { Hamburger } from './hamburger';
+export { Topbar } from './topbar';
