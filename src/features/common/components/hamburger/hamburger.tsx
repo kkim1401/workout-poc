@@ -1,3 +1,5 @@
+'use client';
+
 import { MouseEventHandler } from 'react';
 import styles from './hamburger.module.css';
 import { concatClassNames } from '@/utils';

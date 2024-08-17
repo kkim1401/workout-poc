@@ -9,10 +9,10 @@
 
 .menu {
   position: absolute;
-  width: 300px;
+  width: 240px;
   margin: -100px 0 0 -50px;
   padding: 50px;
-  padding-top: 125px;
+  padding-top: 325px;
   background: var(--surface);
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
@@ -23,5 +23,28 @@
   transform: none;
 }
 
-.menu li {
+.hamburger {
+}
+
+.list {
+  list-style-type: none;
+}
+
+.list li {
+  padding: 10px 0;
+}
+
+.scrim {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  visibility: hidden;
+}
+
+.scrimVisible {
+  visibility: visible;
 }
