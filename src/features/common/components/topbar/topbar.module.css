@@ -9,29 +9,32 @@
 
 .menu {
   position: absolute;
+  padding: 1rem;
+  bottom: 0;
+  top: 0;
+  left: 0;
   width: 240px;
-  margin: -100px 0 0 -50px;
-  padding: 50px;
-  padding-top: 325px;
-  background: var(--surface);
+  background-color: var(--surface);
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
-.menuSelected {
+.menu.visible {
   transform: none;
 }
 
-.hamburger {
-}
-
 .list {
+  margin-top: 3.5rem;
   list-style-type: none;
 }
 
 .list li {
-  padding: 10px 0;
+  margin-top: 1rem;
+}
+
+.list li:first-child {
+  margin-top: 0;
 }
 
 .scrim {
@@ -40,11 +43,11 @@
   right: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  height: 100vh;
-  width: 100vw;
-  visibility: hidden;
+  height: 100%;
+  width: 100%;
+  display: none;
 }
 
-.scrimVisible {
-  visibility: visible;
+.scrim.visible {
+  display: block;
 }

@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { Roboto_Flex } from "next/font/google";
-import "./globals.css";
-import Topbar from "@/features/common/components/topbar/topbar";
+import type { Metadata } from 'next';
+import { Roboto_Flex } from 'next/font/google';
+import './globals.css';
+import { Topbar } from '@/features/common/components';
 
-const roboto = Roboto_Flex({ subsets: ["latin"] });
+const roboto = Roboto_Flex({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Workout PoC",
-  description: "Light weight!",
+  title: 'Workout PoC',
+  description: 'Light weight!',
 };
 
 export default function RootLayout({
@@ -16,9 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={roboto.className}>
-        <Topbar/>
+        <Topbar />
         <main>{children}</main>
       </body>
     </html>

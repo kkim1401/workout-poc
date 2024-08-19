@@ -7,26 +7,24 @@ import { concatClassNames } from '@/utils';
 
 export default function Topbar() {
   const [showMenu, setShowMenu] = useState(false);
-  const handleHamburgerClick = () => setShowMenu(true);
+  const handleMenuOpen = () => setShowMenu(true);
+  const handleMenuClose = () => setShowMenu(false);
 
   return (
     <nav className={styles.container}>
-      <Hamburger className={styles.hamburger} onClick={handleHamburgerClick} />
+      <Hamburger className={styles.hamburger} onClick={handleMenuOpen} />
       <div
-        className={concatClassNames(
-          styles.scrim,
-          showMenu && styles.scrimVisible
-        )}
+        aria-hidden='true'
+        className={concatClassNames(styles.scrim, showMenu && styles.visible)}
+        onClick={handleMenuClose}
       />
       <div
-        className={concatClassNames(
-          styles.menu,
-          showMenu && styles.menuSelected
-        )}
+        className={concatClassNames(styles.menu, showMenu && styles.visible)}
       >
         <Hamburger
           className={styles.hamburger}
-          onClick={handleHamburgerClick}
+          onClick={handleMenuClose}
+          closed={true}
         />
         <ul className={styles.list}>
           <li>

@@ -1,45 +1,44 @@
 :root {
-  --primary: #4C97C1;
-  --primaryDark: #3D79A1;
-  --primaryLight: #8BC9E0;
-  --error: #E70909;
-  --surface: #F7F9FA;
-  --background: #FFFFFF;
+  --primary: #4c97c1;
+  --primaryDark: #3d79a1;
+  --primaryLight: #8bc9e0;
+  --error: #e70909;
+  --surface: #f7f9fa;
+  --background: #ffffff;
   --onPrimary: #000000;
-  --onPrimaryDark: #FFFFFF;
+  --onPrimaryDark: #ffffff;
   --onPrimaryLight: #000000;
-  --onError: #FFFFFF;
+  --onError: #ffffff;
   --onSurface: #000000;
   --onBackground: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary: #4C97C1;
-    --primaryDark: #3D79A1;
-    --primaryLight: #8BC9E0;
-    --error: #E70909;
-    --surface: #F7F9FA;
-    --background: #FFFFFF;
+    --primary: #4c97c1;
+    --primaryDark: #3d79a1;
+    --primaryLight: #8bc9e0;
+    --error: #e70909;
+    --surface: #f7f9fa;
+    --background: #ffffff;
     --onPrimary: #000000;
-    --onPrimaryDark: #FFFFFF;
+    --onPrimaryDark: #ffffff;
     --onPrimaryLight: #000000;
-    --onError: #FFFFFF;
+    --onError: #ffffff;
     --onSurface: #000000;
     --onBackground: #000000;
   }
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+* {
+  padding: 0;
+  margin: 0;
 }
 
 a {
