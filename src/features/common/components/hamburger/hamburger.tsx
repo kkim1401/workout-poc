@@ -12,7 +12,8 @@ type HamburgerProps = {
 
 export default function Hamburger(props: HamburgerProps) {
   return (
-    <div
+    <button
+      aria-label={props.closed ? 'Close menu' : 'Open menu'}
       className={concatClassNames(
         styles.container,
         props.closed && styles.closed,
@@ -23,6 +24,6 @@ export default function Hamburger(props: HamburgerProps) {
       <span className={styles.line} />
       <span className={styles.line} />
       <span className={styles.line} />
-    </div>
+    </button>
   );
 }

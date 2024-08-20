@@ -1,6 +1,6 @@
-.container.closed {
-  position: relative;
-  top: 10px;
+.container {
+  background-color: var(--background);
+  border: none;
 }
 
 .line {
@@ -17,15 +17,15 @@
   margin-bottom: 0;
 }
 
-.closed .line {
+.container.closed .line {
   position: absolute;
   transform: rotate(45deg);
 }
 
-.closed .line:nth-child(2) {
+.container.closed .line:nth-child(2) {
   transform: rotate(-45deg);
 }
 
-.closed .line:last-child {
+.container.closed .line:last-child {
   display: none;
 }
