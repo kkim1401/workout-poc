@@ -12,13 +12,15 @@ export default function Topbar() {
 
   return (
     <nav className={styles.container}>
-      <Hamburger
-        className={concatClassNames(
-          styles.hamburger,
-          showMenu && styles.hidden
-        )}
-        onClick={handleMenuOpen}
-      />
+      <div className={styles.topbar}>
+        <Hamburger
+          className={concatClassNames(
+            styles.hamburger,
+            showMenu && styles.hidden
+          )}
+          onClick={handleMenuOpen}
+        />
+      </div>
       <div
         aria-hidden='true'
         className={concatClassNames(styles.scrim, showMenu && styles.visible)}

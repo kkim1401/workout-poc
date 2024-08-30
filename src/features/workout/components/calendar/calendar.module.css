@@ -1,0 +1,16 @@
+.container {
+  background-color: var(--surfaceVariant);
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.day {
+  color: var(--onSurfaceVariant);
+  margin: auto;
+  text-align: center;
+}
+
+.day div:last-child {
+  margin-top: 0.5rem;
+}

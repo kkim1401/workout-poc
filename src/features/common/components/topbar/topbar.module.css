@@ -1,10 +1,13 @@
 .container {
-  height: 3rem;
-  display: flex;
+}
+
+.topbar {
   align-items: center;
-  padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
-  margin-bottom: 4px;
+  display: flex;
+  padding: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .hamburger.hidden {
