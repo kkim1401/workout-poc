@@ -11,6 +11,9 @@
   text-align: center;
 }
 
-.day div:last-child {
+.dayName {
+}
+
+.dayNumber {
   margin-top: 0.5rem;
 }

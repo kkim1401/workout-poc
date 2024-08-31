@@ -19,18 +19,16 @@ export function getDaysByDayName(date: Date): { [index: string]: number } {
 }
 
 function CalendarDay({
-  className,
   dayName,
   dayNumber,
 }: {
-  className: string;
   dayName: string;
   dayNumber: number;
 }) {
   return (
-    <div className={className}>
-      <div>{dayName}</div>
-      <div>{dayNumber}</div>
+    <div className={styles.day}>
+      <div className={styles.dayName}>{dayName}</div>
+      <div className={styles.dayNumber}>{dayNumber}</div>
     </div>
   );
 }
@@ -40,12 +38,7 @@ export default function Calendar() {
   return (
     <section className={styles.container}>
       {Object.entries(daysByDayName).map(([dayName, dayNumber]) => (
-        <CalendarDay
-          className={styles.day}
-          key={dayName}
-          dayName={dayName}
-          dayNumber={dayNumber}
-        />
+        <CalendarDay key={dayName} dayName={dayName} dayNumber={dayNumber} />
       ))}
     </section>
   );
