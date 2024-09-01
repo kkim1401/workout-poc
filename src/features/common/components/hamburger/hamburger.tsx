@@ -4,22 +4,24 @@ import { MouseEventHandler } from 'react';
 import styles from './hamburger.module.css';
 import { concatClassNames } from '@/utils';
 
-type HamburgerProps = {
+export default function Hamburger({
+  className,
+  isClosed,
+  onClick,
+}: {
   className?: string;
+  isClosed?: boolean;
   onClick?: MouseEventHandler;
-  closed?: boolean;
-};
-
-export default function Hamburger(props: HamburgerProps) {
+}) {
   return (
     <button
-      aria-label={props.closed ? 'Close menu' : 'Open menu'}
+      aria-label={isClosed ? 'Close menu' : 'Open menu'}
       className={concatClassNames(
         styles.container,
-        props.closed && styles.closed,
-        props.className
+        isClosed && styles.closed,
+        className
       )}
-      onClick={(e) => props?.onClick?.(e)}
+      onClick={(e) => onClick?.(e)}
     >
       <span className={styles.line} />
       <span className={styles.line} />

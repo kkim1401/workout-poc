@@ -31,8 +31,8 @@ export default function Topbar() {
       >
         <Hamburger
           className={styles.hamburger}
+          isClosed={true}
           onClick={handleMenuClose}
-          closed={true}
         />
         <ul className={styles.list}>
           <li>
