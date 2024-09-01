@@ -1,6 +1,6 @@
 .topbar {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
-  padding: 1rem;
+  padding: 16px;
   position: relative;
 }
 
@@ -10,7 +10,7 @@
 
 .menu {
   position: absolute;
-  padding: 1rem;
+  padding: 16px;
   bottom: 0;
   top: 0;
   left: 0;
@@ -18,7 +18,9 @@
   background-color: var(--surface);
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), visibility 0.5s;
+  transition:
+    transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    visibility 0.5s;
   visibility: hidden;
 }
 

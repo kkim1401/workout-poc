@@ -2,7 +2,7 @@
   background-color: var(--surfaceVariant);
   display: flex;
   justify-content: center;
-  padding: 1rem;
+  padding: 32px 16px;
 }
 
 .day {
@@ -11,9 +11,13 @@
   text-align: center;
 }
 
-.dayName {
+.dayNumber {
+  margin-top: 0.25rem;
+  padding: 2px 16px;
 }
 
-.dayNumber {
-  margin-top: 0.5rem;
+.dayNumber.current {
+  color: var(--onPrimaryDark);
+  background-color: var(--primaryDark);
+  border-radius: 8px;
 }
