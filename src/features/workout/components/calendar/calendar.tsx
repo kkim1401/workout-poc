@@ -38,9 +38,9 @@ function CalendarDay({
       <div className='subtitle2'>{dayName}</div>
       <div
         className={concatClassNames(
+          'body1',
           styles.dayNumber,
-          isCurrent && styles.current,
-          'body1'
+          isCurrent && styles.current
         )}
       >
         {dayNumber}
@@ -49,13 +49,13 @@ function CalendarDay({
   );
 }
 
-export default function Calendar() {
+export default function Calendar({ className }: { className?: string }) {
   const date = new Date();
   const daysByDayName = getDaysByDayName(date);
   const currentDayName = getCurrentDayName(date);
 
   return (
-    <section className={styles.container}>
+    <section className={concatClassNames(styles.container, className)}>
       {Object.entries(daysByDayName).map(([dayName, dayNumber]) => (
         <CalendarDay
           key={dayName}

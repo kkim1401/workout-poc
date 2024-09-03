@@ -1,0 +1,16 @@
+.container {
+  padding: 0 16px;
+}
+
+.planHeader {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--primaryDark);
+  text-align: inherit;
+}
+
+.planHeader:hover {
+  background-color: var(--primaryLight);
+}

@@ -1,0 +1,12 @@
+.container {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--primaryDark);
+  text-align: inherit;
+}
+
+.container:hover {
+  background-color: var(--primaryLight);
+}

@@ -1,5 +1,4 @@
 'use client';
-
 import { MouseEventHandler } from 'react';
 import styles from './hamburger.module.css';
 import { concatClassNames } from '@/utils';
@@ -11,7 +10,7 @@ export default function Hamburger({
 }: {
   className?: string;
   isClosed?: boolean;
-  onClick?: MouseEventHandler;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }) {
   return (
     <button
