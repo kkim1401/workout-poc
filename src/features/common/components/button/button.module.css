@@ -1,12 +1,31 @@
 .container {
+  align-items: center;
   appearance: none;
-  background-color: transparent;
   border: none;
-  border-radius: 0;
-  color: var(--primaryDark);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  min-width: 64px;
   text-align: inherit;
 }
 
-.container:hover {
-  background-color: var(--primaryLight);
+.text {
+  composes: headline5 from global;
+  color: var(--primaryDark);
+  background-color: transparent;
+  padding: 6px 8px;
+}
+
+.text:hover {
+  background-color: var(--primaryLightest);
+}
+
+.text:focus-visible {
+  color: var(--primaryDarkest);
+  background-color: var(--primaryLightest);
+}
+
+.text:active {
+  color: var(--primaryDarkest);
+  background-color: var(--primaryLighter);
 }
