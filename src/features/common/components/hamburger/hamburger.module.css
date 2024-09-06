@@ -1,6 +1,7 @@
 .container {
   background-color: var(--background);
   border: none;
+  cursor: pointer;
 }
 
 .line {
