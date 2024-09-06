@@ -1,1 +1,1 @@
-export { default as concatClassNames } from './concat-class-names';
+export { default as concatClasses } from './concat-classes';

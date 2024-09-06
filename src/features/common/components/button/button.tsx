@@ -1,6 +1,14 @@
 import styles from './button.module.css';
-import { concatClassNames } from '@/utils';
+import { concatClasses } from '@/utils';
 import { MouseEventHandler, ReactNode } from 'react';
+
+type ButtonProps = {
+  children: ReactNode;
+  className?: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  type?: HTMLButtonElement['type'];
+  variant?: 'contained' | 'raised' | 'text';
+};
 
 export default function Button({
   children,
@@ -8,16 +16,10 @@ export default function Button({
   onClick,
   type = 'button',
   variant = 'contained',
-}: {
-  children: ReactNode;
-  className?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  type?: HTMLButtonElement['type'];
-  variant?: 'contained' | 'raised' | 'text';
-}) {
+}: ButtonProps) {
   return (
     <button
-      className={concatClassNames(
+      className={concatClasses(
         styles.container,
         variant === 'contained' && styles.contained,
         variant === 'raised' && styles.raised,

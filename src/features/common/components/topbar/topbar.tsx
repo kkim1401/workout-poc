@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Hamburger } from '../hamburger';
 import styles from './topbar.module.css';
-import { concatClassNames } from '@/utils';
+import { concatClasses } from '@/utils';
 
 export default function Topbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -14,21 +14,16 @@ export default function Topbar() {
     <nav className={styles.container}>
       <div className={styles.topbar}>
         <Hamburger
-          className={concatClassNames(
-            styles.hamburger,
-            showMenu && styles.hidden
-          )}
+          className={concatClasses(styles.hamburger, showMenu && styles.hidden)}
           onClick={handleMenuOpen}
         />
       </div>
       <div
         aria-hidden='true'
-        className={concatClassNames(styles.scrim, showMenu && styles.visible)}
+        className={concatClasses(styles.scrim, showMenu && styles.visible)}
         onClick={handleMenuClose}
       />
-      <div
-        className={concatClassNames(styles.menu, showMenu && styles.visible)}
-      >
+      <div className={concatClasses(styles.menu, showMenu && styles.visible)}>
         <Hamburger
           className={styles.hamburger}
           isClosed={true}

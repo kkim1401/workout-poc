@@ -1,4 +1,4 @@
-import { concatClassNames } from '@/utils';
+import { concatClasses } from '@/utils';
 import styles from './calendar.module.css';
 
 const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
@@ -24,20 +24,18 @@ function getCurrentDayName(date: Date) {
   return dayNames[currDayIndex];
 }
 
-function CalendarDay({
-  dayName,
-  dayNumber,
-  isCurrent,
-}: {
+type CalendarDayProps = {
   dayName: string;
   dayNumber: number;
   isCurrent?: boolean;
-}) {
+};
+
+function CalendarDay({ dayName, dayNumber, isCurrent }: CalendarDayProps) {
   return (
     <div className={styles.day}>
       <div className='subtitle2'>{dayName}</div>
       <div
-        className={concatClassNames(
+        className={concatClasses(
           'body1',
           styles.dayNumber,
           isCurrent && styles.current
@@ -55,7 +53,7 @@ export default function Calendar({ className }: { className?: string }) {
   const currentDayName = getCurrentDayName(date);
 
   return (
-    <section className={concatClassNames(styles.container, className)}>
+    <section className={concatClasses(styles.container, className)}>
       {Object.entries(daysByDayName).map(([dayName, dayNumber]) => (
         <CalendarDay
           key={dayName}

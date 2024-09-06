@@ -1,12 +1,13 @@
 'use client';
-
-import { concatClassNames } from '@/utils';
+import { concatClasses } from '@/utils';
 import styles from './list.module.css';
 import { Button } from '@/features/common/components';
 
-export default function List({ className }: { className?: string }) {
+type ListProps = { className?: string };
+
+export default function List({ className }: ListProps) {
   return (
-    <section className={concatClassNames(styles.container, className)}>
+    <section className={concatClasses(styles.container, className)}>
       <Button variant='text'>Bro Split</Button>
     </section>
   );
