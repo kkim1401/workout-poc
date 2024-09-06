@@ -5,21 +5,21 @@ import { concatClasses } from '@/utils';
 
 type HamburgerProps = {
   className?: string;
-  isClosed?: boolean;
+  closed?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export default function Hamburger({
   className,
-  isClosed,
+  closed,
   onClick,
 }: HamburgerProps) {
   return (
     <button
-      aria-label={isClosed ? 'Close menu' : 'Open menu'}
+      aria-label={closed ? 'Close menu' : 'Open menu'}
       className={concatClasses(
         styles.container,
-        isClosed && styles.closed,
+        closed && styles.closed,
         className
       )}
       onClick={(e) => onClick?.(e)}

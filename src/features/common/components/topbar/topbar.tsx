@@ -26,7 +26,7 @@ export default function Topbar() {
       <div className={concatClasses(styles.menu, showMenu && styles.visible)}>
         <Hamburger
           className={styles.hamburger}
-          isClosed={true}
+          closed
           onClick={handleMenuClose}
         />
         <ul className={styles.list}>
