@@ -2,7 +2,7 @@
 import { addDays, concatClasses } from '@/utils';
 import styles from './list.module.css';
 import { Button } from '@/features/common/components';
-import { ListItem } from '../list-item';
+import ListItem from './list-item';
 
 type ListProps = { className?: string };
 
@@ -32,13 +32,14 @@ export default function List({ className }: ListProps) {
   return (
     <section className={concatClasses(styles.container, className)}>
       <Button variant='text'>Bro Split</Button>
-      <ol>
-        {workouts.map((workout) => (
+      <ol role='list'>
+        {workouts.map((workout, index) => (
           <ListItem
             key={workout.name}
             completed={workout.completed}
-            date={workout.date}
+            dateInISO={workout.date}
             name={workout.name}
+            number={index + 1}
             setCount={workout.setCount}
           />
         ))}

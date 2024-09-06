@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { Hamburger } from '../hamburger';
+import Hamburger from './hamburger';
 import styles from './topbar.module.css';
 import { concatClasses } from '@/utils';
 

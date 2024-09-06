@@ -1,4 +1,5 @@
 import { addDays, concatClasses } from '@/utils';
+import CalendarDay from './calendar-day';
 import styles from './calendar.module.css';
 
 const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
@@ -18,30 +19,9 @@ function getCurrentDayName(date: Date) {
   return dayNames[currDayIndex];
 }
 
-type CalendarDayProps = {
-  current?: boolean;
-  dayName: string;
-  dayNumber: number;
-};
+type CalendarProps = { className?: string };
 
-function CalendarDay({ current, dayName, dayNumber }: CalendarDayProps) {
-  return (
-    <div className={styles.day}>
-      <div className='subtitle2'>{dayName}</div>
-      <div
-        className={concatClasses(
-          'body1',
-          styles.dayNumber,
-          current && styles.current
-        )}
-      >
-        {dayNumber}
-      </div>
-    </div>
-  );
-}
-
-export default function Calendar({ className }: { className?: string }) {
+export default function Calendar({ className }: CalendarProps) {
   const date = new Date();
   const daysByDayName = getDaysByDayName(date);
   const currentDayName = getCurrentDayName(date);

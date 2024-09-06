@@ -4,25 +4,33 @@ import styles from './list-item.module.css';
 
 type ListItemProps = {
   completed: boolean;
-  date: string;
+  dateInISO: string;
   name: string;
+  number: number;
   setCount: number;
 };
 
 export default function ListItem({
   completed,
-  date,
+  dateInISO,
   name,
+  number,
   setCount,
 }: ListItemProps) {
+  const date = new Date(dateInISO);
+  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}`;
   return (
-    <li>
+    <li className={styles.container}>
       <div
-        className={concatClasses(styles.number, completed && styles.completed)}
-      />
+        className={concatClasses(styles.marker, completed && styles.completed)}
+      >
+        {number}
+      </div>
       <p className={styles.name}>{name}</p>
       <p className={styles.setCount}>{setCount}</p>
-      <p className={styles.date}>{date}</p>
+      <p className={styles.date}>{formattedDate}</p>
     </li>
   );
 }
+
+function ListItemMarker() {}
