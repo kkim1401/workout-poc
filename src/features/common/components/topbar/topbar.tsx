@@ -24,13 +24,9 @@ export default function Topbar() {
         onClick={handleMenuClose}
       />
       <div className={concatClasses(styles.menu, showMenu && styles.visible)}>
-        <Hamburger
-          className={styles.hamburger}
-          closed
-          onClick={handleMenuClose}
-        />
+        <Hamburger closed onClick={handleMenuClose} />
         <ul className={styles.list}>
-          <li>
+          <li className={styles.link}>
             <Link href='/settings'>Settings</Link>
           </li>
         </ul>

@@ -31,9 +31,9 @@ export default function Calendar({ className }: CalendarProps) {
       {Object.entries(daysByDayName).map(([dayName, dayNumber]) => (
         <CalendarDay
           key={dayName}
-          current={currentDayName === dayName}
           dayName={dayName}
           dayNumber={dayNumber}
+          selected={currentDayName === dayName}
         />
       ))}
     </section>

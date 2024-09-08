@@ -2,26 +2,20 @@ import { concatClasses } from '@/utils';
 import styles from './calendar-day.module.css';
 
 type CalendarDayProps = {
-  current?: boolean;
   dayName: string;
   dayNumber: number;
+  selected?: boolean;
 };
 
 export default function CalendarDay({
-  current,
   dayName,
   dayNumber,
+  selected,
 }: CalendarDayProps) {
   return (
     <div className={styles.container}>
       <div className='subtitle2'>{dayName}</div>
-      <div
-        className={concatClasses(
-          'body1',
-          styles.day,
-          current && styles.current
-        )}
-      >
+      <div className={concatClasses(styles.day, selected && styles.selected)}>
         {dayNumber}
       </div>
     </div>

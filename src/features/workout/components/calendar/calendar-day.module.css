@@ -2,15 +2,16 @@
   color: var(--onSurfaceVariant);
   margin: auto;
   text-align: center;
-}
 
-.day {
-  margin-top: 0.25rem;
-  padding: 2px 16px;
-}
+  > .day {
+    composes: body1 from global;
+    margin-top: 0.25rem;
+    padding: 2px 16px;
+  }
 
-.day.current {
-  color: var(--onPrimaryDark);
-  background-color: var(--primaryDark);
-  border-radius: 8px;
+  > .day.selected {
+    color: var(--onPrimaryDark);
+    background-color: var(--primaryDark);
+    border-radius: 8px;
+  }
 }
