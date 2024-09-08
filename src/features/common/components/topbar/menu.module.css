@@ -1,0 +1,17 @@
+.container {
+  background-color: var(--surface);
+  padding: 16px;
+
+  > .list {
+    margin-top: 3.5rem;
+    list-style-type: none;
+  }
+
+  > .list > .link {
+    margin-top: 1rem;
+  }
+
+  > .list > .link:first-child {
+    margin-top: 0;
+  }
+}

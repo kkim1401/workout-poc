@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
-import Link from 'next/link';
 import Hamburger from './hamburger';
 import styles from './topbar.module.css';
 import { concatClasses } from '@/utils';
+import Menu from './menu';
 
 export default function Topbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -23,14 +23,10 @@ export default function Topbar() {
         className={concatClasses(styles.scrim, showMenu && styles.visible)}
         onClick={handleMenuClose}
       />
-      <div className={concatClasses(styles.menu, showMenu && styles.visible)}>
-        <Hamburger closed onClick={handleMenuClose} />
-        <ul className={styles.list}>
-          <li className={styles.link}>
-            <Link href='/settings'>Settings</Link>
-          </li>
-        </ul>
-      </div>
+      <Menu
+        className={concatClasses(styles.menu, showMenu && styles.visible)}
+        onClose={handleMenuClose}
+      />
     </nav>
   );
 }
