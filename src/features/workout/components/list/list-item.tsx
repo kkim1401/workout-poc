@@ -21,14 +21,24 @@ export default function ListItem({
   const formattedDate = `${date.getMonth() + 1}/${date.getDate()}`;
   return (
     <li className={styles.container}>
-      <div
-        className={concatClasses(styles.marker, completed && styles.completed)}
-      >
-        {number}
+      <div className={styles.leftColumn}>
+        <div
+          className={concatClasses(
+            'subtitle2',
+            styles.marker,
+            completed && styles.completed
+          )}
+        >
+          {number}
+        </div>
+        <div className={styles.info}>
+          <p className={concatClasses('subtitle2', styles.name)}>{name}</p>
+          <p className={concatClasses('body2', styles.setCount)}>
+            {setCount} sets
+          </p>
+        </div>
       </div>
-      <p className={styles.name}>{name}</p>
-      <p className={styles.setCount}>{setCount}</p>
-      <p className={styles.date}>{formattedDate}</p>
+      <p className={concatClasses('subtitle2', styles.date)}>{formattedDate}</p>
     </li>
   );
 }

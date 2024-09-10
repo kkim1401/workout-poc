@@ -15,7 +15,13 @@ export default function CalendarDay({
   return (
     <div className={styles.container}>
       <div className='subtitle2'>{dayName}</div>
-      <div className={concatClasses(styles.day, selected && styles.selected)}>
+      <div
+        className={concatClasses(
+          'body1',
+          styles.day,
+          selected && styles.selected
+        )}
+      >
         {dayNumber}
       </div>
     </div>

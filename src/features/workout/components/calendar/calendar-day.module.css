@@ -4,7 +4,6 @@
   text-align: center;
 
   > .day {
-    composes: body1 from global;
     margin-top: 0.25rem;
     padding: 2px 16px;
   }
