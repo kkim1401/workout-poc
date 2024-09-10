@@ -1,8 +1,9 @@
 'use client';
-import { addDays, concatClasses } from '@/utils';
+import { addDays } from '@/utils';
 import styles from './list.module.css';
 import { Button } from '@/features/common/components';
 import ListItem from './list-item';
+import clsx from 'clsx';
 
 type ListProps = { className?: string };
 
@@ -30,7 +31,7 @@ const workouts = [
 
 export default function List({ className }: ListProps) {
   return (
-    <section className={concatClasses(styles.container, className)}>
+    <section className={clsx(styles.container, className)}>
       <Button variant='text'>Bro Split</Button>
       <ol role='list'>
         {workouts.map((workout, index) => (

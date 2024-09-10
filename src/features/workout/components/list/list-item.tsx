@@ -1,6 +1,6 @@
 'use client';
-import { concatClasses } from '@/utils';
 import styles from './list-item.module.css';
+import clsx from 'clsx';
 
 type ListItemProps = {
   completed: boolean;
@@ -23,7 +23,7 @@ export default function ListItem({
     <li className={styles.container}>
       <div className={styles.leftColumn}>
         <div
-          className={concatClasses(
+          className={clsx(
             'subtitle2',
             styles.marker,
             completed && styles.completed
@@ -32,13 +32,11 @@ export default function ListItem({
           {number}
         </div>
         <div className={styles.info}>
-          <p className={concatClasses('subtitle2', styles.name)}>{name}</p>
-          <p className={concatClasses('body2', styles.setCount)}>
-            {setCount} sets
-          </p>
+          <p className={clsx('subtitle2', styles.name)}>{name}</p>
+          <p className={clsx('body2', styles.setCount)}>{setCount} sets</p>
         </div>
       </div>
-      <p className={concatClasses('subtitle2', styles.date)}>{formattedDate}</p>
+      <p className={clsx('subtitle2', styles.date)}>{formattedDate}</p>
     </li>
   );
 }

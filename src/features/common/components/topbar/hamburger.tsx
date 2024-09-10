@@ -1,7 +1,7 @@
 'use client';
 import { MouseEventHandler } from 'react';
 import styles from './hamburger.module.css';
-import { concatClasses } from '@/utils';
+import clsx from 'clsx';
 
 type HamburgerProps = {
   className?: string;
@@ -17,11 +17,7 @@ export default function Hamburger({
   return (
     <button
       aria-label={closed ? 'Close menu' : 'Open menu'}
-      className={concatClasses(
-        styles.container,
-        closed && styles.closed,
-        className
-      )}
+      className={clsx(styles.container, closed && styles.closed, className)}
       onClick={(e) => onClick?.(e)}
     >
       <span className={styles.line} />

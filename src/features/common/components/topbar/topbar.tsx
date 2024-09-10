@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import Hamburger from './hamburger';
 import styles from './topbar.module.css';
-import { concatClasses } from '@/utils';
 import Menu from './menu';
+import clsx from 'clsx';
 
 export default function Topbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -14,17 +14,17 @@ export default function Topbar() {
     <nav className={styles.container}>
       <div className={styles.topbar}>
         <Hamburger
-          className={concatClasses(styles.hamburger, showMenu && styles.hidden)}
+          className={clsx(styles.hamburger, showMenu && styles.hidden)}
           onClick={handleMenuOpen}
         />
       </div>
       <div
         aria-hidden='true'
-        className={concatClasses(styles.scrim, showMenu && styles.visible)}
+        className={clsx(styles.scrim, showMenu && styles.visible)}
         onClick={handleMenuClose}
       />
       <Menu
-        className={concatClasses(styles.menu, showMenu && styles.visible)}
+        className={clsx(styles.menu, showMenu && styles.visible)}
         onClose={handleMenuClose}
       />
     </nav>

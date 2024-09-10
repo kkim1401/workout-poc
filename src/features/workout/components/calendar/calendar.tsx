@@ -1,6 +1,7 @@
-import { addDays, concatClasses } from '@/utils';
+import { addDays } from '@/utils';
 import CalendarDay from './calendar-day';
 import styles from './calendar.module.css';
+import clsx from 'clsx';
 
 const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
@@ -27,7 +28,7 @@ export default function Calendar({ className }: CalendarProps) {
   const currentDayName = getCurrentDayName(date);
 
   return (
-    <section className={concatClasses(styles.container, className)}>
+    <section className={clsx(styles.container, className)}>
       {Object.entries(daysByDayName).map(([dayName, dayNumber]) => (
         <CalendarDay
           key={dayName}

@@ -1,5 +1,5 @@
 import styles from './button.module.css';
-import { concatClasses } from '@/utils';
+import clsx from 'clsx';
 import { MouseEventHandler, ReactNode } from 'react';
 
 type ButtonProps = {
@@ -19,7 +19,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={concatClasses(
+      className={clsx(
         styles.container,
         variant === 'contained' && styles.contained,
         variant === 'raised' && styles.raised,

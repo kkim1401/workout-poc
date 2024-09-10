@@ -1,4 +1,4 @@
-import { concatClasses } from '@/utils';
+import clsx from 'clsx';
 import styles from './calendar-day.module.css';
 
 type CalendarDayProps = {
@@ -15,13 +15,7 @@ export default function CalendarDay({
   return (
     <div className={styles.container}>
       <div className='subtitle2'>{dayName}</div>
-      <div
-        className={concatClasses(
-          'body1',
-          styles.day,
-          selected && styles.selected
-        )}
-      >
+      <div className={clsx('body1', styles.day, selected && styles.selected)}>
         {dayNumber}
       </div>
     </div>

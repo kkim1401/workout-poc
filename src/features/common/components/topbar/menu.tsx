@@ -1,8 +1,8 @@
 import styles from './menu.module.css';
 import Hamburger from './hamburger';
-import { concatClasses } from '@/utils';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
+import clsx from 'clsx';
 
 type MenuProps = {
   className?: string;
@@ -11,7 +11,7 @@ type MenuProps = {
 
 export default function Menu({ className, onClose }: MenuProps) {
   return (
-    <div className={concatClasses(styles.container, className)}>
+    <div className={clsx(styles.container, className)}>
       <Hamburger closed onClick={onClose} />
       <ul className={styles.list}>
         <li className={styles.link}>
