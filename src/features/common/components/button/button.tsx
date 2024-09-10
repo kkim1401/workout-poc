@@ -23,6 +23,7 @@ export default function Button({
         styles.container,
         variant === 'contained' && styles.contained,
         variant === 'raised' && styles.raised,
+        variant === 'text' && 'headline5',
         variant === 'text' && styles.text,
         className
       )}
