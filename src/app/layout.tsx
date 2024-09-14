@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={roboto.className}>
-        <Topbar />
+        <Topbar links={['/login']} />
         <main>{children}</main>
       </body>
     </html>

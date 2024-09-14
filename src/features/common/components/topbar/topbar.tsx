@@ -6,7 +6,11 @@ import styles from './topbar.module.css';
 import Menu from './menu';
 import clsx from 'clsx';
 
-export default function Topbar() {
+type TopbarProps = {
+  links: `/${string}`[];
+};
+
+export default function Topbar({ links }: TopbarProps) {
   const [showMenu, setShowMenu] = useState(false);
   const handleMenuOpen = () => setShowMenu(true);
   const handleMenuClose = () => setShowMenu(false);
@@ -26,6 +30,7 @@ export default function Topbar() {
       />
       <Menu
         className={clsx(styles.menu, showMenu && styles.visible)}
+        links={links}
         onClose={handleMenuClose}
       />
     </nav>
