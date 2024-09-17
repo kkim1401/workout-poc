@@ -1,3 +1,5 @@
+'use client';
+
 import { addDays } from '@/utils';
 import CalendarDay from './calendar-day';
 import styles from './calendar.module.css';
