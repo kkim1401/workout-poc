@@ -3,6 +3,7 @@ import { Roboto_Flex } from 'next/font/google';
 import { ReactNode } from 'react';
 import './globals.css';
 import { Topbar } from '@/features/common/components';
+import { createClient } from '@/utils/supabase/server';
 
 const roboto = Roboto_Flex({ subsets: ['latin'] });
 
@@ -11,15 +12,25 @@ export const metadata: Metadata = {
   description: 'Light weight!',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const supabase = createClient();
+
+  const { data } = await supabase.auth.getUser();
+  const links = [
+    { title: 'Home', href: '/' },
+    data?.user?.email
+      ? { title: 'Settings', href: '/account' }
+      : { title: 'Login', href: '/login' },
+  ];
+
   return (
     <html lang='en'>
       <body className={roboto.className}>
-        <Topbar links={['/login']} />
+        <Topbar links={links} />
         <main>{children}</main>
       </body>
     </html>

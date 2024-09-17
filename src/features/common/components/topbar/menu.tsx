@@ -4,14 +4,13 @@ import Link from 'next/link';
 import { MouseEventHandler } from 'react';
 import clsx from 'clsx';
 
-function capitalizeFirstLetter(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 type MenuProps = {
   className?: string;
-  links: `/${string}`[];
-  onClose?: MouseEventHandler<HTMLButtonElement>;
+  links: {
+    title: string;
+    href: string;
+  }[];
+  onClose?: MouseEventHandler;
 };
 
 export default function Menu({ className, links, onClose }: MenuProps) {
@@ -20,8 +19,8 @@ export default function Menu({ className, links, onClose }: MenuProps) {
       <Hamburger closed onClick={onClose} />
       <ul className={styles.list}>
         {links.map((link) => (
-          <li key={link} className={styles.link}>
-            <Link href={link}>{capitalizeFirstLetter(link.slice(1))}</Link>
+          <li key={link.href} className={styles.link} onClick={onClose}>
+            <Link href={link.href}>{link.title}</Link>
           </li>
         ))}
       </ul>

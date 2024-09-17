@@ -7,7 +7,10 @@ import Menu from './menu';
 import clsx from 'clsx';
 
 type TopbarProps = {
-  links: `/${string}`[];
+  links: {
+    title: string;
+    href: string;
+  }[];
 };
 
 export default function Topbar({ links }: TopbarProps) {
