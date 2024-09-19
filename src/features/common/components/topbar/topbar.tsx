@@ -1,10 +1,10 @@
 'use client';
 
+import clsx from 'clsx';
 import { useState } from 'react';
 import Hamburger from './hamburger';
-import styles from './topbar.module.css';
 import Menu from './menu';
-import clsx from 'clsx';
+import styles from './topbar.module.css';
 
 type TopbarProps = {
   links: {

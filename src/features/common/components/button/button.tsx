@@ -1,6 +1,6 @@
-import styles from './button.module.css';
 import clsx from 'clsx';
 import { MouseEventHandler, ReactNode } from 'react';
+import styles from './button.module.css';
 
 type ButtonProps = {
   children: ReactNode;

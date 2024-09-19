@@ -1,6 +1,7 @@
 .container {
+  align-items: center;
   background-color: var(--backgroundVariant);
   display: flex;
+  height: 100vh;
   justify-content: center;
-  padding: 32px 16px;
 }

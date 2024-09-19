@@ -1,8 +1,8 @@
-import styles from './menu.module.css';
-import Hamburger from './hamburger';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
-import clsx from 'clsx';
+import Hamburger from './hamburger';
+import styles from './menu.module.css';
 
 type MenuProps = {
   className?: string;

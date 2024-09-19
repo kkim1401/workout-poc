@@ -1,8 +1,8 @@
 'use client';
 
+import clsx from 'clsx';
 import { MouseEventHandler } from 'react';
 import styles from './hamburger.module.css';
-import clsx from 'clsx';
 
 type HamburgerProps = {
   className?: string;

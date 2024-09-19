@@ -1,7 +1,7 @@
 'use client';
 
-import styles from './list-item.module.css';
 import clsx from 'clsx';
+import styles from './list-item.module.css';
 
 type ListItemProps = {
   completed: boolean;

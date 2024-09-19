@@ -1,9 +1,9 @@
 'use client';
 
 import { addDays } from '@/utils';
+import clsx from 'clsx';
 import CalendarDay from './calendar-day';
 import styles from './calendar.module.css';
-import clsx from 'clsx';
 
 const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 

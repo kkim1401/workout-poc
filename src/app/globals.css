@@ -8,9 +8,9 @@
   --primaryLightest: #f0f9fc;
   --error: #e70909;
   --surface: #ffffff;
-  --surfaceVariant: #eef1f4;
   --divider: #dbdbdb;
   --background: #ffffff;
+  --backgroundVariant: #eef1f4;
   --onPrimary: #000000;
   --onPrimaryDark: #ffffff;
   --onPrimaryDarkest: #ffffff;
@@ -19,8 +19,8 @@
   --onPrimaryLightest: #000000;
   --onError: #ffffff;
   --onSurface: #000000;
-  --onSurfaceVariant: #000000;
   --onBackground: #000000;
+  --onBackgroundVariant: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
