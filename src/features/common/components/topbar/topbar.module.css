@@ -1,5 +1,6 @@
 .container {
   > .topbar {
+    background-color: var(--surface);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
     line-height: 0;
     padding: 16px;

@@ -1,4 +1,6 @@
+import clsx from 'clsx';
 import { forwardRef, InputHTMLAttributes } from 'react';
+import styles from './text-field.module.css';
 
 type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -7,9 +9,9 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ label, ...inputProps }, ref) => {
     return (
-      <label>
+      <label className={clsx('subtitle2', styles.container)}>
         {label}
-        <input ref={ref} {...inputProps} />
+        <input className={styles.input} ref={ref} {...inputProps} />
       </label>
     );
   }

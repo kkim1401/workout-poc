@@ -11,7 +11,7 @@
 
   > .leftColumn > .marker {
     align-items: center;
-    background-color: var(--backgroundVariant);
+    background-color: var(--surfaceVariant);
     border-radius: 50%;
     display: flex;
     height: 2rem;

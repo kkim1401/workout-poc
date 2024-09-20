@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Roboto_Flex } from 'next/font/google';
 import { ReactNode } from 'react';
+import styles from './layout.module.css';
 import './globals.css';
 import { Topbar } from '@/features/common/components';
 import { createClient } from '@/utils/supabase/server';
@@ -29,7 +31,7 @@ export default async function RootLayout({
 
   return (
     <html lang='en'>
-      <body className={roboto.className}>
+      <body className={clsx(roboto.className, styles.body)}>
         <Topbar links={links} />
         <main>{children}</main>
       </body>
