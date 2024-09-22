@@ -1,9 +1,4 @@
 .container {
-  background-color: var(--surface);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  width: 30rem;
+  max-width: 100%;
+  width: 20rem;
 }
