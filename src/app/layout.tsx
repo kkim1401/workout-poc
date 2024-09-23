@@ -30,10 +30,10 @@ export default async function RootLayout({
   ];
 
   return (
-    <html lang='en'>
+    <html className={styles.container} lang='en'>
       <body className={clsx(roboto.className, styles.body)}>
         <Topbar links={links} />
-        <main>{children}</main>
+        <main className={styles.main}>{children}</main>
       </body>
     </html>
   );

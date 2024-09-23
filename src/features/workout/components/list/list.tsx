@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/features/common/components';
+import { Button, Card } from '@/features/common/components';
 import { addDays } from '@/utils';
 import clsx from 'clsx';
 import ListItem from './list-item';
@@ -32,7 +32,7 @@ const workouts = [
 
 export default function List({ className }: ListProps) {
   return (
-    <section className={clsx(styles.container, className)}>
+    <Card as='section' className={clsx(styles.container, className)}>
       <Button variant='text'>Bro Split</Button>
       <ol role='list'>
         {workouts.map((workout, index) => (
@@ -46,6 +46,6 @@ export default function List({ className }: ListProps) {
           />
         ))}
       </ol>
-    </section>
+    </Card>
   );
 }

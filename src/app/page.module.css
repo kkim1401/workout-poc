@@ -1,3 +1,16 @@
-.workoutList {
-  margin: 0 0.5rem;
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  > .calendar {
+    margin-top: 2rem;
+    width: 100%;
+  }
+
+  > .list {
+    margin-top: 2rem;
+    width: 100%;
+  }
 }

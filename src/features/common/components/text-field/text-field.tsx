@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { forwardRef, InputHTMLAttributes } from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import styles from './text-field.module.css';
 
-type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+type TextFieldProps = ComponentPropsWithoutRef<'input'> & {
   label: string;
 };
 
