@@ -1,9 +1,1 @@
-.container {
-  > .body {
-    background-color: var(--backgroundVariant);
-  }
 
-  > .body > .main {
-    padding: 0 16px;
-  }
-}

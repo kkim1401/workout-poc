@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Roboto_Flex } from 'next/font/google';
 import { ReactNode } from 'react';
@@ -31,9 +30,9 @@ export default async function RootLayout({
 
   return (
     <html className={styles.container} lang='en'>
-      <body className={clsx(roboto.className, styles.body)}>
+      <body className={roboto.className}>
         <Topbar links={links} />
-        <main className={styles.main}>{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );
