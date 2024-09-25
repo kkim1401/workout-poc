@@ -1,4 +1,4 @@
-import { Card, TextField } from '@/features/common/components';
+import { Button, Card, TextField } from '@/features/common/components';
 import clsx from 'clsx';
 import { signInWithEmail } from './login-form-actions';
 import styles from './login-form.module.css';
@@ -11,7 +11,9 @@ export default function LoginForm({ className }: LoginFormProps) {
   return (
     <Card as='form' className={clsx(styles.container, className)}>
       <TextField label='Email' name='email' type='email' required />
-      <button formAction={signInWithEmail}>Sign In</button>
+      <Button className={styles.button} formAction={signInWithEmail}>
+        Sign In
+      </Button>
     </Card>
   );
 }

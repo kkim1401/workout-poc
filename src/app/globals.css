@@ -24,21 +24,17 @@
   --on-background-variant: #000000;
 
   /* Form colors */
-  --btn-active-bg-color: #333;
-  --btn-focus-bg-color: #333;
+  --input-border-color: #ccc;
+  --input-active-border-color: #aaa;
+  --input-focus-border-color: var(--primary-dark);
 
-  --textfld-bg-color: #fff;
-  --textfld-border-color: #ccc;
-  --textfld-active-border-color: #aaa;
-  --textfld-focus-border-color: var(--primary-dark);
+  --input-valid-border-color: hsl(140 50% 75%);
+  --input-valid-active-border-color: hsl(140 50% 65%);
+  --input-valid-focus-border-color: hsl(140 50% 50%);
 
-  --textfld-valid-border-color: hsl(140 50% 75%);
-  --textfld-valid-active-border-color: hsl(140 50% 65%);
-  --textfld-valid-focus-border-color: hsl(140 50% 50%);
-
-  --textfld-invalid-border-color: hsl(20 65% 75%);
-  --textfld-invalid-active-border-color: hsl(20 65% 65%);
-  --textfld-invalid-focus-border-color: hsl(20 65% 50%);
+  --input-invalid-border-color: hsl(20 65% 75%);
+  --input-invalid-active-border-color: hsl(20 65% 65%);
+  --input-invalid-focus-border-color: hsl(20 65% 50%);
 
   /* Form spacing */
   --form-gap-margin: 1.5em;
@@ -65,21 +61,17 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* Form colors */
-    --btn-active-bg-color: #333;
-    --btn-focus-bg-color: #333;
+    --input-border-color: #333;
+    --input-active-border-color: #444;
+    --input-focus-border-color: var(--primary-dark);
 
-    --textfld-bg-color: #222;
-    --textfld-border-color: #333;
-    --textfld-active-border-color: #444;
-    --textfld-focus-border-color: var(--primary-dark);
+    --input-valid-border-color: hsl(140 90% 20%);
+    --input-valid-active-border-color: hsl(140 90% 30%);
+    --input-valid-focus-border-color: hsl(140 90% 45%);
 
-    --textfld-valid-border-color: hsl(140 90% 20%);
-    --textfld-valid-active-border-color: hsl(140 90% 30%);
-    --textfld-valid-focus-border-color: hsl(140 90% 45%);
-
-    --textfld-invalid-border-color: hsl(20 90% 20%);
-    --textfld-invalid-active-border-color: hsl(20 90% 30%);
-    --textfld-invalid-focus-border-color: hsl(20 90% 45%);
+    --input-invalid-border-color: hsl(20 90% 20%);
+    --input-invalid-active-border-color: hsl(20 90% 30%);
+    --input-invalid-focus-border-color: hsl(20 90% 45%);
   }
 }
 
@@ -128,234 +120,6 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
-}
-
-/* FORM ELEMENTS */
-:read-only {
-  &:not(
-      label,
-      button,
-      input[type='button'],
-      input[type='submit'],
-      input[type='reset']
-    ) {
-    cursor: default;
-  }
-}
-
-:disabled {
-  opacity: var(--input-disabled-opacity);
-  cursor: not-allowed;
-}
-
-/* All elements regardless of types */
-input,
-select,
-option,
-textarea,
-button,
-datalist,
-fieldset,
-legend,
-optgroup,
-output,
-input::file-selector-button {
-  font: inherit;
-  color: inherit;
-  accent-color: var(--primary-dark);
-  transition: var(--input-transition);
-  line-height: var(--input-leading);
-}
-
-/* Text-fields, buttons, and drop-down lists */
-select,
-textarea,
-input[type='date'],
-input[type='datetime-local'],
-input[type='email'],
-input[type='month'],
-input[type='number'],
-input[type='password'],
-input[type='search'],
-input[type='tel'],
-input[type='text'],
-input[type='time'],
-input[type='url'],
-input[type='week'],
-button,
-input[type='reset'],
-input[type='submit'],
-input[type='button'],
-input::file-selector-button {
-  border: var(--input-border-width) solid var(--textfld-border-color);
-  padding: var(--input-padding);
-  border-radius: var(--input-border-radius);
-  background-color: var(--textfld-bg-color);
-
-  &:focus {
-    outline: 0;
-  }
-}
-
-/* All text-fields and drop-down lists */
-select,
-textarea,
-input[type='date'],
-input[type='datetime-local'],
-input[type='email'],
-input[type='month'],
-input[type='number'],
-input[type='password'],
-input[type='search'],
-input[type='tel'],
-input[type='text'],
-input[type='time'],
-input[type='url'],
-input[type='week'] {
-  width: var(--input-width);
-  max-width: 100%;
-
-  &:hover,
-  &:active {
-    &:not([readonly], [disabled]) {
-      border-color: var(--textfld-active-border-color);
-    }
-  }
-
-  &:focus {
-    &:not([readonly], [disabled]) {
-      border-color: var(--textfld-focus-border-color);
-    }
-  }
-
-  /* Form validation */
-  &:required {
-    &:valid {
-      &:hover,
-      &:active {
-        &:not([readonly], [disabled]) {
-          border-color: var(--textfld-valid-active-border-color);
-        }
-      }
-
-      &:focus {
-        &:not([readonly], [disabled]) {
-          border-color: var(--textfld-valid-focus-border-color);
-        }
-      }
-    }
-    &:invalid {
-      &:hover,
-      &:active {
-        border-color: var(--textfld-invalid-active-border-color);
-      }
-
-      &:focus {
-        border-color: var(--textfld-invalid-focus-border-color);
-      }
-    }
-  }
-
-  /* Selection */
-  &::selection {
-    background-color: var(--primary-dark);
-    color: var(--on-primary-dark);
-  }
-}
-
-/* Drop-down lists */
-select {
-  &:not([disabled], [readonly]) {
-    option {
-      &:focus,
-      &:active,
-      &:hover,
-      &:checked {
-        background-color: var(--primary-dark);
-        color: var(--on-primary-dark);
-      }
-    }
-  }
-}
-
-/* Color inputs */
-input[type='color'] {
-  cursor: pointer;
-  border-style: solid;
-  border-radius: var(--input-border-radius);
-  border-color: var(--textfld-border-color);
-  background-color: var(--textfld-bg-color);
-
-  &:hover,
-  &:active {
-    &:not([disabled]) {
-      border-color: var(--textfld-active-border-color);
-    }
-  }
-
-  &:focus {
-    outline: 0;
-    &:not([disabled]) {
-      border-color: var(--textfld-focus-border-color);
-    }
-  }
-}
-
-/* Buttons and actions */
-button,
-input[type='reset'],
-input[type='submit'],
-input[type='button'],
-input::file-selector-button {
-  border-color: var(--primary-dark);
-  background-color: var(--primary-dark);
-  color: var(--primary-dark);
-  cursor: pointer;
-
-  &:hover,
-  &:active {
-    background-color: var(--btn-active-bg-color);
-    border-color: var(--btn-active-bg-color);
-  }
-
-  &:focus {
-    background-color: var(--btn-active-bg-color);
-  }
-}
-
-/* Labels */
-label {
-  cursor: pointer;
-  display: block;
-
-  & + &,
-  & + input,
-  & + select,
-  & + button,
-  & + textarea {
-    margin-top: var(--label-margin);
-  }
-
-  /* Inputs nested in labels */
-  &:has(input:disabled) {
-    :disabled {
-      opacity: 1;
-    }
-    opacity: var(--input-disabled-opacity);
-    cursor: not-allowed;
-  }
-}
-
-/* Textarea */
-textarea {
-  width: var(--textarea-width);
-  min-height: var(--textarea-height);
-  max-width: 100%;
-}
-
-/* File input's button */
-input::file-selector-button {
-  margin-right: var(--form-gap-margin);
 }
 
 /* TYPOGRAPHY */

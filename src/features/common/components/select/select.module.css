@@ -1,35 +1,18 @@
 .container {
-  composes: subtitle2 from global;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
+  display: block;
 
-  > .textarea,
-  > .input {
+  > .select {
     accent-color: var(--primary-dark);
-    font: inherit;
-    transition: var(--input-transition);
-    line-height: var(--input-leading);
-  }
-
-  /* Excludes certain inputs like checkboxes */
-  > .textarea,
-  > .input[type='date'],
-  > .input[type='datetime-local'],
-  > .input[type='email'],
-  > .input[type='month'],
-  > .input[type='number'],
-  > .input[type='password'],
-  > .input[type='search'],
-  > .input[type='tel'],
-  > .input[type='text'],
-  > .input[type='time'],
-  > .input[type='url'],
-  > .input[type='week'] {
     background-color: var(--background);
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--input-border-radius);
+    font: inherit;
+    line-height: var(--input-leading);
+    max-width: 100%;
     padding: var(--input-padding);
+    transition: var(--input-transition);
+    width: var(--input-width);
 
     &:hover,
     &:active {
@@ -39,7 +22,6 @@
     }
 
     &:focus {
-      outline: 0;
       &:not([readonly], [disabled]) {
         border-color: var(--input-focus-border-color);
       }
@@ -78,11 +60,17 @@
       background-color: var(--primary-dark);
       color: var(--on-primary-dark);
     }
-  }
 
-  > .textarea {
-    width: var(--textarea-width);
-    min-height: var(--textarea-height);
-    max-width: 100%;
+    &:not([disabled], [readonly]) {
+      & > .option {
+        &:focus,
+        &:active,
+        &:hover,
+        &:checked {
+          background-color: var(--primary-dark);
+          color: var(--on-primary-dark);
+        }
+      }
+    }
   }
 }

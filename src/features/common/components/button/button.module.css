@@ -1,18 +1,68 @@
 .container {
   align-items: center;
   appearance: none;
-  border: none;
-  border-radius: 4px;
+  background-color: var(--background);
+  border: var(--input-border-width) solid var(--input-border-color);
+  border-radius: var(--input-border-radius);
   cursor: pointer;
   display: flex;
   justify-content: center;
-  min-width: 64px;
+  line-height: var(--input-leading);
+  padding: var(--input-padding);
   text-align: inherit;
+  transition: var(--input-transition);
+
+  &:focus-visible {
+    outline: 0;
+  }
+
+  &.contained {
+    border-color: var(--primary-dark);
+    background-color: var(--primary-dark);
+    color: var(--on-primary-dark);
+    font: inherit;
+  }
+
+  &.contained:hover {
+    border-color: var(--primary-darkest);
+    background-color: var(--primary-darkest);
+  }
+
+  &.contained:focus-visible {
+    border-color: var(--primary-darkest);
+    background-color: var(--primary-darkest);
+  }
+
+  &.contained:active {
+    border-color: var(--primary-darkest);
+    background-color: var(--primary-darkest);
+  }
+
+  &.outlined {
+    background-color: transparent;
+    border-color: var(--primary-dark);
+    color: var(--primary-dark);
+    font: inherit;
+  }
+
+  &.outlined:hover {
+    background-color: var(--primary-lightest);
+  }
+
+  &.outlined:focus-visible {
+    background-color: var(--primary-lightest);
+  }
+
+  &.outlined:active {
+    color: var(--primary-darkest);
+    background-color: var(--primary-lighter);
+  }
 
   &.text {
-    color: var(--primary-dark);
+    composes: headline5 from global;
     background-color: transparent;
-    padding: 6px 8px;
+    border: none;
+    color: var(--primary-dark);
   }
 
   &.text:hover {
@@ -20,7 +70,6 @@
   }
 
   &.text:focus-visible {
-    color: var(--primary-darkest);
     background-color: var(--primary-lightest);
   }
 

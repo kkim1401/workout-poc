@@ -1,34 +1,27 @@
 import clsx from 'clsx';
-import { MouseEventHandler, ReactNode } from 'react';
+import { type ComponentPropsWithoutRef } from 'react';
 import styles from './button.module.css';
 
-type ButtonProps = {
-  children: ReactNode;
-  className?: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  type?: HTMLButtonElement['type'];
-  variant?: 'contained' | 'raised' | 'text';
+type ButtonProps = ComponentPropsWithoutRef<'button'> & {
+  variant?: 'contained' | 'outlined' | 'text';
 };
 
 export default function Button({
   children,
   className,
-  onClick,
-  type = 'button',
   variant = 'contained',
+  ...rest
 }: ButtonProps) {
   return (
     <button
       className={clsx(
         styles.container,
         variant === 'contained' && styles.contained,
-        variant === 'raised' && styles.raised,
-        variant === 'text' && 'headline5',
+        variant === 'outlined' && styles.outlined,
         variant === 'text' && styles.text,
         className
       )}
-      onClick={onClick}
-      type={type}
+      {...rest}
     >
       {children}
     </button>
