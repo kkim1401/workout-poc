@@ -20,7 +20,9 @@ export default function Menu({ className, links, onClose }: MenuProps) {
       <ul className={styles.list}>
         {links.map((link) => (
           <li key={link.href} className={styles.link} onClick={onClose}>
-            <Link href={link.href}>{link.title}</Link>
+            <Link className={clsx('headline6', styles.a)} href={link.href}>
+              {link.title}
+            </Link>
           </li>
         ))}
       </ul>

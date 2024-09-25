@@ -14,4 +14,8 @@
   > .list > .link:first-child {
     margin-top: 0;
   }
+
+  > .list > .link > .a {
+    color: var(--on-surface);
+  }
 }

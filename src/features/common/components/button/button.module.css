@@ -20,7 +20,6 @@
     border-color: var(--primary-dark);
     background-color: var(--primary-dark);
     color: var(--on-primary-dark);
-    font: inherit;
   }
 
   &.contained:hover {
@@ -59,7 +58,6 @@
   }
 
   &.text {
-    composes: headline5 from global;
     background-color: transparent;
     border: none;
     color: var(--primary-dark);

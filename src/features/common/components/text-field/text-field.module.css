@@ -1,13 +1,10 @@
 .container {
-  composes: subtitle2 from global;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
 
   > .textarea,
   > .input {
     accent-color: var(--primary-dark);
-    font: inherit;
     transition: var(--input-transition);
     line-height: var(--input-leading);
   }

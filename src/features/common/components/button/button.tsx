@@ -16,8 +16,11 @@ export default function Button({
     <button
       className={clsx(
         styles.container,
+        variant === 'contained' && 'button',
         variant === 'contained' && styles.contained,
+        variant === 'outlined' && 'button',
         variant === 'outlined' && styles.outlined,
+        variant === 'text' && 'headline5',
         variant === 'text' && styles.text,
         className
       )}

@@ -122,6 +122,19 @@ h6 {
   overflow-wrap: break-word;
 }
 
+a {
+  outline: 0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  text-decoration: underline;
+}
+
 /* TYPOGRAPHY */
 .headline1 {
   font-size: 6rem;
@@ -195,7 +208,6 @@ h6 {
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.078125rem; /* 1.25px */
-  line-height: 1.75;
   text-transform: uppercase;
 }
 
