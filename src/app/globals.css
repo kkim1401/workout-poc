@@ -2,42 +2,35 @@
 :root {
   /* Theme colors */
   --primary: #49a7d0;
-  --primaryDark: #3987af;
-  --primaryDarkest: #295779;
-  --primaryLight: #8dd2e5;
-  --primaryLighter: #e1f3f8;
-  --primaryLightest: #f0f9fc;
+  --primary-dark: #3987af;
+  --primary-darkest: #295779;
+  --primary-light: #8dd2e5;
+  --primary-lighter: #e1f3f8;
+  --primary-lightest: #f0f9fc;
   --error: #e70909;
   --surface: #ffffff;
   --divider: #dbdbdb;
   --background: #ffffff;
-  --backgroundVariant: #eef1f4;
-  --onPrimary: #000000;
-  --onPrimaryDark: #ffffff;
-  --onPrimaryDarkest: #ffffff;
-  --onPrimaryLight: #000000;
-  --onPrimaryLighter: #000000;
-  --onPrimaryLightest: #000000;
-  --onError: #ffffff;
-  --onSurface: #000000;
-  --onBackground: #000000;
-  --onBackgroundVariant: #000000;
+  --background-variant: #eef1f4;
+  --on-primary: #000000;
+  --on-primary-dark: #ffffff;
+  --on-primary-darkest: #ffffff;
+  --on-primary-light: #000000;
+  --on-primary-lighter: #000000;
+  --on-primary-lightest: #000000;
+  --on-error: #ffffff;
+  --on-surface: #000000;
+  --on-background: #000000;
+  --on-background-variant: #000000;
 
   /* Form colors */
-  --body-bg-color: #eee;
-  --body-text-color: #444;
-  --body-accent-color: #4834d4;
-  --body-accent-color-contrast: #fff;
-
-  --btn-text-color: var(--body-accent-color-contrast);
-  --btn-bg-color: var(--body-accent-color);
   --btn-active-bg-color: #333;
   --btn-focus-bg-color: #333;
 
   --textfld-bg-color: #fff;
   --textfld-border-color: #ccc;
   --textfld-active-border-color: #aaa;
-  --textfld-focus-border-color: var(--body-accent-color);
+  --textfld-focus-border-color: var(--primary-dark);
 
   --textfld-valid-border-color: hsl(140 50% 75%);
   --textfld-valid-active-border-color: hsl(140 50% 65%);
@@ -72,20 +65,13 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* Form colors */
-    --body-bg-color: #111;
-    --body-text-color: #ddd;
-    --body-accent-color: #6c5ce7;
-    --body-accent-color-contrast: #fff;
-
-    --btn-text-color: var(--body-accent-color-contrast);
-    --btn-bg-color: var(--body-accent-color);
     --btn-active-bg-color: #333;
     --btn-focus-bg-color: #333;
 
     --textfld-bg-color: #222;
     --textfld-border-color: #333;
     --textfld-active-border-color: #444;
-    --textfld-focus-border-color: var(--body-accent-color);
+    --textfld-focus-border-color: var(--primary-dark);
 
     --textfld-valid-border-color: hsl(140 90% 20%);
     --textfld-valid-active-border-color: hsl(140 90% 30%);
@@ -117,7 +103,7 @@
 }
 
 body {
-  background-color: var(--backgroundVariant);
+  background-color: var(--background-variant);
   line-height: 1.5;
 }
 
@@ -176,7 +162,7 @@ output,
 input::file-selector-button {
   font: inherit;
   color: inherit;
-  accent-color: var(--body-accent-color);
+  accent-color: var(--primary-dark);
   transition: var(--input-transition);
   line-height: var(--input-leading);
 }
@@ -272,8 +258,8 @@ input[type='week'] {
 
   /* Selection */
   &::selection {
-    background-color: var(--body-accent-color);
-    color: var(--body-accent-color-contrast);
+    background-color: var(--primary-dark);
+    color: var(--on-primary-dark);
   }
 }
 
@@ -285,8 +271,8 @@ select {
       &:active,
       &:hover,
       &:checked {
-        background-color: var(--body-accent-color);
-        color: var(--body-accent-color-contrast);
+        background-color: var(--primary-dark);
+        color: var(--on-primary-dark);
       }
     }
   }
@@ -321,9 +307,9 @@ input[type='reset'],
 input[type='submit'],
 input[type='button'],
 input::file-selector-button {
-  border-color: var(--btn-bg-color);
-  background-color: var(--btn-bg-color);
-  color: var(--btn-text-color);
+  border-color: var(--primary-dark);
+  background-color: var(--primary-dark);
+  color: var(--primary-dark);
   cursor: pointer;
 
   &:hover,

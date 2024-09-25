@@ -10,22 +10,22 @@
   text-align: inherit;
 
   &.text {
-    color: var(--primaryDark);
+    color: var(--primary-dark);
     background-color: transparent;
     padding: 6px 8px;
   }
 
   &.text:hover {
-    background-color: var(--primaryLightest);
+    background-color: var(--primary-lightest);
   }
 
   &.text:focus-visible {
-    color: var(--primaryDarkest);
-    background-color: var(--primaryLightest);
+    color: var(--primary-darkest);
+    background-color: var(--primary-lightest);
   }
 
   &.text:active {
-    color: var(--primaryDarkest);
-    background-color: var(--primaryLighter);
+    color: var(--primary-darkest);
+    background-color: var(--primary-lighter);
   }
 }

@@ -1,5 +1,5 @@
 .container {
-  color: var(--onBackgroundVariant);
+  color: var(--on-background-variant);
   margin: auto;
   text-align: center;
 
@@ -9,8 +9,8 @@
   }
 
   > .day.selected {
-    color: var(--onPrimaryDark);
-    background-color: var(--primaryDark);
+    color: var(--on-primary-dark);
+    background-color: var(--primary-dark);
     border-radius: 8px;
   }
 }
