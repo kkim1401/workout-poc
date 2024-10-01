@@ -1,10 +1,6 @@
 import { LoginForm } from '@/features/account/components';
-import styles from './page.module.css';
+import { signInWithEmail } from './actions';
 
 export default function LoginPage() {
-  return (
-    <section className={styles.container}>
-      <LoginForm className={styles.loginForm} />
-    </section>
-  );
+  return <LoginForm action={signInWithEmail} />;
 }

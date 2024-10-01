@@ -1,15 +1,16 @@
-import { Button, Card, TextField } from '@/features/common/components';
+import { Button, TextField } from '@/features/common/components';
 import clsx from 'clsx';
-import { signInWithEmail } from './login-form-actions';
 import styles from './login-form.module.css';
 
 type LoginFormProps = {
+  // eslint-disable-next-line no-unused-vars
+  action: (formData: FormData) => void;
   className?: string;
 };
 
-export default function LoginForm({ className }: LoginFormProps) {
+export default function LoginForm({ action, className }: LoginFormProps) {
   return (
-    <Card as='form' className={clsx(styles.container, className)}>
+    <form action={action} className={clsx(styles.container, className)}>
       <h1 className='headline4'>Log In</h1>
       <TextField
         className={styles.textField}
@@ -18,9 +19,7 @@ export default function LoginForm({ className }: LoginFormProps) {
         type='email'
         required
       />
-      <Button className={styles.button} formAction={signInWithEmail}>
-        Sign In
-      </Button>
-    </Card>
+      <Button className={styles.button}>Sign In</Button>
+    </form>
   );
 }

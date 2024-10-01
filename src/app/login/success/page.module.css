@@ -1,0 +1,5 @@
+.container {
+  > .message {
+    margin-top: 1rem;
+  }
+}

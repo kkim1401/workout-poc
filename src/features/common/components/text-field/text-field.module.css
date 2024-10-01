@@ -4,7 +4,6 @@
 
   > .textarea,
   > .input {
-    accent-color: var(--primary-dark);
     transition: var(--input-transition);
     line-height: var(--input-leading);
   }

@@ -2,7 +2,9 @@
   > .topbar {
     background-color: var(--surface);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
+    display: flex;
     line-height: 0;
+    min-height: var(--topbar-height);
     padding: 16px;
     position: relative;
   }
