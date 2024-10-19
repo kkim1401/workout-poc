@@ -7,7 +7,8 @@
   --primary-light: #8dd2e5;
   --primary-lighter: #e1f3f8;
   --primary-lightest: #f0f9fc;
-  --error: #e70909;
+  --error: #ff2515;
+  --error-dark: #cf0000;
   --surface: #ffffff;
   --divider: #dbdbdb;
   --background: #ffffff;
@@ -19,6 +20,7 @@
   --on-primary-lighter: #000000;
   --on-primary-lightest: #000000;
   --on-error: #ffffff;
+  --on-error-dark: #ffffff;
   --on-surface: #000000;
   --on-background: #000000;
   --on-background-variant: #000000;
@@ -28,19 +30,16 @@
   --input-active-border-color: #aaa;
   --input-focus-border-color: var(--primary-dark);
 
-  --input-valid-border-color: hsl(140 50% 75%);
-  --input-valid-active-border-color: hsl(140 50% 65%);
-  --input-valid-focus-border-color: hsl(140 50% 50%);
-
-  --input-invalid-border-color: hsl(20 65% 75%);
-  --input-invalid-active-border-color: hsl(20 65% 65%);
-  --input-invalid-focus-border-color: hsl(20 65% 50%);
+  --input-invalid-border-color: var(--error);
+  --input-invalid-active-border-color: var(--error-dark);
+  --input-invalid-focus-border-color: var(--error-dark);
 
   /* Form spacing */
   --form-gap-margin: 1.5em;
 
   --input-border-radius: 0.25em;
   --input-border-width: 2px;
+  --input-focus-border-width: 2px;
   --input-disabled-opacity: 0.5;
   --input-leading: 120%;
   --input-padding: 0.75em;
@@ -50,7 +49,8 @@
     background-color var(--input-transition-duration),
     border-color var(--input-transition-duration)
       var(--input-transition-function);
-  --input-width: 250px;
+
+  --select-width: 250px;
 
   --label-margin: 0.5em;
 
@@ -67,14 +67,6 @@
     --input-border-color: #333;
     --input-active-border-color: #444;
     --input-focus-border-color: var(--primary-dark);
-
-    --input-valid-border-color: hsl(140 90% 20%);
-    --input-valid-active-border-color: hsl(140 90% 30%);
-    --input-valid-focus-border-color: hsl(140 90% 45%);
-
-    --input-invalid-border-color: hsl(20 90% 20%);
-    --input-invalid-active-border-color: hsl(20 90% 30%);
-    --input-invalid-focus-border-color: hsl(20 90% 45%);
   }
 }
 

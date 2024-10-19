@@ -2,5 +2,5 @@ import { LoginForm } from '@/features/account/components';
 import { signInWithEmail } from './actions';
 
 export default function LoginPage() {
-  return <LoginForm action={signInWithEmail} />;
+  return <LoginForm loginAction={signInWithEmail} />;
 }

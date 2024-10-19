@@ -12,7 +12,7 @@
     max-width: 100%;
     padding: var(--input-padding);
     transition: var(--input-transition);
-    width: var(--input-width);
+    width: var(--select-width);
 
     &:hover,
     &:active {

@@ -36,36 +36,22 @@
 
     &:focus {
       outline: 0;
+
       &:not([readonly], [disabled]) {
         border-color: var(--input-focus-border-color);
       }
     }
 
-    /* Form validation */
-    &:required {
-      &:valid {
-        &:hover,
-        &:active {
-          &:not([readonly], [disabled]) {
-            border-color: var(--input-valid-active-border-color);
-          }
-        }
+    &[aria-invalid='true'] {
+      border-color: var(--input-invalid-border-color);
 
-        &:focus {
-          &:not([readonly], [disabled]) {
-            border-color: var(--input-valid-focus-border-color);
-          }
-        }
+      &:hover,
+      &:active {
+        border-color: var(--input-invalid-active-border-color);
       }
-      &:invalid {
-        &:hover,
-        &:active {
-          border-color: var(--input-invalid-active-border-color);
-        }
 
-        &:focus {
-          border-color: var(--input-invalid-focus-border-color);
-        }
+      &:focus {
+        border-color: var(--input-invalid-focus-border-color);
       }
     }
 
@@ -80,5 +66,10 @@
     width: var(--textarea-width);
     min-height: var(--textarea-height);
     max-width: 100%;
+  }
+
+  > .error {
+    color: var(--error);
+    margin-top: 0.25rem;
   }
 }
