@@ -26,6 +26,14 @@
   --on-background-variant: #000000;
 
   /* Form colors */
+  --button-contained-disabled-bg-color: rgba(0, 0, 0, 0.12);
+  --button-contained-disabled-color: rgba(0, 0, 0, 0.26);
+
+  --button-outlined-disabled-border-color: rgba(0, 0, 0, 0.12);
+  --button-outlined-disabled-color: rgba(0, 0, 0, 0.26);
+
+  --button-text-disabled-color: rgba(0, 0, 0, 0.26);
+
   --input-border-color: #ccc;
   --input-active-border-color: #aaa;
   --input-focus-border-color: var(--primary-dark);

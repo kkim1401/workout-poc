@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import styles from './page.module.css';
 
-export default async function LoginSuccessPage() {
+export default async function LoginEmailSentPage() {
   const email = cookies().get('email')?.value;
   return (
     <section className={styles.container}>
