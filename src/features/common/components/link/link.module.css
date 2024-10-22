@@ -1,0 +1,14 @@
+.container {
+  display: block;
+
+  &.primaryDark {
+    color: var(--primary-dark);
+  }
+
+  &.primaryDark:hover,
+  &.primaryDark:focus-visible,
+  &.primaryDark:active {
+    color: var(--primary-darkest);
+    text-decoration: none;
+  }
+}

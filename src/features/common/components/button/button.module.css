@@ -1,7 +1,6 @@
 .container {
   align-items: center;
   appearance: none;
-  background-color: var(--background);
   border: none;
   border-radius: var(--input-border-radius);
   cursor: pointer;

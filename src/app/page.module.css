@@ -1,9 +1,4 @@
 .container {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
   > .calendar {
     margin-top: 2rem;
     width: 100%;
@@ -12,5 +7,14 @@
   > .list {
     margin-top: 2rem;
     width: 100%;
+  }
+
+  > .links {
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  > .links > .link {
+    margin-top: 0.25rem;
   }
 }
