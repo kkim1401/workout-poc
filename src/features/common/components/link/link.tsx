@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import NextLink, { type LinkProps as NextLinkProps } from 'next/link';
+import NextLink from 'next/link';
 import { ComponentPropsWithoutRef } from 'react';
 import styles from './link.module.css';
 
