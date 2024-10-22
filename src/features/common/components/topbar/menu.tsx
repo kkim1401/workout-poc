@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/client';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { MouseEventHandler } from 'react';
 import Hamburger from './hamburger';
 import styles from './menu.module.css';
 
@@ -24,12 +24,8 @@ export default function Menu({
   const supabase = createClient();
 
   const handleLogOut = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-    } catch (e) {
-      throw e;
-    }
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
   };
 
   const menuLinks = [
