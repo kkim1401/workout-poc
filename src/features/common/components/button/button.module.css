@@ -2,7 +2,7 @@
   align-items: center;
   appearance: none;
   background-color: var(--background);
-  border: var(--input-border-width) solid var(--input-border-color);
+  border: none;
   border-radius: var(--input-border-radius);
   cursor: pointer;
   display: flex;
@@ -22,35 +22,30 @@
   }
 
   &.contained {
-    border-color: var(--primary-dark);
     background-color: var(--primary-dark);
     color: var(--on-primary-dark);
   }
 
   &.contained:hover {
-    border-color: var(--primary-darkest);
     background-color: var(--primary-darkest);
   }
 
   &.contained:focus-visible {
-    border-color: var(--primary-darkest);
     background-color: var(--primary-darkest);
   }
 
   &.contained:active {
-    border-color: var(--primary-darkest);
     background-color: var(--primary-darkest);
   }
 
   &.contained:disabled {
     background-color: var(--button-contained-disabled-bg-color);
-    border: none;
     color: var(--button-contained-disabled-color);
   }
 
   &.outlined {
     background-color: transparent;
-    border-color: var(--primary-dark);
+    border: var(--input-border-width) solid var(--primary-dark);
     color: var(--primary-dark);
     font: inherit;
   }
@@ -75,7 +70,6 @@
 
   &.text {
     background-color: transparent;
-    border: none;
     color: var(--primary-dark);
   }
 

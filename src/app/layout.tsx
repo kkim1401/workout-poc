@@ -21,17 +21,13 @@ export default async function RootLayout({
   const supabase = createClient();
 
   const { data } = await supabase.auth.getUser();
-  const links = [
-    { title: 'Home', href: '/' },
-    data?.user?.email
-      ? { title: 'Settings', href: '/account' }
-      : { title: 'Login', href: '/login' },
-  ];
+  const isLoggedIn = Boolean(data?.user);
+  const links = [{ title: 'Home', href: '/' }];
 
   return (
     <html className={styles.container} lang='en'>
       <body className={roboto.className}>
-        <Topbar links={links} />
+        <Topbar links={links} isLoggedIn={isLoggedIn} />
         <main>{children}</main>
       </body>
     </html>

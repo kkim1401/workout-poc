@@ -9,11 +9,11 @@ import { z } from 'zod';
 const getURL = () => {
   let url =
     process?.env?.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ??
-    'http://localhost:3000/';
+    'http://localhost:3000';
   // Make sure to include `https://` when not localhost.
   url = url.startsWith('http') ? url : `https://${url}`;
-  // Make sure to include a trailing `/`.
-  url = url.endsWith('/') ? url : `${url}/`;
+  // Make sure to exclude a trailing `/`.
+  url = url.endsWith('/') ? url.slice(0, -1) : url;
   return url;
 };
 
