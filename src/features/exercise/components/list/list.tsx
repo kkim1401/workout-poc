@@ -1,15 +1,12 @@
 'use client';
 
+import { useSupabaseBrowser } from '@/utils/supabase/client';
+import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import { FixedSizeList } from 'react-window';
-
-const exercises = [
-  { name: 'squat' },
-  { name: 'bench press' },
-  { name: 'deadlift' },
-];
+import { getAllExercises } from '../../queries';
 
 type RowProps = {
-  data: { name: string }[];
+  data: { name: string | null }[];
   index: number;
   style: object;
 };
@@ -19,15 +16,23 @@ const Row = ({ data, index, style }: RowProps) => (
 );
 
 export default function List() {
+  const supabase = useSupabaseBrowser();
+
+  const { data: exercises } = useQuery(getAllExercises(supabase));
+
   return (
-    <FixedSizeList
-      height={150}
-      itemData={exercises}
-      itemCount={100}
-      itemSize={35}
-      width={300}
-    >
-      {Row}
-    </FixedSizeList>
+    <section>
+      {exercises && (
+        <FixedSizeList
+          height={150}
+          itemData={exercises}
+          itemCount={100}
+          itemSize={35}
+          width={300}
+        >
+          {Row}
+        </FixedSizeList>
+      )}
+    </section>
   );
 }

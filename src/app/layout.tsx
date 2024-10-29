@@ -5,6 +5,7 @@ import styles from './layout.module.css';
 import './globals.css';
 import { Topbar } from '@/features/common/components';
 import { createClient } from '@/utils/supabase/server';
+import Providers from './providers';
 
 const roboto = Roboto_Flex({ subsets: ['latin'] });
 
@@ -27,8 +28,10 @@ export default async function RootLayout({
   return (
     <html className={styles.container} lang='en'>
       <body className={roboto.className}>
-        <Topbar links={links} isLoggedIn={isLoggedIn} />
-        <main>{children}</main>
+        <Providers>
+          <Topbar links={links} isLoggedIn={isLoggedIn} />
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );

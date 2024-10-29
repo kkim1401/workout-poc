@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/client';
+import { useSupabaseBrowser } from '@/utils/supabase/client';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
@@ -21,7 +21,7 @@ export default function Menu({
   links,
   onClose,
 }: MenuProps) {
-  const supabase = createClient();
+  const supabase = useSupabaseBrowser();
 
   const handleLogOut = async () => {
     const { error } = await supabase.auth.signOut();
