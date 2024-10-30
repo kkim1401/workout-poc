@@ -7,10 +7,16 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import { redirect } from 'next/navigation';
 
 export default async function ExercisesPage() {
   const queryClient = new QueryClient();
   const supabase = createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect('/login');
+  }
 
   await prefetchQuery(queryClient, getAllExercises(supabase));
 
