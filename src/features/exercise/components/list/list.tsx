@@ -19,7 +19,6 @@ export default function List() {
   const supabase = useSupabaseBrowser();
 
   const { data: exercises } = useQuery(getAllExercises(supabase));
-
   return (
     <section>
       {exercises && (
