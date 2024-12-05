@@ -45,5 +45,11 @@
     "prettier": "^3.3.3",
     "supabase": "^1.207.9",
     "typescript": "^5"
+  },
+  "nextBundleAnalysis": {
+    "budget": 174080,
+    "budgetPercentIncreaseRed": 20,
+    "minimumChangeThreshold": 0,
+    "showDetails": true
   }
 }
