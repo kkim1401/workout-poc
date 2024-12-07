@@ -9,7 +9,7 @@
     "lint-staged": "lint-staged",
     "prepare": "husky",
     "start": "next start",
-    "test": "jest test"
+    "test": "TZ=UTC jest"
   },
   "dependencies": {
     "@supabase-cache-helpers/postgrest-react-query": "^1.10.1",
