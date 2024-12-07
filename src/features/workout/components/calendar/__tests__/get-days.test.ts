@@ -2,9 +2,7 @@ import { getDaysByDayName } from '../calendar';
 
 describe('getDaysByDayName', () => {
   beforeEach(() => {
-    jest
-      .useFakeTimers()
-      .setSystemTime(new Date(new Date('2020-01-06T00:00:00Z')));
+    jest.useFakeTimers().setSystemTime(new Date('2020-01-06T00:00:00Z'));
   });
 
   afterEach(() => {
