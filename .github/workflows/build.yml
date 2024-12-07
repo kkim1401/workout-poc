@@ -23,6 +23,8 @@ permissions:
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    env:
+      TZ: 'UTC'
     steps:
       - uses: actions/checkout@v3
 
