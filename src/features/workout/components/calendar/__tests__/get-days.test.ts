@@ -1,6 +1,6 @@
 import { getDaysByDayName } from '../calendar';
 
-jest.useFakeTimers().setSystemTime(new Date(Date.UTC(2020, 0, 6)));
+jest.useFakeTimers().setSystemTime(new Date('2020-01-06'));
 
 describe('getDaysByDayName', () => {
   it('getDaysByDayName should return a dictionary of days', () => {

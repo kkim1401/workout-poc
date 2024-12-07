@@ -12,7 +12,7 @@ export function getDaysByDayName(date: Date): { [index: string]: number } {
   return dayNames.reduce((acc, curr, index) => {
     return {
       ...acc,
-      [curr]: addDays(date, index - currDayIndex - 1).getDate(),
+      [curr]: addDays(date, index - currDayIndex).getDate(),
     };
   }, {});
 }

@@ -1,6 +1,6 @@
 import addDays from '../add-days';
 
-jest.useFakeTimers().setSystemTime(new Date(Date.UTC(2020, 0, 6)));
+jest.useFakeTimers().setSystemTime(new Date('2020-01-06'));
 
 describe('addDays', () => {
   it('should add days and return new Date instance if second argument is positive', () => {
