@@ -32,7 +32,7 @@ export async function signInWithEmail(_prevState: unknown, formData: FormData) {
     };
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const { error } = await supabase.auth.signInWithOtp({
     email: formData.get('email') as string,
     options: {
@@ -46,7 +46,7 @@ export async function signInWithEmail(_prevState: unknown, formData: FormData) {
 
   revalidatePath('/', 'layout');
 
-  cookies().set('email', formData.get('email') as string);
+  (await cookies()).set('email', formData.get('email') as string);
 
   redirect('/login/email-sent');
 }
