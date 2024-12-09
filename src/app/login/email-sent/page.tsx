@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import styles from './page.module.css';
 
 export default async function LoginEmailSentPage() {
-  const email = cookies().get('email')?.value;
+  const email = (await cookies()).get('email')?.value;
   return (
     <section className={styles.container}>
       <h1 className='headline4'>Check your email</h1>

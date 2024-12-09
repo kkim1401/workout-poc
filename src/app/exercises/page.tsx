@@ -11,7 +11,7 @@ import { redirect } from 'next/navigation';
 
 export default async function ExercisesPage() {
   const queryClient = new QueryClient();
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
