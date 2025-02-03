@@ -2,7 +2,8 @@
 
 import { Button, TextField } from '@/features/common/components';
 import clsx from 'clsx';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import styles from './login-form.module.css';
 
 type LoginFormProps = {
@@ -16,7 +17,7 @@ type LoginFormProps = {
 };
 
 export default function LoginForm({ className, loginAction }: LoginFormProps) {
-  const [state, formAction] = useFormState(loginAction, null);
+  const [state, formAction] = useActionState(loginAction, null);
   return (
     <form action={formAction} className={clsx(styles.container, className)}>
       <h1 className='headline4'>Log In</h1>
