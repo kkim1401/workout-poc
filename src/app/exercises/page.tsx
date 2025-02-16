@@ -1,6 +1,6 @@
 import { List } from '@/features/exercise/components';
-import { getAllExercises } from '@/features/exercise/queries';
-import { createClient } from '@/utils/supabase/server';
+import { getAllExercises } from '@/lib/api/db/exercises/queries';
+import { createClient } from '@/lib/supabase/server';
 import { prefetchQuery } from '@supabase-cache-helpers/postgrest-react-query';
 import {
   dehydrate,
