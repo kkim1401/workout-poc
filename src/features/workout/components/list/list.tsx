@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Card } from '@/features/common/components';
-import { addDays } from '@/utils';
+import { addDays } from '@/lib/utils';
 import clsx from 'clsx';
 import ListItem from './list-item';
 import styles from './list.module.css';
