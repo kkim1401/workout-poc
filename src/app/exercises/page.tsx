@@ -1,16 +1,9 @@
 import { List } from '@/features/exercise/components';
-import { getAllExercises } from '@/features/exercise/queries';
-import { createClient } from '@/utils/supabase/server';
-import { prefetchQuery } from '@supabase-cache-helpers/postgrest-react-query';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
+import { getAllExercises } from '@/lib/api/db/exercises/queries';
+import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 
 export default async function ExercisesPage() {
-  const queryClient = new QueryClient();
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.getUser();
@@ -18,11 +11,7 @@ export default async function ExercisesPage() {
     redirect('/login');
   }
 
-  await prefetchQuery(queryClient, getAllExercises(supabase));
+  const exercises = await getAllExercises(supabase);
 
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <List />
-    </HydrationBoundary>
-  );
+  return <List exercises={exercises} />;
 }

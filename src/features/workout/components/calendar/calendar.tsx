@@ -1,6 +1,6 @@
 'use client';
 
-import { addDays } from '@/utils';
+import { addDays } from '@/lib/utils';
 import clsx from 'clsx';
 import CalendarDay from './calendar-day';
 import styles from './calendar.module.css';

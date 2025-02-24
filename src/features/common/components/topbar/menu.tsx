@@ -1,4 +1,4 @@
-import { useSupabaseBrowser } from '@/utils/supabase/client';
+import { useSupabaseBrowser } from '@/lib/supabase/client';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';

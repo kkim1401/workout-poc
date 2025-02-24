@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import styles from './layout.module.css';
 import './globals.css';
 import { Topbar } from '@/features/common/components';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/lib/supabase/server';
 import Providers from './providers';
 
 const roboto = Roboto_Flex({ subsets: ['latin'] });
