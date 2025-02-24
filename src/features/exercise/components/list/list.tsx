@@ -1,9 +1,7 @@
 'use client';
 
-import { useSupabaseBrowser } from '@/lib/supabase/client';
-import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
+import { Exercise } from '@/lib/api/db/exercises/types';
 import { FixedSizeList } from 'react-window';
-import { getAllExercises } from '../../queries';
 
 type RowProps = {
   data: { name: string | null }[];
@@ -15,10 +13,11 @@ const Row = ({ data, index, style }: RowProps) => (
   <div style={style}>{data[index % data.length].name}</div>
 );
 
-export default function List() {
-  const supabase = useSupabaseBrowser();
+type ListProps = {
+  exercises?: Exercise[];
+};
 
-  const { data: exercises } = useQuery(getAllExercises(supabase));
+export default function List({ exercises }: ListProps) {
   return (
     <section>
       {exercises && (

@@ -10,27 +10,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      common_exercises: {
-        Row: {
-          created_at: string | null;
-          description: string | null;
-          id: string;
-          name: string | null;
-        };
-        Insert: {
-          created_at?: string | null;
-          description?: string | null;
-          id?: string;
-          name?: string | null;
-        };
-        Update: {
-          created_at?: string | null;
-          description?: string | null;
-          id?: string;
-          name?: string | null;
-        };
-        Relationships: [];
-      };
       exercises: {
         Row: {
           common_exercise_id: string | null;
@@ -68,7 +47,7 @@ export type Database = {
             foreignKeyName: 'exercises_common_exercise_id_fkey';
             columns: ['common_exercise_id'];
             isOneToOne: false;
-            referencedRelation: 'common_exercises';
+            referencedRelation: 'exercises';
             referencedColumns: ['id'];
           },
         ];
@@ -142,6 +121,7 @@ export type Database = {
           id: string;
           reps: number | null;
           rpe: number | null;
+          user_id: string | null;
           weight: number | null;
           workout_id: string | null;
         };
@@ -151,6 +131,7 @@ export type Database = {
           id?: string;
           reps?: number | null;
           rpe?: number | null;
+          user_id?: string | null;
           weight?: number | null;
           workout_id?: string | null;
         };
@@ -160,17 +141,11 @@ export type Database = {
           id?: string;
           reps?: number | null;
           rpe?: number | null;
+          user_id?: string | null;
           weight?: number | null;
           workout_id?: string | null;
         };
         Relationships: [
-          {
-            foreignKeyName: 'set_exercise_id_fkey';
-            columns: ['exercise_id'];
-            isOneToOne: false;
-            referencedRelation: 'exercises';
-            referencedColumns: ['id'];
-          },
           {
             foreignKeyName: 'set_workout_id_fkey';
             columns: ['workout_id'];
@@ -230,7 +205,17 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      user_visible_exercises: {
+        Row: {
+          common_exercise_id: string | null;
+          created_at: string | null;
+          description: string | null;
+          id: string | null;
+          name: string | null;
+          user_id: string | null;
+        };
+        Relationships: [];
+      };
     };
     Functions: {
       [_ in never]: never;
