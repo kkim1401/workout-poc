@@ -17,14 +17,14 @@ type ListProps = {
   exercises?: Exercise[];
 };
 
-export default function List({ exercises }: ListProps) {
+export default function List({ exercises = [] }: ListProps) {
   return (
     <section>
-      {exercises && (
+      {exercises.length > 0 && (
         <FixedSizeList
           height={150}
           itemData={exercises}
-          itemCount={100}
+          itemCount={exercises.length}
           itemSize={35}
           width={300}
         >
