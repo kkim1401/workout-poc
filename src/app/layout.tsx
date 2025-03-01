@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import styles from './layout.module.css';
 import './globals.css';
 import { Topbar } from '@/features/common/components';
+import { getUser } from '@/lib/api';
 import { createClient } from '@/lib/supabase/server';
 import Providers from './providers';
 
@@ -21,8 +22,8 @@ export default async function RootLayout({
 }>) {
   const supabase = await createClient();
 
-  const { data } = await supabase.auth.getUser();
-  const isLoggedIn = Boolean(data?.user);
+  const user = await getUser(supabase);
+  const isLoggedIn = Boolean(user);
   const links = [{ title: 'Home', href: '/' }];
 
   return (
