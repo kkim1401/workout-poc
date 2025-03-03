@@ -21,7 +21,10 @@ const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
 });
 
-export async function signInWithEmail(_prevState: unknown, formData: FormData) {
+export async function signInWithEmail(
+  _prevState: unknown,
+  formData: FormData
+): Promise<{ formErrors?: { email?: string[] }; message?: string } | void> {
   const validatedFields = schema.safeParse({
     email: formData.get('email'),
   });

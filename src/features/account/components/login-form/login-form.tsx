@@ -10,7 +10,7 @@ type LoginFormProps = {
   loginAction: (
     prevData: unknown,
     formData: FormData
-  ) => Promise<{ formErrors?: { email?: string[] }; message?: '' } | void>;
+  ) => Promise<{ formErrors?: { email?: string[] }; message?: string } | void>;
   /* eslint-enable no-unused-vars*/
   className?: string;
 };
