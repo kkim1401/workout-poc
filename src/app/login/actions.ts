@@ -28,7 +28,7 @@ export async function signInWithEmail(_prevState: unknown, formData: FormData) {
 
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      formErrors: validatedFields.error.flatten().fieldErrors,
     };
   }
 
@@ -41,7 +41,7 @@ export async function signInWithEmail(_prevState: unknown, formData: FormData) {
   });
 
   if (error) {
-    redirect('/error');
+    return { message: error.message };
   }
 
   revalidatePath('/', 'layout');
