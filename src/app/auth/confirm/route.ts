@@ -10,18 +10,29 @@ export async function GET(request: NextRequest) {
   const next = searchParams.get('redirect_to') ?? '/?logged_in=true';
 
   if (token_hash && type) {
-    const supabase = await createClient();
+    let supabase;
+    try {
+      supabase = await createClient();
+    } catch (e) {
+      console.error(e);
+      redirect('/login');
+    }
 
     const { error } = await supabase.auth.verifyOtp({
       type,
       token_hash,
     });
+
     if (!error) {
-      // redirect user to specified redirect URL or root of app
+      /**
+       * In Server Actions and Route Handlers,
+       * redirect should be called after the try/catch block.
+       * https://nextjs.org/docs/app/api-reference/functions/redirect
+       */
       redirect(next);
+    } else {
+      console.error(error);
+      redirect('/login');
     }
   }
-
-  // redirect the user to an error page with some instructions
-  redirect('/error');
 }

@@ -3,7 +3,6 @@
 import { Button, TextField } from '@/features/common/components';
 import clsx from 'clsx';
 import { useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
 import styles from './login-form.module.css';
 
 type LoginFormProps = {
@@ -11,33 +10,41 @@ type LoginFormProps = {
   loginAction: (
     prevData: unknown,
     formData: FormData
-  ) => Promise<{ errors: { email?: string[] } } | void>;
+  ) => Promise<{ formErrors?: { email?: string[] }; message?: string } | void>;
   /* eslint-enable no-unused-vars*/
   className?: string;
 };
 
+const initialState = {};
+
 export default function LoginForm({ className, loginAction }: LoginFormProps) {
-  const [state, formAction] = useActionState(loginAction, null);
+  const [state, formAction, pending] = useActionState(
+    loginAction,
+    initialState
+  );
+
   return (
     <form action={formAction} className={clsx(styles.container, className)}>
       <h1 className='headline4'>Log In</h1>
+      {state?.message && (
+        <strong className={styles.error}>{state?.message}</strong>
+      )}
       <TextField
         className={styles.textField}
-        error={state?.errors?.email?.join(' ')}
+        error={state?.formErrors?.email?.join(' ')}
         label='Email'
         name='email'
         type='email'
         required
       />
-      <SubmitButton />
+      <SubmitButton disabled={pending} />
     </form>
   );
 }
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
+function SubmitButton({ disabled }: { disabled: boolean }) {
   return (
-    <Button disabled={pending} className={styles.button}>
+    <Button disabled={disabled} className={styles.button}>
       Sign In
     </Button>
   );

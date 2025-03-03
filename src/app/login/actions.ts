@@ -21,14 +21,17 @@ const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
 });
 
-export async function signInWithEmail(_prevState: unknown, formData: FormData) {
+export async function signInWithEmail(
+  _prevState: unknown,
+  formData: FormData
+): Promise<{ formErrors?: { email?: string[] }; message?: string } | void> {
   const validatedFields = schema.safeParse({
     email: formData.get('email'),
   });
 
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      formErrors: validatedFields.error.flatten().fieldErrors,
     };
   }
 
@@ -41,7 +44,7 @@ export async function signInWithEmail(_prevState: unknown, formData: FormData) {
   });
 
   if (error) {
-    redirect('/error');
+    return { message: error.message };
   }
 
   revalidatePath('/', 'layout');

@@ -1,13 +1,14 @@
 import { List } from '@/features/exercise/components';
-import { getAllExercises } from '@/lib/api/db/exercises/queries';
+import { getAllExercises, getUser } from '@/lib/api';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 
 export default async function ExercisesPage() {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
+  const user = await getUser(supabase);
+
+  if (!user) {
     redirect('/login');
   }
 

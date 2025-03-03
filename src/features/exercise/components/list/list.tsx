@@ -14,13 +14,13 @@ const Row = ({ data, index, style }: RowProps) => (
 );
 
 type ListProps = {
-  exercises?: Exercise[];
+  exercises: Exercise[] | null;
 };
 
-export default function List({ exercises = [] }: ListProps) {
+export default function List({ exercises }: ListProps) {
   return (
     <section>
-      {exercises.length > 0 && (
+      {exercises && exercises.length > 0 && (
         <FixedSizeList
           height={150}
           itemData={exercises}
