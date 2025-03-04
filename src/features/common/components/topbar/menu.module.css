@@ -1,6 +1,7 @@
 .container {
   background-color: var(--surface);
   padding: 16px;
+  z-index: 1;
 
   > .list {
     margin-top: 3.5rem;
