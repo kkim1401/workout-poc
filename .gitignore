@@ -19,6 +19,7 @@
 # misc
 .DS_Store
 *.pem
+delete-local-branches.sh
 
 # debug
 npm-debug.log*
