@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
 
+  > .input {
+    height: var(--input-height);
+  }
+
   > .textarea,
   > .input {
     transition: var(--input-transition);
