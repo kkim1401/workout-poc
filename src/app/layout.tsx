@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import styles from './layout.module.css';
 import './globals.css';
 import { Topbar } from '@/features/common/components';
-import { getUser } from '@/lib/api';
+import { getUser } from '@/lib/api/db/user/queries/server';
 import { createClient } from '@/lib/supabase/server';
 import Providers from './providers';
 
@@ -22,7 +22,7 @@ export default async function RootLayout({
 }>) {
   const supabase = await createClient();
 
-  const user = await getUser(supabase);
+  const { data: user } = await getUser(supabase);
   const isLoggedIn = Boolean(user);
   const links = [{ title: 'Home', href: '/' }];
 
