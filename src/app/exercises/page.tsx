@@ -18,7 +18,11 @@ export default async function ExercisesPage() {
 
   return (
     <section className={styles.container}>
-      <List onClick={() => {}} className={styles.list} exercises={exercises} />
+      <List
+        onExerciseClick={() => {}}
+        className={styles.list}
+        exercises={exercises}
+      />
     </section>
   );
 }

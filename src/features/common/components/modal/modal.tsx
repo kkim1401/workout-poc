@@ -7,6 +7,7 @@ import {
   useRef,
   type ComponentPropsWithoutRef,
 } from 'react';
+import { Button } from '../button';
 import { Card } from '../card';
 import styles from './modal.module.css';
 
@@ -25,9 +26,15 @@ const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     return (
       <dialog className={styles.container} ref={forkedRef} {...rest}>
         <Card className={styles.content}>
-          <span onClick={handleClose} className={styles.close} autoFocus>
+          <Button
+            aria-label='Close Modal'
+            onClick={handleClose}
+            className={styles.close}
+            variant='none'
+            autoFocus
+          >
             &times;
-          </span>
+          </Button>
           {children}
         </Card>
       </dialog>
