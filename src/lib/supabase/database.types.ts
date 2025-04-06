@@ -16,7 +16,7 @@ export type Database = {
           created_at: string | null;
           description: string | null;
           id: string;
-          name: string | null;
+          name: string;
           user_id: string | null;
         };
         Insert: {
@@ -24,7 +24,7 @@ export type Database = {
           created_at?: string | null;
           description?: string | null;
           id?: string;
-          name?: string | null;
+          name: string;
           user_id?: string | null;
         };
         Update: {
@@ -32,7 +32,7 @@ export type Database = {
           created_at?: string | null;
           description?: string | null;
           id?: string;
-          name?: string | null;
+          name?: string;
           user_id?: string | null;
         };
         Relationships: [
@@ -118,6 +118,7 @@ export type Database = {
         Row: {
           created_at: string | null;
           exercise_id: string | null;
+          exercise_name: string;
           id: string;
           reps: number | null;
           rpe: number | null;
@@ -128,6 +129,7 @@ export type Database = {
         Insert: {
           created_at?: string | null;
           exercise_id?: string | null;
+          exercise_name: string;
           id?: string;
           reps?: number | null;
           rpe?: number | null;
@@ -138,6 +140,7 @@ export type Database = {
         Update: {
           created_at?: string | null;
           exercise_id?: string | null;
+          exercise_name?: string;
           id?: string;
           reps?: number | null;
           rpe?: number | null;

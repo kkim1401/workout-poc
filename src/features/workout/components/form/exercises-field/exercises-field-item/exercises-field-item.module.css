@@ -1,0 +1,33 @@
+.container {
+  background-color: var(--background-variant);
+  cursor: pointer;
+
+  &:not(:first-of-type) {
+    margin-top: 0.5rem;
+  }
+
+  > .sets {
+    background-color: var(--surface);
+    cursor: auto;
+  }
+
+  > .sets > .setItems {
+    display: flex;
+    overflow-x: auto;
+    column-gap: 0.5rem;
+    padding-bottom: 8px;
+  }
+
+  > .sets > .setItems > .setItem {
+    background-color: var(--background-variant);
+    width: 7rem;
+  }
+
+  > .sets > .setItems > .plusButton > .plus {
+    align-items: center;
+    background-color: var(--background-variant);
+    display: flex;
+    width: 3rem;
+    height: 100%;
+  }
+}

@@ -1,0 +1,25 @@
+.container {
+  &:modal {
+    > .content {
+      margin: 15% auto; /* 15% from the top and centered */
+    }
+
+    > .content > .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    > .content > .close:hover,
+    > .content > .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+  &::backdrop {
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+}

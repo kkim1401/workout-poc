@@ -8,11 +8,17 @@ import styles from './list.module.css';
 import { Row } from './row';
 
 type ListProps = {
-  className: string;
-  exercises: Exercise[] | null;
+  className?: string;
+  exercises?: Exercise[] | null;
+  // eslint-disable-next-line no-unused-vars
+  onExerciseClick: (exercise: Exercise) => void;
 };
 
-export default function List({ className, exercises }: ListProps) {
+export default function List({
+  className,
+  onExerciseClick,
+  exercises,
+}: ListProps) {
   return (
     <section className={clsx(styles.container, className)}>
       {exercises && exercises.length > 0 && (
@@ -26,7 +32,14 @@ export default function List({ className, exercises }: ListProps) {
             itemSize={30}
             width={300}
           >
-            {Row}
+            {({ index, style, data }) => (
+              <Row
+                index={index}
+                style={style}
+                data={data}
+                onClick={onExerciseClick}
+              />
+            )}
           </FixedSizeList>
         </Card>
       )}

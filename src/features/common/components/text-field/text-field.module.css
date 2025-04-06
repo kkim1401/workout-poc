@@ -1,6 +1,21 @@
+/* Can't use composes when nesting */
+.input,
+.textarea {
+  composes: body1 from global;
+}
+
+.error {
+  composes: subtitle2 from global;
+}
+
 .container {
   display: flex;
   flex-direction: column;
+  composes: subtitle2 from global;
+
+  > .input.fixedSize {
+    height: var(--input-height);
+  }
 
   > .textarea,
   > .input {

@@ -1,18 +1,19 @@
 .container {
   cursor: pointer;
-  display: block;
+  display: flex;
+  flex-direction: column;
 
   > .select {
     accent-color: var(--primary-dark);
     background-color: var(--background);
     border: var(--input-border-width) solid var(--input-border-color);
     border-radius: var(--input-border-radius);
-    font: inherit;
+    cursor: pointer;
+    height: var(--input-height);
     line-height: var(--input-leading);
     max-width: 100%;
     padding: var(--input-padding);
     transition: var(--input-transition);
-    width: var(--select-width);
 
     &:hover,
     &:active {

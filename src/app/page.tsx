@@ -9,7 +9,10 @@ export default function Home() {
       <List className={styles.list} />
       <ul className={styles.links}>
         <li className={styles.link}>
-          <Link href='/plans'>All plans</Link>
+          <Link href='/plans'>All Plans</Link>
+        </li>
+        <li className={styles.link}>
+          <Link href='/workout'>Workout of the Day</Link>
         </li>
         <li className={styles.link}>
           <Link href='/exercises'>Exercises</Link>

@@ -3,4 +3,12 @@
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
   padding: 16px;
+
+  &.shallow {
+    padding: 8px;
+  }
+
+  &.deep {
+    padding: 24px;
+  }
 }
