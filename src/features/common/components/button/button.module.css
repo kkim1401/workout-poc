@@ -5,8 +5,10 @@
   border-radius: var(--input-border-radius);
   cursor: pointer;
   display: flex;
+  font-size: 0.875rem;
+  font-family: inherit;
   justify-content: center;
-  line-height: var(--input-leading);
+  letter-spacing: 0.078125rem;
   padding: var(--input-padding);
   text-align: inherit;
   transition: var(--input-transition);
@@ -46,7 +48,6 @@
     background-color: transparent;
     border: var(--input-border-width) solid var(--primary-dark);
     color: var(--primary-dark);
-    font: inherit;
   }
 
   &.outlined:hover {
@@ -67,9 +68,15 @@
     color: var(--button-outlined-disabled-color);
   }
 
+  &.none {
+    background-color: transparent;
+    padding: 0;
+  }
+
   &.text {
     background-color: transparent;
     color: var(--primary-dark);
+    font-size: 1.5rem;
   }
 
   &.text:hover {
