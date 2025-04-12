@@ -2,20 +2,50 @@ import { Button, Card } from '@/features/common/components';
 import { Exercise } from '@/lib/api/db/exercises/types';
 import { Set } from '@/lib/api/db/sets/types';
 import { Plus } from 'lucide-react';
+import { ChangeEventHandler } from 'react';
 import styles from './exercises-field-item.module.css';
 import { SetCard } from './set-card';
 
 type ExercisesFieldItemProps = {
   exerciseName: Exercise['name'];
   onAddSetClick: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onSetChange: (set: Partial<Set>, index: number) => void;
   sets?: Partial<Set>[];
 };
 
 export default function ExercisesFieldItem({
   exerciseName,
   onAddSetClick,
+  onSetChange,
   sets,
 }: ExercisesFieldItemProps) {
+  const createRepsChangeHandler =
+    (set: Partial<Set>, index: number): ChangeEventHandler<HTMLInputElement> =>
+    (e) => {
+      const reps = e.target.value;
+      onSetChange(
+        {
+          ...set,
+          reps: Number(reps),
+        },
+        index
+      );
+    };
+
+  const createWeightChangeHandler =
+    (set: Partial<Set>, index: number): ChangeEventHandler<HTMLInputElement> =>
+    (e) => {
+      const weight = e.target.value;
+      onSetChange(
+        {
+          ...set,
+          weight: Number(weight),
+        },
+        index
+      );
+    };
+
   return (
     <Card depth='shallow' as='details' className={styles.container}>
       <summary>{exerciseName}</summary>
@@ -25,7 +55,14 @@ export default function ExercisesFieldItem({
           {sets &&
             sets.length > 0 &&
             sets.map((set, i) => (
-              <SetCard className={styles.setItem} key={i} set={set} index={i} />
+              <SetCard
+                className={styles.setItem}
+                key={i}
+                set={set}
+                index={i}
+                onRepsChange={createRepsChangeHandler(set, i)}
+                onWeightChange={createWeightChangeHandler(set, i)}
+              />
             ))}
           <Button
             aria-label='Add Exercise'

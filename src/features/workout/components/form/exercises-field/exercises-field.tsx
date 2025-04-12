@@ -34,10 +34,33 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
   const handleAddWorkoutExercise = (exercise: Exercise) => {
     setWorkoutExercises([
       ...workoutExercises,
-      { exerciseName: exercise.name, sets: [{ weight: 0, reps: 0 }] },
+      { exerciseName: exercise.name, sets: [{ weight: null, reps: null }] },
     ]);
     modalRef.current?.close();
   };
+
+  const createEditSetsHandler =
+    (exerciseIndex: number) => (set: Partial<Set>, setIndex: number) => {
+      setWorkoutExercises(
+        workoutExercises.map((currWorkoutExercise, exerciseI) => {
+          if (exerciseIndex === exerciseI) {
+            return {
+              ...currWorkoutExercise,
+              sets: currWorkoutExercise.sets.map((currSet, setI) => {
+                if (setIndex === setI) {
+                  return {
+                    ...currSet,
+                    ...set,
+                  };
+                }
+                return currSet;
+              }),
+            };
+          }
+          return currWorkoutExercise;
+        })
+      );
+    };
 
   const createAddSetsHandler = (index: number) => () => {
     setWorkoutExercises(
@@ -45,7 +68,7 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
         if (index === i) {
           return {
             ...workoutExercise,
-            sets: [...workoutExercise.sets, { weight: 0, reps: 0 }],
+            sets: [...workoutExercise.sets, { weight: null, reps: null }],
           };
         }
         return workoutExercise;
@@ -60,10 +83,16 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
         onExerciseClick={handleAddWorkoutExercise}
       />
       <span>Exercises</span>
+      <input
+        type='hidden'
+        name='workoutExercises'
+        value={JSON.stringify(workoutExercises)}
+      />
       {workoutExercises.length > 0 &&
         workoutExercises.map(({ exerciseName, sets }, i) => (
           <ExercisesFieldItem
             onAddSetClick={createAddSetsHandler(i)}
+            onSetChange={createEditSetsHandler(i)}
             key={i}
             exerciseName={exerciseName}
             sets={sets}

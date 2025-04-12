@@ -13,7 +13,7 @@
   flex-direction: column;
   composes: subtitle2 from global;
 
-  > .input.fixedSize {
+  > .input {
     height: var(--input-height);
   }
 

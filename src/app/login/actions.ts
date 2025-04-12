@@ -24,15 +24,13 @@ const schema = z.object({
 export async function signInWithEmail(
   _prevState: unknown,
   formData: FormData
-): Promise<{ formErrors?: { email?: string[] }; message?: string } | void> {
+): Promise<{ fieldErrors?: { email?: string[] }; message?: string } | void> {
   const validatedFields = schema.safeParse({
     email: formData.get('email'),
   });
 
   if (!validatedFields.success) {
-    return {
-      formErrors: validatedFields.error.flatten().fieldErrors,
-    };
+    return validatedFields.error.flatten();
   }
 
   const supabase = await createClient();
