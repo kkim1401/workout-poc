@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/features/common/components';
+import { WorkoutExercise, WorkoutExerciseSet } from '@/features/workout/types';
 import { Exercise } from '@/lib/api/db/exercises/types';
 import { Set } from '@/lib/api/db/sets/types';
 import clsx from 'clsx';
@@ -13,17 +14,6 @@ type ExercisesFieldProps = {
   className?: string;
 };
 
-/**
- * When getting workout, the UI will get a list of sets, ordered by when they should
- * be done. UI will group them by exercise.
- * WorkoutExercise is a UI model representing the group, containing the exercise metadata (just name in this case)
- * and sets.
- */
-type WorkoutExercise = {
-  exerciseName: Exercise['name'];
-  sets: Partial<Set>[];
-};
-
 export default function ExercisesField({ className }: ExercisesFieldProps) {
   const [workoutExercises, setWorkoutExercises] = useState<WorkoutExercise[]>(
     []
@@ -32,9 +22,14 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const handleAddWorkoutExercise = (exercise: Exercise) => {
+    const newSet: WorkoutExerciseSet = {
+      exercise_name: exercise.name,
+      weight: null,
+      reps: null,
+    };
     setWorkoutExercises([
       ...workoutExercises,
-      { exerciseName: exercise.name, sets: [{ weight: null, reps: null }] },
+      { exerciseName: exercise.name, sets: [newSet] },
     ]);
     modalRef.current?.close();
   };
@@ -66,9 +61,14 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
     setWorkoutExercises(
       workoutExercises.map((workoutExercise, i) => {
         if (index === i) {
+          const newSet: WorkoutExerciseSet = {
+            exercise_name: workoutExercise.exerciseName,
+            weight: null,
+            reps: null,
+          };
           return {
             ...workoutExercise,
-            sets: [...workoutExercise.sets, { weight: null, reps: null }],
+            sets: [...workoutExercise.sets, newSet],
           };
         }
         return workoutExercise;

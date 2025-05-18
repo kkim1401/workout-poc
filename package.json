@@ -9,7 +9,7 @@
     "lint-staged": "lint-staged",
     "prepare": "husky",
     "pull-env": "vercel env pull",
-    "pull-types": "cross-env dotenv -e .env.local -- supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/lib/supabase/database.types.ts",
+    "pull-types": "cross-env dotenv -e .env.local -- supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/lib/supabase/database-generated.types.ts",
     "start": "next start",
     "test": "TZ=UTC jest"
   },
@@ -24,6 +24,7 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-window": "^1.8.10",
+    "type-fest": "^4.41.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
