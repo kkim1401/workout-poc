@@ -221,7 +221,10 @@ export type Database = {
       };
     };
     Functions: {
-      [_ in never]: never;
+      create_workout: {
+        Args: { name: string; workout_exercises: Json };
+        Returns: string;
+      };
     };
     Enums: {
       [_ in never]: never;

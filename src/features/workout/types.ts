@@ -12,6 +12,7 @@ export type WorkoutExerciseSet = Partial<Set> & {
  * and sets.
  */
 export type WorkoutExercise = {
-  exerciseName: NonNullable<Exercise['name']>;
+  exercise_id: Exercise['id'];
+  exercise_name: NonNullable<Exercise['name']>;
   sets: WorkoutExerciseSet[];
 };

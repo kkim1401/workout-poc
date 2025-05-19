@@ -27,10 +27,12 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
       weight: null,
       reps: null,
     };
-    setWorkoutExercises([
-      ...workoutExercises,
-      { exerciseName: exercise.name, sets: [newSet] },
-    ]);
+    const newWorkoutExercise: WorkoutExercise = {
+      exercise_id: exercise.id,
+      exercise_name: exercise.name,
+      sets: [newSet],
+    };
+    setWorkoutExercises([...workoutExercises, newWorkoutExercise]);
     modalRef.current?.close();
   };
 
@@ -62,7 +64,7 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
       workoutExercises.map((workoutExercise, i) => {
         if (index === i) {
           const newSet: WorkoutExerciseSet = {
-            exercise_name: workoutExercise.exerciseName,
+            exercise_name: workoutExercise.exercise_name,
             weight: null,
             reps: null,
           };
@@ -89,12 +91,12 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
         value={JSON.stringify(workoutExercises)}
       />
       {workoutExercises.length > 0 &&
-        workoutExercises.map(({ exerciseName, sets }, i) => (
+        workoutExercises.map(({ exercise_name, sets }, i) => (
           <ExercisesFieldItem
             onAddSetClick={createAddSetsHandler(i)}
             onSetChange={createEditSetsHandler(i)}
             key={i}
-            exerciseName={exerciseName}
+            exerciseName={exercise_name}
             sets={sets}
           />
         ))}

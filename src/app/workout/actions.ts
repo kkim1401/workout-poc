@@ -28,17 +28,20 @@ export async function createWorkout(
 
   const supabase = await createClient();
 
-  // Need to do this in an atomic transaction
-  workoutExercises.forEach((workoutExercise) => {
-    workoutExercise.sets.forEach((set) => {
-      supabase.from('sets').insert(set);
-    });
+  /**
+   * Need to validate workoutExercises for null reps/weight
+   */
+
+  const { data, error } = await supabase.rpc('create_workout', {
+    name: validatedFields.data.title,
+    workout_exercises: workoutExercises,
   });
 
-  // Might want to revalidate workout view
+  /**
+   * Might want to revalidate workout view and/or redirect to workout view
+   */
   console.log({
-    workoutExercises,
-    sets: workoutExercises[0].sets,
-    validatedFields,
+    data,
+    error,
   });
 }
