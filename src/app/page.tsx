@@ -1,5 +1,6 @@
 import { Link } from '@/features/common/components';
-import { Calendar, List } from '@/features/workout/components';
+import { List } from '@/features/plan/components';
+import { Calendar } from '@/features/workout/components';
 import styles from './page.module.css';
 
 export default function Home() {
