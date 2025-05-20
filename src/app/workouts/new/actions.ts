@@ -37,6 +37,10 @@ export async function createWorkout(
     workout_exercises: workoutExercises,
   });
 
+  if (error) {
+    return { message: error.message };
+  }
+
   /**
    * Might want to revalidate workout view and/or redirect to workout view
    */

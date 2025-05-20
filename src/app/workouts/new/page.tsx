@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { createWorkout } from './actions';
 import styles from './page.module.css';
 
-export default async function WorkoutPage() {
+export default async function WorkoutCreationPage() {
   const supabase = await createClient();
 
   const { data: user } = await getUser(supabase);

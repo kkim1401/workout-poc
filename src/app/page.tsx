@@ -12,7 +12,7 @@ export default function Home() {
           <Link href='/plans'>All Plans</Link>
         </li>
         <li className={styles.link}>
-          <Link href='/workout'>Workout of the Day</Link>
+          <Link href='/workouts/new'>Create Workout</Link>
         </li>
         <li className={styles.link}>
           <Link href='/exercises'>Exercises</Link>
