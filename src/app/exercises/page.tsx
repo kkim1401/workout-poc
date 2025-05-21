@@ -1,4 +1,4 @@
-import { List } from '@/features/exercise/components';
+import { ExerciseList } from '@/features/exercise/components';
 import { getAllUserExercises } from '@/lib/api/db/exercises/queries/server';
 import { getUser } from '@/lib/api/db/user/queries/server';
 import { createClient } from '@/lib/supabase/server';
@@ -18,11 +18,7 @@ export default async function ExercisesPage() {
 
   return (
     <section className={styles.container}>
-      <List
-        onExerciseClick={() => {}}
-        className={styles.list}
-        exercises={exercises}
-      />
+      <ExerciseList className={styles.exerciseList} exercises={exercises} />
     </section>
   );
 }

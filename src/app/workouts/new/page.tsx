@@ -1,4 +1,4 @@
-import { Form } from '@/features/workout/components';
+import { CreateWorkoutForm } from '@/features/workout/components';
 import { getUser } from '@/lib/api/db/user/queries/server';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
@@ -16,7 +16,10 @@ export default async function WorkoutCreationPage() {
 
   return (
     <section className={styles.container}>
-      <Form action={createWorkout} className={styles.form} />
+      <CreateWorkoutForm
+        action={createWorkout}
+        className={styles.createWorkoutForm}
+      />
     </section>
   );
 }

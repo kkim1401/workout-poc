@@ -1,1 +1,1 @@
-export { List } from './list';
+export { PlanCard } from './plan-card';

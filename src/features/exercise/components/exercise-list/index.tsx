@@ -7,6 +7,6 @@ import dynamic from 'next/dynamic';
  * components in the initial bundle:
  * https://github.com/vercel/next.js/issues/61066#issuecomment-2058080448
  */
-export const List = dynamic(() => import('./list'), {
+export const ExerciseList = dynamic(() => import('./exercise-list'), {
   loading: () => <div>Loading...</div>,
 });

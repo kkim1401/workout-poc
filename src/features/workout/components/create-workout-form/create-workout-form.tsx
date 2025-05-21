@@ -3,10 +3,10 @@
 import { Button, Card, TextField } from '@/features/common/components';
 import clsx from 'clsx';
 import { useActionState } from 'react';
-import { ExercisesField } from './exercises-field';
-import styles from './form.module.css';
+import styles from './create-workout-form.module.css';
+import { ExerciseField } from './exercise-field';
 
-type FormProps = {
+type CreateWorkoutFormProps = {
   /* eslint-disable no-unused-vars*/
   action: (
     prevData: unknown,
@@ -18,7 +18,10 @@ type FormProps = {
 
 const initialState = {};
 
-export default function Form({ action, className }: FormProps) {
+export default function CreateWorkoutForm({
+  action,
+  className,
+}: CreateWorkoutFormProps) {
   const [state, formAction, pending] = useActionState(action, initialState);
 
   return (
@@ -32,7 +35,7 @@ export default function Form({ action, className }: FormProps) {
         <strong className={styles.error}>{state?.message}</strong>
       )}
       <TextField name='title' type='text' label='Title' />
-      <ExercisesField className={styles.exercisesField} />
+      <ExerciseField className={styles.exerciseField} />
       <Button disabled={pending} className={styles.saveWorkoutButton}>
         Save Workout
       </Button>

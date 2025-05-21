@@ -3,10 +3,10 @@ import { Exercise } from '@/lib/api/db/exercises/types';
 import { Set } from '@/lib/api/db/sets/types';
 import { Plus } from 'lucide-react';
 import { ChangeEventHandler } from 'react';
-import styles from './exercises-field-item.module.css';
+import styles from './exercise-field-item.module.css';
 import { SetCard } from './set-card';
 
-type ExercisesFieldItemProps = {
+type ExerciseFieldItemProps = {
   exerciseName: Exercise['name'];
   onAddSetClick: () => void;
   // eslint-disable-next-line no-unused-vars
@@ -14,12 +14,12 @@ type ExercisesFieldItemProps = {
   sets?: Partial<Set>[];
 };
 
-export default function ExercisesFieldItem({
+export default function ExerciseFieldItem({
   exerciseName,
   onAddSetClick,
   onSetChange,
   sets,
-}: ExercisesFieldItemProps) {
+}: ExerciseFieldItemProps) {
   const createRepsChangeHandler =
     (set: Partial<Set>, index: number): ChangeEventHandler<HTMLInputElement> =>
     (e) => {

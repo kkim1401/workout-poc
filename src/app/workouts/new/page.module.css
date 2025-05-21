@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
 
-  > .form {
+  > .createWorkoutForm {
     margin-top: 10rem;
     width: 20rem;
   }

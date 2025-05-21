@@ -6,9 +6,9 @@ import { Exercise } from '@/lib/api/db/exercises/types';
 import { Set } from '@/lib/api/db/sets/types';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
-import ExercisesModal from '../exercises-modal';
-import { ExercisesFieldItem } from './exercises-field-item';
-import styles from './exercises-field.module.css';
+import ExerciseModal from '../exercise-modal';
+import { ExerciseFieldItem } from './exercise-field-item';
+import styles from './exercise-field.module.css';
 
 type ExercisesFieldProps = {
   className?: string;
@@ -80,7 +80,7 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
 
   return (
     <section className={clsx(styles.container, 'subtitle1', className)}>
-      <ExercisesModal
+      <ExerciseModal
         ref={modalRef}
         onExerciseClick={handleAddWorkoutExercise}
       />
@@ -92,7 +92,7 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
       />
       {workoutExercises.length > 0 &&
         workoutExercises.map(({ exercise_name, sets }, i) => (
-          <ExercisesFieldItem
+          <ExerciseFieldItem
             onAddSetClick={createAddSetsHandler(i)}
             onSetChange={createEditSetsHandler(i)}
             key={i}

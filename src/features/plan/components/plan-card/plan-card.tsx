@@ -4,9 +4,9 @@ import { Button, Card } from '@/features/common/components';
 import { addDays } from '@/lib/utils';
 import clsx from 'clsx';
 import ListItem from './list-item';
-import styles from './list.module.css';
+import styles from './plan-card.module.css';
 
-type ListProps = { className?: string };
+type PlanCardProps = { className?: string };
 
 // Mock data obviously. Will replace with real data in the future.
 const workouts = [
@@ -30,7 +30,7 @@ const workouts = [
   },
 ];
 
-export default function List({ className }: ListProps) {
+export default function PlanCard({ className }: PlanCardProps) {
   return (
     <Card as='section' className={clsx(styles.container, className)}>
       <Button variant='text'>Bro Split</Button>

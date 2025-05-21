@@ -3,7 +3,7 @@
 import { addDays } from '@/lib/utils';
 import clsx from 'clsx';
 import CalendarDay from './calendar-day';
-import styles from './calendar.module.css';
+import styles from './workout-calendar.module.css';
 
 const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
@@ -22,9 +22,9 @@ function getCurrentDayName(date: Date) {
   return dayNames[currDayIndex];
 }
 
-type CalendarProps = { className?: string };
+type WorkoutCalendarProps = { className?: string };
 
-export default function Calendar({ className }: CalendarProps) {
+export default function WorkoutCalendar({ className }: WorkoutCalendarProps) {
   const date = new Date();
   const daysByDayName = getDaysByDayName(date);
   const currentDayName = getCurrentDayName(date);

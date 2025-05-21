@@ -4,21 +4,21 @@ import { Card } from '@/features/common/components';
 import { Exercise } from '@/lib/api/db/exercises/types';
 import clsx from 'clsx';
 import { FixedSizeList } from 'react-window';
-import styles from './list.module.css';
+import styles from './exercise-list.module.css';
 import { Row } from './row';
 
-type ListProps = {
+type ExerciseListProps = {
   className?: string;
   exercises?: Exercise[] | null;
   // eslint-disable-next-line no-unused-vars
-  onExerciseClick: (exercise: Exercise) => void;
+  onExerciseClick?: (exercise: Exercise) => void;
 };
 
-export default function List({
+export default function ExerciseList({
   className,
   onExerciseClick,
   exercises,
-}: ListProps) {
+}: ExerciseListProps) {
   return (
     <section className={clsx(styles.container, className)}>
       {exercises && exercises.length > 0 && (

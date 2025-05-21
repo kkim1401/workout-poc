@@ -5,11 +5,11 @@ type RowProps = {
   data: Exercise[];
   index: number;
   // eslint-disable-next-line no-unused-vars
-  onClick: (exercise: Exercise) => void;
+  onClick?: (exercise: Exercise) => void;
   style: object;
 };
 
-export const Row = ({ data, index, onClick, style }: RowProps) => (
+export const Row = ({ data, index, onClick = () => {}, style }: RowProps) => (
   <li
     className={styles.container}
     style={style}

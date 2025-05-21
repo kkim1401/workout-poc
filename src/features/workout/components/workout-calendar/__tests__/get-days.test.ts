@@ -1,4 +1,4 @@
-import { getDaysByDayName } from '../calendar';
+import { getDaysByDayName } from '../workout-calendar';
 
 jest.useFakeTimers().setSystemTime(new Date('2020-01-06'));
 
