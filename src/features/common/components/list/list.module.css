@@ -1,0 +1,7 @@
+.container {
+  .container {
+    > .card > .list {
+      margin-top: 1rem;
+    }
+  }
+}

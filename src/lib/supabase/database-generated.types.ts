@@ -163,7 +163,7 @@ export type Database = {
           created_at: string | null;
           description: string | null;
           id: string;
-          name: string | null;
+          name: string;
           plan_id: string | null;
           started_at: string | null;
           status: string | null;
@@ -173,7 +173,7 @@ export type Database = {
           created_at?: string | null;
           description?: string | null;
           id?: string;
-          name?: string | null;
+          name: string;
           plan_id?: string | null;
           started_at?: string | null;
           status?: string | null;
@@ -183,7 +183,7 @@ export type Database = {
           created_at?: string | null;
           description?: string | null;
           id?: string;
-          name?: string | null;
+          name?: string;
           plan_id?: string | null;
           started_at?: string | null;
           status?: string | null;

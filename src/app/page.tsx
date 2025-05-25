@@ -18,6 +18,9 @@ export default function Home() {
         <li className={styles.link}>
           <Link href='/exercises'>Exercises</Link>
         </li>
+        <li className={styles.link}>
+          <Link href='/workouts'>Workouts</Link>
+        </li>
       </ul>
     </div>
   );
