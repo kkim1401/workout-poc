@@ -3,7 +3,7 @@ import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import styles from './text-field.module.css';
 
 type TextFieldProps = ComponentPropsWithoutRef<'input'> & {
-  error?: string;
+  error?: string | undefined;
   label: string;
 };
 

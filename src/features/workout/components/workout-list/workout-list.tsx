@@ -2,19 +2,20 @@
 
 import { List } from '@/features/common/components/list';
 import { Workout } from '@/lib/api/db/workouts/types';
+import { useRouter } from 'next/navigation';
 
 type WorkoutListProps = {
   className?: string;
   workouts?: Workout[] | null;
-  // eslint-disable-next-line no-unused-vars
-  onWorkoutClick?: (Workout: Workout) => void;
 };
 
-export default function WorkoutList({
-  className,
-  onWorkoutClick,
-  workouts,
-}: WorkoutListProps) {
+export default function WorkoutList({ className, workouts }: WorkoutListProps) {
+  const router = useRouter();
+
+  const onWorkoutClick = (workout: Workout) => {
+    router.push(`/workouts/${workout.id}`);
+  };
+
   return (
     <List
       className={className}

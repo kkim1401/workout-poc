@@ -1,11 +1,10 @@
 'use client';
 
 import { Button } from '@/features/common/components';
-import { WorkoutExercise, WorkoutExerciseSet } from '@/features/workout/types';
 import { Exercise } from '@/lib/api/db/exercises/types';
-import { Set } from '@/lib/api/db/sets/types';
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import ExerciseModal from '../exercise-modal';
 import { ExerciseFieldItem } from './exercise-field-item';
 import styles from './exercise-field.module.css';
@@ -15,91 +14,37 @@ type ExercisesFieldProps = {
 };
 
 export default function ExercisesField({ className }: ExercisesFieldProps) {
-  const [workoutExercises, setWorkoutExercises] = useState<WorkoutExercise[]>(
-    []
-  );
-
   const modalRef = useRef<HTMLDialogElement>(null);
 
-  const handleAddWorkoutExercise = (exercise: Exercise) => {
-    const newSet: WorkoutExerciseSet = {
+  const { register } = useFormContext();
+  const { fields, append } = useFieldArray({
+    name: 'workoutExercises',
+  });
+
+  const handleExerciseClick = (exercise: Exercise) => {
+    append({
       exercise_name: exercise.name,
-      weight: null,
-      reps: null,
-    };
-    const newWorkoutExercise: WorkoutExercise = {
       exercise_id: exercise.id,
-      exercise_name: exercise.name,
-      sets: [newSet],
-    };
-    setWorkoutExercises([...workoutExercises, newWorkoutExercise]);
+      sets: [
+        {
+          exercise_name: exercise.name,
+          reps: '',
+          weight: '',
+        },
+      ],
+    });
     modalRef.current?.close();
-  };
-
-  const createEditSetsHandler =
-    (exerciseIndex: number) => (set: Partial<Set>, setIndex: number) => {
-      setWorkoutExercises(
-        workoutExercises.map((currWorkoutExercise, exerciseI) => {
-          if (exerciseIndex === exerciseI) {
-            return {
-              ...currWorkoutExercise,
-              sets: currWorkoutExercise.sets.map((currSet, setI) => {
-                if (setIndex === setI) {
-                  return {
-                    ...currSet,
-                    ...set,
-                  };
-                }
-                return currSet;
-              }),
-            };
-          }
-          return currWorkoutExercise;
-        })
-      );
-    };
-
-  const createAddSetsHandler = (index: number) => () => {
-    setWorkoutExercises(
-      workoutExercises.map((workoutExercise, i) => {
-        if (index === i) {
-          const newSet: WorkoutExerciseSet = {
-            exercise_name: workoutExercise.exercise_name,
-            weight: null,
-            reps: null,
-          };
-          return {
-            ...workoutExercise,
-            sets: [...workoutExercise.sets, newSet],
-          };
-        }
-        return workoutExercise;
-      })
-    );
   };
 
   return (
     <section className={clsx(styles.container, 'subtitle1', className)}>
-      <ExerciseModal
-        ref={modalRef}
-        onExerciseClick={handleAddWorkoutExercise}
-      />
+      <ExerciseModal ref={modalRef} onExerciseClick={handleExerciseClick} />
       <span>Exercises</span>
-      <input
-        type='hidden'
-        name='workoutExercises'
-        value={JSON.stringify(workoutExercises)}
-      />
-      {workoutExercises.length > 0 &&
-        workoutExercises.map(({ exercise_name, sets }, i) => (
-          <ExerciseFieldItem
-            onAddSetClick={createAddSetsHandler(i)}
-            onSetChange={createEditSetsHandler(i)}
-            key={i}
-            exerciseName={exercise_name}
-            sets={sets}
-          />
-        ))}
+      {fields.map((field, index) => {
+        register(`workoutExercises.${index}.exercise_name`);
+        register(`workoutExercises.${index}.exercise_id`);
+        return <ExerciseFieldItem exerciseIndex={index} key={field.id} />;
+      })}
       <Button
         className={styles.addExerciseButton}
         variant='outlined'

@@ -1,2 +1,10 @@
 .container {
+  > .weightInput {
+    width: 100%;
+    max-width: 5rem;
+  }
+  > .repsInput {
+    width: 100%;
+    max-width: 5rem;
+  }
 }

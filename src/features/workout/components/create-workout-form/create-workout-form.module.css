@@ -1,7 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  > .exercisesField {
+
+  > .exerciseField {
     margin-top: 1rem;
   }
 

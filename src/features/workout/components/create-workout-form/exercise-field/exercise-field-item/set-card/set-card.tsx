@@ -1,38 +1,57 @@
 import { Card, TextField } from '@/features/common/components';
-import { Set } from '@/lib/api/db/sets/types';
 import clsx from 'clsx';
-import { ChangeEventHandler } from 'react';
+import { get } from 'lodash-es';
+import { useFormContext } from 'react-hook-form';
 import styles from './set-card.module.css';
 
 type SetCardProps = {
   className: string;
+  exerciseIndex: number;
   index: number;
-  onRepsChange: ChangeEventHandler<HTMLInputElement>;
-  onWeightChange: ChangeEventHandler<HTMLInputElement>;
-  set: Partial<Set>;
 };
 
 export default function SetCard({
   className,
+  exerciseIndex,
   index,
-  onRepsChange,
-  onWeightChange,
-  set,
 }: SetCardProps) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
+  console.log({ errors });
+
+  const weightError = get(
+    errors,
+    `workoutExercises.${exerciseIndex}.sets.${index}.weight.message`
+  ) as string | undefined;
+
+  const repsError = get(
+    errors,
+    `workoutExercises.${exerciseIndex}.sets.${index}.reps.message`
+  ) as string | undefined;
+
   return (
     <Card depth='shallow' className={clsx(styles.container, className)}>
       <span>Set {index + 1}</span>
       <TextField
+        className={styles.weightInput}
         type='number'
         label='Weight'
-        defaultValue={set.weight ?? ''}
-        onChange={onWeightChange}
+        {...register(`workoutExercises.${exerciseIndex}.sets.${index}.weight`, {
+          valueAsNumber: true,
+        })}
+        error={weightError}
       />
       <TextField
+        className={styles.repsInput}
         type='number'
         label='Reps'
-        defaultValue={set.reps ?? ''}
-        onChange={onRepsChange}
+        {...register(`workoutExercises.${exerciseIndex}.sets.${index}.reps`, {
+          valueAsNumber: true,
+        })}
+        error={repsError}
       />
     </Card>
   );
