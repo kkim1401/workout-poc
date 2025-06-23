@@ -39,11 +39,7 @@ export default function ExerciseFieldItem({
             aria-label='Add Set'
             className={styles.plusButton}
             onClick={() => {
-              append({
-                exercise_name: exerciseName,
-                reps: '',
-                weight: '',
-              });
+              append({ exercise_name: exerciseName });
             }}
             type='button'
             variant='none'

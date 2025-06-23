@@ -25,13 +25,7 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
     append({
       exercise_name: exercise.name,
       exercise_id: exercise.id,
-      sets: [
-        {
-          exercise_name: exercise.name,
-          reps: '',
-          weight: '',
-        },
-      ],
+      sets: [{ exercise_name: exercise.name }],
     });
     modalRef.current?.close();
   };
