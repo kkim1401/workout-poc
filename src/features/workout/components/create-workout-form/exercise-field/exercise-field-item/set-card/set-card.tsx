@@ -20,8 +20,6 @@ export default function SetCard({
     formState: { errors },
   } = useFormContext();
 
-  console.log({ errors });
-
   const weightError = get(
     errors,
     `workoutExercises.${exerciseIndex}.sets.${index}.weight.message`
