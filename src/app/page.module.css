@@ -1,10 +1,10 @@
 .container {
-  > .calendar {
+  > .workoutCalendar {
     margin-top: 2rem;
     width: 100%;
   }
 
-  > .list {
+  > .planCard {
     margin-top: 2rem;
     width: 100%;
   }

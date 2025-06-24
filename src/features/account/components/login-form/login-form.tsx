@@ -7,21 +7,18 @@ import styles from './login-form.module.css';
 
 type LoginFormProps = {
   /* eslint-disable no-unused-vars*/
-  loginAction: (
+  action: (
     prevData: unknown,
     formData: FormData
-  ) => Promise<{ formErrors?: { email?: string[] }; message?: string } | void>;
+  ) => Promise<{ fieldErrors?: { email?: string[] }; message?: string } | void>;
   /* eslint-enable no-unused-vars*/
   className?: string;
 };
 
 const initialState = {};
 
-export default function LoginForm({ className, loginAction }: LoginFormProps) {
-  const [state, formAction, pending] = useActionState(
-    loginAction,
-    initialState
-  );
+export default function LoginForm({ action, className }: LoginFormProps) {
+  const [state, formAction, pending] = useActionState(action, initialState);
 
   return (
     <form action={formAction} className={clsx(styles.container, className)}>
@@ -31,21 +28,15 @@ export default function LoginForm({ className, loginAction }: LoginFormProps) {
       )}
       <TextField
         className={styles.textField}
-        error={state?.formErrors?.email?.join(' ')}
+        error={state?.fieldErrors?.email?.join(' ')}
         label='Email'
         name='email'
         type='email'
         required
       />
-      <SubmitButton disabled={pending} />
+      <Button disabled={pending} className={styles.button}>
+        Sign In
+      </Button>
     </form>
-  );
-}
-
-function SubmitButton({ disabled }: { disabled: boolean }) {
-  return (
-    <Button disabled={disabled} className={styles.button}>
-      Sign In
-    </Button>
   );
 }

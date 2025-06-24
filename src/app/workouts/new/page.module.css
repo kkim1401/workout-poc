@@ -1,0 +1,10 @@
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  > .createWorkoutForm {
+    margin-top: 10rem;
+    width: 20rem;
+  }
+}

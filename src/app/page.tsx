@@ -1,21 +1,25 @@
 import { Link } from '@/features/common/components';
-import { Calendar, List } from '@/features/workout/components';
+import { PlanCard } from '@/features/plan/components';
+import { WorkoutCalendar } from '@/features/workout/components';
 import styles from './page.module.css';
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Calendar className={styles.calendar} />
-      <List className={styles.list} />
+      <WorkoutCalendar className={styles.workoutCalendar} />
+      <PlanCard className={styles.planCard} />
       <ul className={styles.links}>
         <li className={styles.link}>
           <Link href='/plans'>All Plans</Link>
         </li>
         <li className={styles.link}>
-          <Link href='/workout'>Workout of the Day</Link>
+          <Link href='/workouts/new'>Create Workout</Link>
         </li>
         <li className={styles.link}>
           <Link href='/exercises'>Exercises</Link>
+        </li>
+        <li className={styles.link}>
+          <Link href='/workouts'>Workouts</Link>
         </li>
       </ul>
     </div>

@@ -1,3 +1,3 @@
-export { Calendar } from './calendar';
-export { Form } from './form';
-export { List } from './list';
+export { WorkoutCalendar } from './workout-calendar';
+export { CreateWorkoutForm } from './create-workout-form';
+export { WorkoutList } from './workout-list';

@@ -3,13 +3,12 @@ import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import styles from './text-field.module.css';
 
 type TextFieldProps = ComponentPropsWithoutRef<'input'> & {
-  error?: string;
+  error?: string | undefined;
   label: string;
-  fixedSize?: boolean;
 };
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ className, error, fixedSize = true, label, ...rest }, ref) => {
+  ({ className, error, label, type = 'text', ...rest }, ref) => {
     const errorId = className + '_error';
     const hasError = Boolean(error);
     return (
@@ -18,8 +17,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         <input
           aria-invalid={hasError}
           {...(hasError && { 'aria-errormessage': errorId })}
-          className={clsx(styles.input, fixedSize && styles.fixedSize)}
+          className={styles.input}
           ref={ref}
+          type={type}
           {...rest}
         />
         {hasError && (

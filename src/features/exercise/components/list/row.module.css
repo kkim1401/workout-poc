@@ -1,9 +1,0 @@
-.container {
-  display: flex;
-  align-items: center;
-
-  &:nth-child(odd) {
-    color: var(--on-primary-lightest);
-    background-color: var(--primary-lightest);
-  }
-}
