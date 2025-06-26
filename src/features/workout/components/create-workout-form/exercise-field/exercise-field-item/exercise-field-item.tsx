@@ -20,7 +20,7 @@ export default function ExerciseFieldItem({
   });
 
   return (
-    <Card depth='shallow' as='details' className={styles.container}>
+    <Card depth='shallow' as='details' open className={styles.container}>
       <summary>{exerciseName}</summary>
       <Card depth='shallow' className={styles.sets} as='section'>
         <p className='subtitle1'>Sets</p>

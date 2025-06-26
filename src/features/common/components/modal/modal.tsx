@@ -8,7 +8,6 @@ import {
   type ComponentPropsWithoutRef,
 } from 'react';
 import { Button } from '../button';
-import { Card } from '../card';
 import styles from './modal.module.css';
 
 type ModalProps = ComponentPropsWithoutRef<'dialog'> & {
@@ -25,7 +24,7 @@ const Modal = forwardRef<HTMLDialogElement, ModalProps>(
     };
     return (
       <dialog className={styles.container} ref={forkedRef} {...rest}>
-        <Card className={styles.content}>
+        <section className={styles.content}>
           <Button
             aria-label='Close Modal'
             onClick={handleClose}
@@ -36,7 +35,7 @@ const Modal = forwardRef<HTMLDialogElement, ModalProps>(
             &times;
           </Button>
           {children}
-        </Card>
+        </section>
       </dialog>
     );
   }
