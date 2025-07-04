@@ -24,8 +24,8 @@ export default function CreateWorkoutForm({
   const methods = useForm({
     resolver: zodResolver(createWorkoutSchema),
     defaultValues: {
-      title: '',
-      workoutExercises: [],
+      name: '',
+      workout_exercises: [],
     },
   });
 
@@ -37,10 +37,7 @@ export default function CreateWorkoutForm({
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    const { data: id, error } = await supabase.rpc('create_workout', {
-      name: data.title,
-      workout_exercises: data.workoutExercises,
-    });
+    const { data: id, error } = await supabase.rpc('create_workout', data);
     if (error) {
       setError('root', { message: error.message });
     } else {
@@ -61,9 +58,9 @@ export default function CreateWorkoutForm({
         )}
         <TextField
           type='text'
-          label='Title'
-          {...register('title')}
-          error={errors?.title?.message}
+          label='Name'
+          {...register('name')}
+          error={errors?.name?.message}
         />
         <ExerciseField className={styles.exerciseField} />
         <Button disabled={isSubmitting} className={styles.saveWorkoutButton}>

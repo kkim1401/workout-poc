@@ -18,7 +18,7 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
 
   const { register } = useFormContext();
   const { fields, append } = useFieldArray({
-    name: 'workoutExercises',
+    name: 'workout_exercises',
   });
 
   const handleExerciseClick = (exercise: Exercise) => {
