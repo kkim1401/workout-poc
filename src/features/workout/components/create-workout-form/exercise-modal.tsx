@@ -3,7 +3,7 @@ import { ExerciseList } from '@/features/exercise/components';
 import { getAllUserExercises } from '@/lib/api/db/exercises/queries/client';
 import { Exercise } from '@/lib/api/db/exercises/types';
 import { useSupabaseBrowser } from '@/lib/supabase/client';
-import { useQuery } from '@supabase-cache-helpers/postgrest-react-query';
+import { useQuery } from '@tanstack/react-query';
 import { forwardRef } from 'react';
 
 type ExerciseModalProps = {
@@ -14,7 +14,10 @@ type ExerciseModalProps = {
 const ExerciseModal = forwardRef<HTMLDialogElement, ExerciseModalProps>(
   ({ onExerciseClick }, ref) => {
     const client = useSupabaseBrowser();
-    const { data: exercises } = useQuery(getAllUserExercises(client));
+    const { data: exercises } = useQuery({
+      queryKey: getAllUserExercises.getQueryKey(),
+      queryFn: () => getAllUserExercises(client),
+    });
 
     return (
       <Modal ref={ref}>
