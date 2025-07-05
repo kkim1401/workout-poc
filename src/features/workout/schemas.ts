@@ -25,7 +25,7 @@ const workoutExerciseSchema = z.strictObject({
 });
 
 export const createWorkoutSchema = z.strictObject({
-  name: z.string().min(1, 'Title is required'),
+  name: z.string().min(1, 'Name is required'),
   workout_exercises: z
     .array(workoutExerciseSchema)
     .min(1, 'At least one exercise is required'),
