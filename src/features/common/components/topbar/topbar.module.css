@@ -1,4 +1,7 @@
 .container {
+  position: sticky;
+  top: 0;
+
   > .topbar {
     background-color: var(--surface);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
@@ -6,7 +9,6 @@
     line-height: 0;
     min-height: var(--topbar-height);
     padding: 16px;
-    position: relative;
   }
 
   > .topbar > .hamburger.hidden {
@@ -14,7 +16,7 @@
   }
 
   > .scrim {
-    position: absolute;
+    position: fixed; /* Changed from absolute to fixed */
     top: 0;
     right: 0;
     left: 0;
@@ -22,7 +24,6 @@
     height: 100%;
     width: 100%;
     display: none;
-    z-index: 1;
   }
 
   > .scrim.visible {
@@ -30,7 +31,7 @@
   }
 
   > .menu {
-    position: absolute;
+    position: fixed; /* Changed from absolute to fixed */
     bottom: 0;
     top: 0;
     left: 0;

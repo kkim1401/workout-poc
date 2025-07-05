@@ -1,5 +1,12 @@
 import { z } from 'zod/v4';
 
+/**
+ * For creating a workout.
+ * Coupled to supabase.rpc('create_workout', data).
+ * Might be a way to decouple this from the RPC call,
+ * but for now, this is the simplest way to ensure the data structure matches.
+ */
+
 const workoutExerciseSetSchema = z.strictObject({
   exercise_name: z.string().min(1, 'Exercise name is required'),
   reps: z
@@ -18,12 +25,8 @@ const workoutExerciseSchema = z.strictObject({
 });
 
 export const createWorkoutSchema = z.strictObject({
-  title: z.string().min(1, 'Title is required'),
-  workoutExercises: z
+  name: z.string().min(1, 'Title is required'),
+  workout_exercises: z
     .array(workoutExerciseSchema)
     .min(1, 'At least one exercise is required'),
 });
-
-export type WorkoutExerciseSetSchema = z.infer<typeof workoutExerciseSetSchema>;
-export type WorkoutExerciseSchema = z.infer<typeof workoutExerciseSchema>;
-export type CreateWorkoutSchema = z.infer<typeof createWorkoutSchema>;

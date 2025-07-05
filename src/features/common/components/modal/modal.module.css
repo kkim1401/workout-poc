@@ -1,14 +1,14 @@
 .container {
-  &:modal {
-    > .content {
-      margin: 15% auto; /* 15% from the top and centered */
-    }
+  border: none;
+  margin: 25svh auto;
 
+  &:modal {
     > .content > .close {
       color: #aaa;
       float: right;
-      font-size: 28px;
+      font-size: 2rem;
       font-weight: bold;
+      margin-right: 0.5rem;
     }
 
     > .content > .close:hover,
