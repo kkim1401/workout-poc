@@ -12,11 +12,11 @@ export default function ExerciseFieldItem({
   exerciseIndex,
 }: ExerciseFieldItemProps) {
   const { fields, append } = useFieldArray({
-    name: `workoutExercises.${exerciseIndex}.sets`,
+    name: `workout_exercises.${exerciseIndex}.sets`,
   });
 
   const exerciseName = useWatch({
-    name: `workoutExercises.${exerciseIndex}.exercise_name`,
+    name: `workout_exercises.${exerciseIndex}.exercise_name`,
   });
 
   return (

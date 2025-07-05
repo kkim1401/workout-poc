@@ -35,8 +35,8 @@ export default function ExercisesField({ className }: ExercisesFieldProps) {
       <ExerciseModal ref={modalRef} onExerciseClick={handleExerciseClick} />
       <span>Exercises</span>
       {fields.map((field, index) => {
-        register(`workoutExercises.${index}.exercise_name`);
-        register(`workoutExercises.${index}.exercise_id`);
+        register(`workout_exercises.${index}.exercise_name`);
+        register(`workout_exercises.${index}.exercise_id`);
         return <ExerciseFieldItem exerciseIndex={index} key={field.id} />;
       })}
       <Button

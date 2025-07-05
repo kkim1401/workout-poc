@@ -22,12 +22,12 @@ export default function SetCard({
 
   const weightError = get(
     errors,
-    `workoutExercises.${exerciseIndex}.sets.${index}.weight.message`
+    `workout_exercises.${exerciseIndex}.sets.${index}.weight.message`
   ) as string | undefined;
 
   const repsError = get(
     errors,
-    `workoutExercises.${exerciseIndex}.sets.${index}.reps.message`
+    `workout_exercises.${exerciseIndex}.sets.${index}.reps.message`
   ) as string | undefined;
 
   return (
@@ -37,16 +37,19 @@ export default function SetCard({
         className={styles.weightInput}
         type='number'
         label='Weight'
-        {...register(`workoutExercises.${exerciseIndex}.sets.${index}.weight`, {
-          valueAsNumber: true,
-        })}
+        {...register(
+          `workout_exercises.${exerciseIndex}.sets.${index}.weight`,
+          {
+            valueAsNumber: true,
+          }
+        )}
         error={weightError}
       />
       <TextField
         className={styles.repsInput}
         type='number'
         label='Reps'
-        {...register(`workoutExercises.${exerciseIndex}.sets.${index}.reps`, {
+        {...register(`workout_exercises.${exerciseIndex}.sets.${index}.reps`, {
           valueAsNumber: true,
         })}
         error={repsError}
