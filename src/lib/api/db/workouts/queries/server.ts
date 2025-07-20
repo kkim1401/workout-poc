@@ -2,7 +2,7 @@ import { failSafely } from '@/lib/utils';
 import { cache } from 'react';
 import {
   getAllUserWorkouts as getAllUserWorkoutsBase,
-  getWorkoutById as getWorkoutByIdBase,
+  getUserWorkoutById as getWorkoutByIdBase,
 } from './client';
 
 export const getAllUserWorkouts = cache(
@@ -10,7 +10,7 @@ export const getAllUserWorkouts = cache(
     failSafely(getAllUserWorkoutsBase(...args))
 );
 
-export const getWorkoutById = cache(
+export const getUserWorkoutById = cache(
   (...args: Parameters<typeof getWorkoutByIdBase>) =>
     failSafely(getWorkoutByIdBase(...args))
 );

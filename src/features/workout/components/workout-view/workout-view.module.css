@@ -1,0 +1,10 @@
+.container {
+  > .exerciseList {
+    margin-top: 0.5rem;
+  }
+
+  > .startButton {
+    margin-top: 1rem;
+    width: 100%;
+  }
+}
