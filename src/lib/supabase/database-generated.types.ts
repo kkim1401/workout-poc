@@ -8,6 +8,11 @@ export type Json =
   | Json[];
 
 export type Database = {
+  // Allows to automatically instanciate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: '12.2.3 (519615d)';
+  };
   public: {
     Tables: {
       exercises: {
@@ -114,59 +119,186 @@ export type Database = {
         };
         Relationships: [];
       };
-      sets: {
+      set_instances: {
         Row: {
+          completed_at: string | null;
           created_at: string | null;
-          exercise_id: string | null;
+          exercise_id: string;
           exercise_name: string;
           id: string;
-          reps: number | null;
-          rpe: number | null;
+          notes: string | null;
+          order_in_workout: number;
+          reps_actual: number | null;
+          reps_target: number | null;
+          rpe_actual: number | null;
+          rpe_target: number | null;
+          set_template_id: string | null;
           user_id: string | null;
-          weight: number | null;
-          workout_id: string | null;
+          weight_actual: number | null;
+          weight_target: number | null;
+          workout_instance_id: string;
         };
         Insert: {
+          completed_at?: string | null;
           created_at?: string | null;
-          exercise_id?: string | null;
+          exercise_id: string;
           exercise_name: string;
           id?: string;
-          reps?: number | null;
-          rpe?: number | null;
+          notes?: string | null;
+          order_in_workout: number;
+          reps_actual?: number | null;
+          reps_target?: number | null;
+          rpe_actual?: number | null;
+          rpe_target?: number | null;
+          set_template_id?: string | null;
           user_id?: string | null;
-          weight?: number | null;
-          workout_id?: string | null;
+          weight_actual?: number | null;
+          weight_target?: number | null;
+          workout_instance_id: string;
         };
         Update: {
+          completed_at?: string | null;
           created_at?: string | null;
-          exercise_id?: string | null;
+          exercise_id?: string;
           exercise_name?: string;
           id?: string;
-          reps?: number | null;
-          rpe?: number | null;
+          notes?: string | null;
+          order_in_workout?: number;
+          reps_actual?: number | null;
+          reps_target?: number | null;
+          rpe_actual?: number | null;
+          rpe_target?: number | null;
+          set_template_id?: string | null;
           user_id?: string | null;
-          weight?: number | null;
-          workout_id?: string | null;
+          weight_actual?: number | null;
+          weight_target?: number | null;
+          workout_instance_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: 'set_workout_id_fkey';
-            columns: ['workout_id'];
+            foreignKeyName: 'set_instances_exercise_id_fkey';
+            columns: ['exercise_id'];
             isOneToOne: false;
-            referencedRelation: 'workouts';
+            referencedRelation: 'exercises';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'set_instances_set_template_id_fkey';
+            columns: ['set_template_id'];
+            isOneToOne: false;
+            referencedRelation: 'set_templates';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'set_instances_workout_instance_id_fkey';
+            columns: ['workout_instance_id'];
+            isOneToOne: false;
+            referencedRelation: 'workout_instances';
             referencedColumns: ['id'];
           },
         ];
       };
-      workouts: {
+      set_templates: {
+        Row: {
+          created_at: string | null;
+          exercise_id: string;
+          exercise_name: string;
+          id: string;
+          order_in_workout: number | null;
+          reps_target: number;
+          rpe_target: number | null;
+          user_id: string | null;
+          weight_target: number | null;
+          workout_template_id: string;
+        };
+        Insert: {
+          created_at?: string | null;
+          exercise_id: string;
+          exercise_name: string;
+          id?: string;
+          order_in_workout?: number | null;
+          reps_target: number;
+          rpe_target?: number | null;
+          user_id?: string | null;
+          weight_target?: number | null;
+          workout_template_id: string;
+        };
+        Update: {
+          created_at?: string | null;
+          exercise_id?: string;
+          exercise_name?: string;
+          id?: string;
+          order_in_workout?: number | null;
+          reps_target?: number;
+          rpe_target?: number | null;
+          user_id?: string | null;
+          weight_target?: number | null;
+          workout_template_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'set_templates_workout_template_id_fkey';
+            columns: ['workout_template_id'];
+            isOneToOne: false;
+            referencedRelation: 'workout_templates';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      workout_instances: {
+        Row: {
+          completed_at: string | null;
+          created_at: string;
+          description: string | null;
+          id: string;
+          name: string;
+          notes: string | null;
+          order_in_plan: number | null;
+          started_at: string;
+          user_id: string;
+          workout_template_id: string;
+        };
+        Insert: {
+          completed_at?: string | null;
+          created_at?: string;
+          description?: string | null;
+          id?: string;
+          name: string;
+          notes?: string | null;
+          order_in_plan?: number | null;
+          started_at?: string;
+          user_id: string;
+          workout_template_id: string;
+        };
+        Update: {
+          completed_at?: string | null;
+          created_at?: string;
+          description?: string | null;
+          id?: string;
+          name?: string;
+          notes?: string | null;
+          order_in_plan?: number | null;
+          started_at?: string;
+          user_id?: string;
+          workout_template_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'workout_instances_workout_template_id_fkey';
+            columns: ['workout_template_id'];
+            isOneToOne: false;
+            referencedRelation: 'workout_templates';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      workout_templates: {
         Row: {
           created_at: string | null;
           description: string | null;
           id: string;
           name: string;
           plan_id: string | null;
-          started_at: string | null;
-          status: string | null;
           user_id: string | null;
         };
         Insert: {
@@ -175,8 +307,6 @@ export type Database = {
           id?: string;
           name: string;
           plan_id?: string | null;
-          started_at?: string | null;
-          status?: string | null;
           user_id?: string | null;
         };
         Update: {
@@ -185,8 +315,6 @@ export type Database = {
           id?: string;
           name?: string;
           plan_id?: string | null;
-          started_at?: string | null;
-          status?: string | null;
           user_id?: string | null;
         };
         Relationships: [
@@ -235,21 +363,28 @@ export type Database = {
   };
 };
 
-type DefaultSchema = Database[Extract<keyof Database, 'public'>];
+type DatabaseWithoutInternals = Omit<Database, '__InternalSupabase'>;
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<
+  keyof Database,
+  'public'
+>];
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema['Tables'] & DefaultSchema['Views'])
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database;
+    schema: keyof DatabaseWithoutInternals;
   }
-    ? keyof (Database[DefaultSchemaTableNameOrOptions['schema']]['Tables'] &
-        Database[DefaultSchemaTableNameOrOptions['schema']]['Views'])
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables'] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Views'])
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[DefaultSchemaTableNameOrOptions['schema']]['Tables'] &
-      Database[DefaultSchemaTableNameOrOptions['schema']]['Views'])[TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals;
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables'] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Views'])[TableName] extends {
       Row: infer R;
     }
     ? R
@@ -267,14 +402,16 @@ export type Tables<
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema['Tables']
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database;
+    schema: keyof DatabaseWithoutInternals;
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions['schema']]['Tables']
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables']
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals;
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Insert: infer I;
     }
     ? I
@@ -290,14 +427,16 @@ export type TablesInsert<
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema['Tables']
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database;
+    schema: keyof DatabaseWithoutInternals;
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions['schema']]['Tables']
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables']
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals;
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Update: infer U;
     }
     ? U
@@ -313,14 +452,16 @@ export type TablesUpdate<
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema['Enums']
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof Database;
+    schema: keyof DatabaseWithoutInternals;
   }
-    ? keyof Database[DefaultSchemaEnumNameOrOptions['schema']]['Enums']
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions['schema']]['Enums']
     : never = never,
-> = DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaEnumNameOrOptions['schema']]['Enums'][EnumName]
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals;
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions['schema']]['Enums'][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema['Enums']
     ? DefaultSchema['Enums'][DefaultSchemaEnumNameOrOptions]
     : never;
@@ -328,14 +469,16 @@ export type Enums<
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema['CompositeTypes']
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database;
+    schema: keyof DatabaseWithoutInternals;
   }
-    ? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
     : never = never,
-> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals;
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema['CompositeTypes']
     ? DefaultSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
     : never;
