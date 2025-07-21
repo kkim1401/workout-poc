@@ -1,36 +1,43 @@
 import { type TypedSupabaseClient } from '@/lib/supabase/types';
-import { mapSetDTOToSet } from '../types';
+import { mapSetTemplateDTOToSetTemplate } from '../types';
 
-export const getUserSetsByWorkoutId = async (
+export const getUserSetTemplatesByWorkoutTemplateId = async (
   client: TypedSupabaseClient,
   workoutId: string
 ) => {
   const result = await client
-    .from('sets')
+    .from('set_templates')
     .select('*')
-    .eq('workout_id', workoutId);
+    .eq('workout_template_id', workoutId);
 
   if (result.error) {
     throw result.error;
   }
 
-  return result.data.map(mapSetDTOToSet);
+  return result.data.map(mapSetTemplateDTOToSetTemplate);
 };
-getUserSetsByWorkoutId.getQueryKey = (workoutId: string) => [
-  'getUserSetsByWorkoutId',
+getUserSetTemplatesByWorkoutTemplateId.getQueryKey = (workoutId: string) => [
+  'getUserSetTemplatesByWorkoutTemplateId',
   { workoutId },
 ];
 
-export const getUserSetById = async (
+export const getUserSetTemplateById = async (
   client: TypedSupabaseClient,
   setId: string
 ) => {
-  const result = await client.from('sets').select('*').eq('id', setId).single();
+  const result = await client
+    .from('set_templates')
+    .select('*')
+    .eq('id', setId)
+    .single();
 
   if (result.error) {
     throw result.error;
   }
 
-  return mapSetDTOToSet(result.data);
+  return mapSetTemplateDTOToSetTemplate(result.data);
 };
-getUserSetById.getQueryKey = (setId: string) => ['getUserSetById', { setId }];
+getUserSetTemplateById.getQueryKey = (setId: string) => [
+  'getUserSetTemplateById',
+  { setId },
+];

@@ -1,29 +1,27 @@
 import { Tables } from '@/lib/supabase/database.types';
 
-export type SetDTO = Tables<'sets'>;
+export type SetTemplateDTO = Tables<'set_templates'>;
 
-export type Set = {
+export type SetTemplate = {
   id: string;
-  workoutId: string;
+  workoutTemplateId: string;
   exerciseId: string;
   exerciseName: string;
-  reps: number;
-  repsAttempted: number | null;
-  weight: number | null;
-  weightAttempted: number | null;
-  rpe: number | null;
+  repsTarget: number;
+  weightTarget: number | null;
+  rpeTarget: number | null;
 };
 
-export function mapSetDTOToSet(set: SetDTO): Set {
+export function mapSetTemplateDTOToSetTemplate(
+  set: SetTemplateDTO
+): SetTemplate {
   return {
     id: set.id,
-    workoutId: set.workout_id,
+    workoutTemplateId: set.workout_template_id,
     exerciseId: set.exercise_id,
     exerciseName: set.exercise_name,
-    reps: set.reps,
-    repsAttempted: set.reps_attempted,
-    weight: set.weight,
-    weightAttempted: set.weight_attempted,
-    rpe: set.rpe,
+    repsTarget: set.reps_target,
+    weightTarget: set.weight_target,
+    rpeTarget: set.rpe_target,
   };
 }

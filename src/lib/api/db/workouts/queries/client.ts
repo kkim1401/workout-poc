@@ -1,23 +1,25 @@
 import { type TypedSupabaseClient } from '@/lib/supabase/types';
-import { mapWorkoutDTOToWorkout } from '../types';
+import { mapWorkoutTemplateDTOToWorkoutTemplate } from '../types';
 
-export const getAllUserWorkouts = async (client: TypedSupabaseClient) => {
-  const result = await client.from('workouts').select('*');
+export const getAllUserWorkoutTemplates = async (
+  client: TypedSupabaseClient
+) => {
+  const result = await client.from('workout_templates').select('*');
 
   if (result.error) {
     throw result.error;
   }
 
-  return result.data.map(mapWorkoutDTOToWorkout);
+  return result.data.map(mapWorkoutTemplateDTOToWorkoutTemplate);
 };
-getAllUserWorkouts.getQueryKey = () => ['getAllUserWorkouts'];
+getAllUserWorkoutTemplates.getQueryKey = () => ['getAllUserWorkoutTemplates'];
 
-export const getUserWorkoutById = async (
+export const getUserWorkoutTemplateById = async (
   client: TypedSupabaseClient,
   workoutId: string
 ) => {
   const result = await client
-    .from('workouts')
+    .from('workout_templates')
     .select('*')
     .eq('id', workoutId)
     .single();
@@ -26,9 +28,9 @@ export const getUserWorkoutById = async (
     throw result.error;
   }
 
-  return mapWorkoutDTOToWorkout(result.data);
+  return mapWorkoutTemplateDTOToWorkoutTemplate(result.data);
 };
-getUserWorkoutById.getQueryKey = (workoutId: string) => [
-  'getUserWorkoutById',
+getUserWorkoutTemplateById.getQueryKey = (workoutId: string) => [
+  'getUserWorkoutTemplateById',
   { workoutId },
 ];

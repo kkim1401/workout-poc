@@ -1,18 +1,21 @@
 'use client';
 
 import { List } from '@/features/common/components/list';
-import { Workout } from '@/lib/api/db/workouts/types';
+import { WorkoutTemplate } from '@/lib/api/db/workouts/types';
 import { useRouter } from 'next/navigation';
 
-type WorkoutListProps = {
+type WorkoutTemplateListProps = {
   className?: string;
-  workouts?: Workout[] | null;
+  workoutTemplates?: WorkoutTemplate[] | null;
 };
 
-export default function WorkoutList({ className, workouts }: WorkoutListProps) {
+export default function WorkoutTemplateList({
+  className,
+  workoutTemplates,
+}: WorkoutTemplateListProps) {
   const router = useRouter();
 
-  const onWorkoutClick = (workout: Workout) => {
+  const onWorkoutClick = (workout: WorkoutTemplate) => {
     router.push(`/workouts/${workout.id}`);
   };
 
@@ -20,7 +23,7 @@ export default function WorkoutList({ className, workouts }: WorkoutListProps) {
     <List
       className={className}
       title='Workouts'
-      items={workouts}
+      items={workoutTemplates}
       onItemClick={onWorkoutClick}
     />
   );

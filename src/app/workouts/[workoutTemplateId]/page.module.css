@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
 
-  > .workoutView {
+  > .workoutTemplateView {
     margin-top: 10svh;
     width: 20rem;
   }

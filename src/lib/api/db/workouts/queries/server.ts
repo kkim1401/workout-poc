@@ -1,16 +1,16 @@
 import { failSafely } from '@/lib/utils';
 import { cache } from 'react';
 import {
-  getAllUserWorkouts as getAllUserWorkoutsBase,
-  getUserWorkoutById as getWorkoutByIdBase,
+  getAllUserWorkoutTemplates as getAllUserWorkoutTemplatesBase,
+  getUserWorkoutTemplateById as getWorkoutByIdBase,
 } from './client';
 
-export const getAllUserWorkouts = cache(
-  (...args: Parameters<typeof getAllUserWorkoutsBase>) =>
-    failSafely(getAllUserWorkoutsBase(...args))
+export const getAllUserWorkoutTemplates = cache(
+  (...args: Parameters<typeof getAllUserWorkoutTemplatesBase>) =>
+    failSafely(getAllUserWorkoutTemplatesBase(...args))
 );
 
-export const getUserWorkoutById = cache(
+export const getUserWorkoutTemplateById = cache(
   (...args: Parameters<typeof getWorkoutByIdBase>) =>
     failSafely(getWorkoutByIdBase(...args))
 );

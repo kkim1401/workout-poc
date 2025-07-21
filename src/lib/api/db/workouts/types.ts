@@ -1,13 +1,15 @@
 import { Tables } from '@/lib/supabase/database.types';
 
-export type WorkoutDTO = Tables<'workouts'>;
+export type WorkoutTemplateDTO = Tables<'workout_templates'>;
 
-export type Workout = {
+export type WorkoutTemplate = {
   id: string;
   name: string;
 };
 
-export function mapWorkoutDTOToWorkout(workout: WorkoutDTO): Workout {
+export function mapWorkoutTemplateDTOToWorkoutTemplate(
+  workout: WorkoutTemplateDTO
+): WorkoutTemplate {
   return {
     id: workout.id,
     name: workout.name,
