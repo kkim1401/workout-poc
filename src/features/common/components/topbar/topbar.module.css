@@ -1,6 +1,7 @@
 .container {
   position: sticky;
   top: 0;
+  z-index: 1000; /* Ensure the topbar and scrim are above the content */
 
   > .topbar {
     background-color: var(--surface);
