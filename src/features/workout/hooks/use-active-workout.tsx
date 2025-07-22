@@ -1,4 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
+import {
+  getActiveWorkout,
+  removeActiveWorkout,
+  setActiveWorkout,
+} from '../utils';
 
 const useActiveWorkout = (expirationHours = 12) => {
   const [activeWorkoutId, setActiveWorkoutId] = useState<string | null>(null);
@@ -18,23 +23,19 @@ const useActiveWorkout = (expirationHours = 12) => {
   const clearExpiredWorkout = useCallback(() => {
     setActiveWorkoutId(null);
     setWorkoutStartTime(null);
-    localStorage.removeItem('activeWorkoutId');
-    localStorage.removeItem('workoutStartTime');
+    removeActiveWorkout();
   }, []);
 
   // Load from localStorage on mount
   useEffect(() => {
-    const storedWorkoutId = localStorage.getItem('activeWorkoutId');
-    const storedStartTime = localStorage.getItem('workoutStartTime');
+    const { workoutId, startTime } = getActiveWorkout();
 
-    if (storedWorkoutId && storedStartTime) {
-      const startTime = parseInt(storedStartTime);
-
+    if (workoutId && startTime) {
       // Check if workout has expired
       if (isWorkoutExpired(startTime)) {
         clearExpiredWorkout();
       } else {
-        setActiveWorkoutId(storedWorkoutId);
+        setActiveWorkoutId(workoutId);
         setWorkoutStartTime(startTime);
       }
     }
@@ -47,8 +48,7 @@ const useActiveWorkout = (expirationHours = 12) => {
     setActiveWorkoutId(workoutId);
     setWorkoutStartTime(startTime);
 
-    localStorage.setItem('activeWorkoutId', workoutId);
-    localStorage.setItem('workoutStartTime', startTime.toString());
+    setActiveWorkout(workoutId, startTime);
   }, []);
 
   // End the current workout
@@ -56,8 +56,7 @@ const useActiveWorkout = (expirationHours = 12) => {
     setActiveWorkoutId(null);
     setWorkoutStartTime(null);
 
-    localStorage.removeItem('activeWorkoutId');
-    localStorage.removeItem('workoutStartTime');
+    removeActiveWorkout();
   }, []);
 
   // Check and handle expiration (can be called manually)

@@ -1,4 +1,6 @@
+import { removeActiveWorkout } from '@/features/workout/utils';
 import { useSupabaseBrowser } from '@/lib/supabase/client';
+import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
@@ -22,10 +24,20 @@ export default function Menu({
   onClose,
 }: MenuProps) {
   const supabase = useSupabaseBrowser();
+  const queryClient = useQueryClient();
 
   const handleLogOut = async () => {
+    removeActiveWorkout();
+    queryClient.clear();
+
     const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    if (error) {
+      console.error('Logout failed:', error);
+      alert('Failed to log out. Please try again.');
+      return;
+    }
+
+    window.location.reload();
   };
 
   const menuLinks = [

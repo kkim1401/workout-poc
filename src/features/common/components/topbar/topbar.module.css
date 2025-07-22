@@ -17,7 +17,7 @@
   }
 
   > .scrim {
-    position: fixed; /* Changed from absolute to fixed */
+    position: fixed;
     top: 0;
     right: 0;
     left: 0;
@@ -32,7 +32,7 @@
   }
 
   > .menu {
-    position: fixed; /* Changed from absolute to fixed */
+    position: fixed;
     bottom: 0;
     top: 0;
     left: 0;

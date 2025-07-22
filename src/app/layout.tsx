@@ -23,7 +23,7 @@ export default async function RootLayout({
   const supabase = await createClient();
 
   const { data: user } = await getUser(supabase);
-  const isLoggedIn = Boolean(user);
+  const isLoggedIn = Boolean(user?.user);
   const links = [{ title: 'Home', href: '/' }];
 
   return (
