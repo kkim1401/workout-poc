@@ -1,0 +1,42 @@
+.container {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  > .header {
+    margin-bottom: 2rem;
+  }
+
+  > .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.settingsSection {
+  padding: 24px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 1rem;
+
+  > .item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  > .item > .label {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--color-text-secondary);
+  }
+}
+
+.preferencesNote {
+  margin-top: 1rem;
+  color: var(--color-text-secondary);
+}
