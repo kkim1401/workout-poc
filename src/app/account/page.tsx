@@ -29,7 +29,7 @@ export default async function AccountPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className='headline1'>Settings</h1>
+        <h1 className='headline2'>Settings</h1>
         <p className='body1'>Manage your account and preferences</p>
       </div>
 
