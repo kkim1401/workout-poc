@@ -3,34 +3,47 @@
 import { Button, Card } from '@/features/common/components';
 import { SetTemplate } from '@/lib/api/db/sets/types';
 import { createWorkoutInstance } from '@/lib/api/db/workouts/mutations';
-import { WorkoutInstance, WorkoutTemplate } from '@/lib/api/db/workouts/types';
+import {
+  WorkoutInstanceInsertDTO,
+  WorkoutTemplate,
+} from '@/lib/api/db/workouts/types';
 import { createClient } from '@/lib/supabase/client';
+import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 import ExerciseList from './exercise-list';
 import styles from './workout-template-view.module.css';
 
 type WorkoutTemplateViewProps = {
   className?: string;
   userId: string;
-  workoutInstance: WorkoutInstance | null;
-  workoutTemplate: WorkoutTemplate | null;
   setTemplates: SetTemplate[] | null;
+  workoutTemplate: WorkoutTemplate | null;
 };
 
 export default function WorkoutTemplateView({
   className,
   setTemplates,
-  workoutInstance,
-  workoutTemplate,
   userId,
+  workoutTemplate,
 }: WorkoutTemplateViewProps) {
   const supabase = createClient();
+  const router = useRouter();
 
-  const handleClick = async () => {
-    if (!workoutTemplate && !workoutInstance) return;
+  const { mutate: startWorkout, isPending } = useMutation({
+    mutationFn: (data: WorkoutInstanceInsertDTO) =>
+      createWorkoutInstance(supabase, data),
+    onSuccess: (data) => {
+      router.push(`/workouts/instances/${data.id}`);
+    },
+  });
+
+  const handleClick = () => {
+    if (!workoutTemplate) return;
 
     if (workoutTemplate) {
-      await createWorkoutInstance(supabase, {
+      startWorkout({
+        name: workoutTemplate.name,
         user_id: userId,
         workout_template_id: workoutTemplate.id,
       });
@@ -44,8 +57,12 @@ export default function WorkoutTemplateView({
         setTemplates={setTemplates}
         className={styles.exerciseList}
       />
-      <Button onClick={handleClick} className={styles.startButton}>
-        {workoutInstance ? 'Continue Workout' : 'Start Workout'}
+      <Button
+        disabled={isPending}
+        onClick={handleClick}
+        className={styles.startButton}
+      >
+        Start Workout
       </Button>
     </Card>
   );

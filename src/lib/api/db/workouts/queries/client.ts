@@ -38,7 +38,7 @@ getUserWorkoutTemplateById.getQueryKey = (workoutId: string) => [
   { workoutId },
 ];
 
-export const getLatestUserWorkoutInstanceByWorkoutTemplateId = async (
+export const getActiveUserWorkoutInstanceByWorkoutTemplateId = async (
   client: TypedSupabaseClient,
   workoutTemplateId: string
 ) => {
@@ -46,6 +46,7 @@ export const getLatestUserWorkoutInstanceByWorkoutTemplateId = async (
     .from('workout_instances')
     .select('*')
     .eq('workout_template_id', workoutTemplateId)
+    .is('completed_at', null)
     .order('created_at', { ascending: false })
     .single();
 
@@ -55,6 +56,6 @@ export const getLatestUserWorkoutInstanceByWorkoutTemplateId = async (
 
   return mapWorkoutInstanceDTOToWorkoutInstance(result.data);
 };
-getLatestUserWorkoutInstanceByWorkoutTemplateId.getQueryKey = (
+getActiveUserWorkoutInstanceByWorkoutTemplateId.getQueryKey = (
   workoutTemplateId: string
-) => ['getLatestUserWorkoutInstanceByWorkoutTemplateId', { workoutTemplateId }];
+) => ['getActiveUserWorkoutInstanceByWorkoutTemplateId', { workoutTemplateId }];

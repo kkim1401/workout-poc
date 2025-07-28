@@ -1,4 +1,4 @@
-import { removeActiveWorkout } from '@/features/workout/utils';
+import { removeActiveWorkout } from '@/features/workout/helpers';
 import { useSupabaseBrowser } from '@/lib/supabase/client';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';

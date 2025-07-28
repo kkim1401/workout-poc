@@ -1,9 +1,22 @@
 import { TypedSupabaseClient } from '@/lib/supabase/types';
-import { WorkoutInstanceInsertDTO } from './types';
+import {
+  mapWorkoutInstanceDTOToWorkoutInstance,
+  WorkoutInstanceInsertDTO,
+} from './types';
 
-export const createWorkoutInstance = (
+export const createWorkoutInstance = async (
   client: TypedSupabaseClient,
   workoutInstance: WorkoutInstanceInsertDTO
 ) => {
-  return client.from('workout_instances').insert(workoutInstance);
+  const result = await client
+    .from('workout_instances')
+    .insert(workoutInstance)
+    .select()
+    .single();
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  return mapWorkoutInstanceDTOToWorkoutInstance(result.data);
 };

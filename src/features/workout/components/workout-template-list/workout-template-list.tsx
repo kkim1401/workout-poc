@@ -16,7 +16,7 @@ export default function WorkoutTemplateList({
   const router = useRouter();
 
   const onWorkoutClick = (workout: WorkoutTemplate) => {
-    router.push(`/workouts/${workout.id}`);
+    router.push(`/workouts/templates/${workout.id}`);
   };
 
   return (

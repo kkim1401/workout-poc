@@ -1,8 +1,8 @@
 import { failSafely } from '@/lib/utils';
 import { cache } from 'react';
 import {
+  getActiveUserWorkoutInstanceByWorkoutTemplateId as getActiveUserWorkoutInstanceByWorkoutTemplateIdBase,
   getAllUserWorkoutTemplates as getAllUserWorkoutTemplatesBase,
-  getLatestUserWorkoutInstanceByWorkoutTemplateId as getLatestUserWorkoutInstanceByWorkoutTemplateIdBase,
   getUserWorkoutTemplateById as getWorkoutByIdBase,
 } from './client';
 
@@ -16,10 +16,10 @@ export const getUserWorkoutTemplateById = cache(
     failSafely(getWorkoutByIdBase(...args))
 );
 
-export const getLatestUserWorkoutInstanceByWorkoutTemplateId = cache(
+export const getActiveUserWorkoutInstanceByWorkoutTemplateId = cache(
   (
     ...args: Parameters<
-      typeof getLatestUserWorkoutInstanceByWorkoutTemplateIdBase
+      typeof getActiveUserWorkoutInstanceByWorkoutTemplateIdBase
     >
-  ) => failSafely(getLatestUserWorkoutInstanceByWorkoutTemplateIdBase(...args))
+  ) => failSafely(getActiveUserWorkoutInstanceByWorkoutTemplateIdBase(...args))
 );
