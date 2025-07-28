@@ -3,7 +3,7 @@ import {
   getActiveWorkout,
   removeActiveWorkout,
   setActiveWorkout,
-} from '../utils';
+} from '../helpers';
 
 const useActiveWorkout = (expirationHours = 12) => {
   const [activeWorkoutId, setActiveWorkoutId] = useState<string | null>(null);

@@ -25,3 +25,27 @@ export function mapSetTemplateDTOToSetTemplate(
     rpeTarget: set.rpe_target,
   };
 }
+
+export type SetInstanceDTO = Tables<'set_instances'>;
+
+export type SetInstance = {
+  id: string;
+  workoutInstanceId: string;
+  setTemplateId: string | null;
+  repsCompleted: number | null;
+  weightUsed: number | null;
+  completedAt: string | null;
+};
+
+export function mapSetInstanceDTOToSetInstance(
+  set: SetInstanceDTO
+): SetInstance {
+  return {
+    id: set.id,
+    workoutInstanceId: set.workout_instance_id,
+    setTemplateId: set.set_template_id,
+    repsCompleted: set.reps_actual,
+    weightUsed: set.weight_actual,
+    completedAt: set.completed_at,
+  };
+}

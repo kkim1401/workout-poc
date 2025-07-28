@@ -2,15 +2,17 @@
 
 import { Button, Card } from '@/features/common/components';
 import { SetTemplate } from '@/lib/api/db/sets/types';
-import { WorkoutTemplate } from '@/lib/api/db/workouts/types';
+import { createWorkoutInstance } from '@/lib/api/db/workouts/mutations';
+import { WorkoutInstance, WorkoutTemplate } from '@/lib/api/db/workouts/types';
+import { createClient } from '@/lib/supabase/client';
 import clsx from 'clsx';
-// import { useRouter } from 'next/navigation';
-// import { useActiveWorkout } from '../../hooks';
 import ExerciseList from './exercise-list';
 import styles from './workout-template-view.module.css';
 
 type WorkoutTemplateViewProps = {
   className?: string;
+  userId: string;
+  workoutInstance: WorkoutInstance | null;
   workoutTemplate: WorkoutTemplate | null;
   setTemplates: SetTemplate[] | null;
 };
@@ -18,12 +20,22 @@ type WorkoutTemplateViewProps = {
 export default function WorkoutTemplateView({
   className,
   setTemplates,
+  workoutInstance,
   workoutTemplate,
+  userId,
 }: WorkoutTemplateViewProps) {
-  // const { startWorkout } = useActiveWorkout();
-  // const router = useRouter();
+  const supabase = createClient();
 
-  const handleClick = () => {};
+  const handleClick = async () => {
+    if (!workoutTemplate && !workoutInstance) return;
+
+    if (workoutTemplate) {
+      await createWorkoutInstance(supabase, {
+        user_id: userId,
+        workout_template_id: workoutTemplate.id,
+      });
+    }
+  };
 
   return (
     <Card className={clsx(styles.container, className)}>
@@ -33,7 +45,7 @@ export default function WorkoutTemplateView({
         className={styles.exerciseList}
       />
       <Button onClick={handleClick} className={styles.startButton}>
-        Start
+        {workoutInstance ? 'Continue Workout' : 'Start Workout'}
       </Button>
     </Card>
   );

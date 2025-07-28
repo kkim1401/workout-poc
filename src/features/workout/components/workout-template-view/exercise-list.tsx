@@ -1,31 +1,11 @@
 import { SetTemplate } from '@/lib/api/db/sets/types';
 import clsx from 'clsx';
+import { groupSetsByExercise } from '../../helpers';
 import styles from './exercise-list.module.css';
 
 type ExerciseListProps = {
   className?: string;
   setTemplates: SetTemplate[] | null;
-};
-
-const groupSetsByExercise = (setTemplates: SetTemplate[]) => {
-  return setTemplates.reduce(
-    (acc, setTemplate) => {
-      const { exerciseId, exerciseName } = setTemplate;
-      if (!acc[exerciseId]) {
-        acc[exerciseId] = {
-          id: exerciseId,
-          exerciseName,
-          setTemplates: [],
-        };
-      }
-      acc[exerciseId].setTemplates.push(setTemplate);
-      return acc;
-    },
-    {} as Record<
-      string,
-      { id: string; exerciseName: string; setTemplates: SetTemplate[] }
-    >
-  );
 };
 
 export default function ExerciseList({

@@ -74,9 +74,9 @@ export default function SettingsForm({
   const updateMutation = useMutation({
     mutationFn: (data: ProfileFormData) => {
       if (initialProfile) {
-        return updateUserProfile(supabase, userId, data);
+        return updateUserProfile(supabase, data);
       } else {
-        return createUserProfile(supabase, userId, data);
+        return createUserProfile(supabase, { ...data, id: userId });
       }
     },
     onSuccess: () => {
