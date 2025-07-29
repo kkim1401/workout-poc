@@ -1,4 +1,9 @@
 import { Tables, TablesInsert } from '@/lib/supabase/database.types';
+import {
+  mapSetTemplateDTOToSetTemplate,
+  SetTemplate,
+  SetTemplateDTO,
+} from '../sets/types';
 
 export type WorkoutTemplateDTO = Tables<'workout_templates'>;
 
@@ -17,7 +22,10 @@ export function mapWorkoutTemplateDTOToWorkoutTemplate(
 }
 
 export type WorkoutInstanceDTO = Tables<'workout_instances'> & {
-  workout_templates: Pick<Tables<'workout_templates'>, 'name'> | null;
+  workout_templates: {
+    name?: WorkoutTemplateDTO['name'] | null;
+    set_templates?: SetTemplateDTO[];
+  } | null;
 };
 export type WorkoutInstanceInsertDTO = TablesInsert<'workout_instances'>;
 
@@ -29,6 +37,7 @@ export type WorkoutInstance = {
   createdAt: string;
   startedAt: string | null;
   completedAt: string | null;
+  setTemplates?: SetTemplate[] | null;
 };
 
 export function mapWorkoutInstanceDTOToWorkoutInstance(
@@ -42,5 +51,10 @@ export function mapWorkoutInstanceDTOToWorkoutInstance(
     createdAt: workout.created_at,
     startedAt: workout.started_at,
     completedAt: workout.completed_at,
+    setTemplates: workout.workout_templates?.set_templates
+      ? workout.workout_templates.set_templates.map(
+          mapSetTemplateDTOToSetTemplate
+        )
+      : null,
   };
 }

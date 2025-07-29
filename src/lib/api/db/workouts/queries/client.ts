@@ -19,12 +19,12 @@ getAllUserWorkoutTemplates.getQueryKey = () => ['getAllUserWorkoutTemplates'];
 
 export const getUserWorkoutTemplateById = async (
   client: TypedSupabaseClient,
-  workoutId: string
+  workoutTemplateId: string
 ) => {
   const result = await client
     .from('workout_templates')
     .select('*')
-    .eq('id', workoutId)
+    .eq('id', workoutTemplateId)
     .single();
 
   if (result.error) {
@@ -33,9 +33,30 @@ export const getUserWorkoutTemplateById = async (
 
   return mapWorkoutTemplateDTOToWorkoutTemplate(result.data);
 };
-getUserWorkoutTemplateById.getQueryKey = (workoutId: string) => [
+getUserWorkoutTemplateById.getQueryKey = (workoutTemplateId: string) => [
   'getUserWorkoutTemplateById',
-  { workoutId },
+  { workoutTemplateId },
+];
+
+export const getUserWorkoutInstanceById = async (
+  client: TypedSupabaseClient,
+  workoutInstanceId: string
+) => {
+  const result = await client
+    .from('workout_instances')
+    .select('*, workout_templates(set_templates(*))')
+    .eq('id', workoutInstanceId)
+    .single();
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  return mapWorkoutInstanceDTOToWorkoutInstance(result.data);
+};
+getUserWorkoutInstanceById.getQueryKey = (workoutInstanceId: string) => [
+  'getUserWorkoutInstanceById',
+  { workoutInstanceId },
 ];
 
 export const getActiveUserWorkoutInstanceByWorkoutTemplateId = async (
