@@ -44,7 +44,7 @@ export const getActiveUserWorkoutInstanceByWorkoutTemplateId = async (
 ) => {
   const result = await client
     .from('workout_instances')
-    .select('*')
+    .select('*, workout_templates(name)')
     .eq('workout_template_id', workoutTemplateId)
     .is('completed_at', null)
     .order('created_at', { ascending: false })

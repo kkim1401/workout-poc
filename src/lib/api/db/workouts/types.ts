@@ -16,12 +16,14 @@ export function mapWorkoutTemplateDTOToWorkoutTemplate(
   };
 }
 
-export type WorkoutInstanceDTO = Tables<'workout_instances'>;
+export type WorkoutInstanceDTO = Tables<'workout_instances'> & {
+  workout_templates: Pick<Tables<'workout_templates'>, 'name'> | null;
+};
 export type WorkoutInstanceInsertDTO = TablesInsert<'workout_instances'>;
 
 export type WorkoutInstance = {
   id: string;
-  name: string | null;
+  name?: string | null;
   workoutTemplateId: string;
   userId: string;
   createdAt: string;
@@ -34,7 +36,7 @@ export function mapWorkoutInstanceDTOToWorkoutInstance(
 ): WorkoutInstance {
   return {
     id: workout.id,
-    name: workout.name,
+    name: workout?.workout_templates?.name,
     workoutTemplateId: workout.workout_template_id,
     userId: workout.user_id,
     createdAt: workout.created_at,

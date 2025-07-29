@@ -4,6 +4,7 @@ import { Button, Card } from '@/features/common/components';
 import { SetTemplate } from '@/lib/api/db/sets/types';
 import { createWorkoutInstance } from '@/lib/api/db/workouts/mutations';
 import {
+  WorkoutInstance,
   WorkoutInstanceInsertDTO,
   WorkoutTemplate,
 } from '@/lib/api/db/workouts/types';
@@ -18,6 +19,7 @@ type WorkoutTemplateViewProps = {
   className?: string;
   userId: string;
   setTemplates: SetTemplate[] | null;
+  workoutInstance: WorkoutInstance | null;
   workoutTemplate: WorkoutTemplate | null;
 };
 
@@ -25,6 +27,7 @@ export default function WorkoutTemplateView({
   className,
   setTemplates,
   userId,
+  workoutInstance,
   workoutTemplate,
 }: WorkoutTemplateViewProps) {
   const supabase = createClient();
@@ -35,15 +38,20 @@ export default function WorkoutTemplateView({
       createWorkoutInstance(supabase, data),
     onSuccess: (data) => {
       router.push(`/workouts/instances/${data.id}`);
+      router.refresh();
     },
   });
 
   const handleClick = () => {
-    if (!workoutTemplate) return;
+    if (isPending) return;
+
+    if (workoutInstance) {
+      router.push(`/workouts/instances/${workoutInstance.id}`);
+      return;
+    }
 
     if (workoutTemplate) {
       startWorkout({
-        name: workoutTemplate.name,
         user_id: userId,
         workout_template_id: workoutTemplate.id,
       });
@@ -52,7 +60,9 @@ export default function WorkoutTemplateView({
 
   return (
     <Card className={clsx(styles.container, className)}>
-      <h1 className='headline4'>{workoutTemplate?.name}</h1>
+      <h1 className='headline4'>
+        {workoutTemplate?.name || workoutInstance?.name || 'Unknown Workout'}
+      </h1>
       <ExerciseList
         setTemplates={setTemplates}
         className={styles.exerciseList}
@@ -62,7 +72,7 @@ export default function WorkoutTemplateView({
         onClick={handleClick}
         className={styles.startButton}
       >
-        Start Workout
+        {workoutInstance ? 'Continue Workout' : 'Start Workout'}
       </Button>
     </Card>
   );
