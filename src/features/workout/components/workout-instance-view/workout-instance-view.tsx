@@ -25,7 +25,7 @@ export default function WorkoutInstanceView({
           <h1 className='headline4'>{workoutInstance?.name}</h1>
           <ExerciseList
             currentExerciseIndex={currentExerciseIndex}
-            setTemplates={workoutInstance?.setTemplates}
+            workoutInstance={workoutInstance}
           />
         </>
       ) : (
