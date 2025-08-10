@@ -124,7 +124,6 @@ export type Database = {
           completed_at: string | null;
           created_at: string | null;
           exercise_id: string;
-          exercise_name: string;
           id: string;
           notes: string | null;
           order_in_workout: number;
@@ -142,7 +141,6 @@ export type Database = {
           completed_at?: string | null;
           created_at?: string | null;
           exercise_id: string;
-          exercise_name: string;
           id?: string;
           notes?: string | null;
           order_in_workout: number;
@@ -160,7 +158,6 @@ export type Database = {
           completed_at?: string | null;
           created_at?: string | null;
           exercise_id?: string;
-          exercise_name?: string;
           id?: string;
           notes?: string | null;
           order_in_workout?: number;

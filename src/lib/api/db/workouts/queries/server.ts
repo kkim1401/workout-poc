@@ -3,6 +3,7 @@ import { cache } from 'react';
 import {
   getActiveUserWorkoutInstanceByWorkoutTemplateId as getActiveUserWorkoutInstanceByWorkoutTemplateIdBase,
   getAllUserWorkoutTemplates as getAllUserWorkoutTemplatesBase,
+  getUserWorkoutInstanceById as getUserWorkoutInstanceByIdBase,
   getUserWorkoutTemplateById as getWorkoutByIdBase,
 } from './client';
 
@@ -22,4 +23,9 @@ export const getActiveUserWorkoutInstanceByWorkoutTemplateId = cache(
       typeof getActiveUserWorkoutInstanceByWorkoutTemplateIdBase
     >
   ) => failSafely(getActiveUserWorkoutInstanceByWorkoutTemplateIdBase(...args))
+);
+
+export const getUserWorkoutInstanceById = cache(
+  (...args: Parameters<typeof getUserWorkoutInstanceByIdBase>) =>
+    failSafely(getUserWorkoutInstanceByIdBase(...args))
 );

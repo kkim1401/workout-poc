@@ -1,0 +1,32 @@
+.container {
+  > .fieldHeader {
+    align-items: center;
+    display: flex;
+  }
+
+  > .fieldHeader > .fieldIcon {
+    margin-left: 0.5rem;
+  }
+
+  > .fieldHeader > .removeButton {
+    color: var(--error);
+  }
+
+  > .fieldHeader > .removeButton:hover {
+    color: var(--error-dark);
+  }
+
+  > .fieldHeader > .fieldLabel {
+    font-weight: 600;
+  }
+
+  > .setItem {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  > .setItem > .weightInput,
+  > .setItem > .repsInput {
+    width: 5rem;
+  }
+}

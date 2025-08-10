@@ -33,7 +33,7 @@ const workouts = [
 export default function PlanCard({ className }: PlanCardProps) {
   return (
     <Card as='section' className={clsx(styles.container, className)}>
-      <Button variant='text'>Bro Split</Button>
+      <Button variant='text-lg'>Bro Split</Button>
       <ol role='list'>
         {workouts.map((workout, index) => (
           <ListItem

@@ -1,22 +1,23 @@
-import { SetTemplate } from '@/lib/api/db/sets/types';
+import { WorkoutInstance } from '@/lib/api/db/workouts/types';
 import clsx from 'clsx';
-import { groupSetTemplatesByExercise } from '../../helpers';
+import { groupSetsByExercise } from '../../../helpers';
 import styles from './exercise-list.module.css';
 
 type ExerciseListProps = {
   className?: string;
-  setTemplates: SetTemplate[] | null;
+  currentExerciseIndex?: number;
+  workoutInstance?: WorkoutInstance | null;
 };
 
 export default function ExerciseList({
   className,
-  setTemplates,
+  workoutInstance,
 }: ExerciseListProps) {
-  if (!setTemplates || setTemplates.length === 0) {
+  if (!workoutInstance || workoutInstance?.setTemplates?.length === 0) {
     return <p>No exercises logged for this workout.</p>;
   }
 
-  const exercises = groupSetTemplatesByExercise(setTemplates || []);
+  const exercises = groupSetsByExercise(workoutInstance);
 
   return (
     <ol role='list' className={clsx(styles.container, className)}>

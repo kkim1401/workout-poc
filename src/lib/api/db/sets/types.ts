@@ -1,4 +1,4 @@
-import { Tables } from '@/lib/supabase/database.types';
+import { Tables, TablesInsert } from '@/lib/supabase/database.types';
 
 export type SetTemplateDTO = Tables<'set_templates'>;
 
@@ -27,6 +27,7 @@ export function mapSetTemplateDTOToSetTemplate(
 }
 
 export type SetInstanceDTO = Tables<'set_instances'>;
+export type SetInstanceInsertDTO = TablesInsert<'set_instances'>;
 
 export type SetInstance = {
   id: string;

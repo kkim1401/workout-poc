@@ -44,7 +44,7 @@ export const getUserWorkoutInstanceById = async (
 ) => {
   const result = await client
     .from('workout_instances')
-    .select('*, workout_templates(set_templates(*))')
+    .select('*, set_instances(*), workout_templates(name, set_templates(*))')
     .eq('id', workoutInstanceId)
     .single();
 

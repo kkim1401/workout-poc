@@ -63,7 +63,11 @@ export default function CreateWorkoutForm({
           error={errors?.name?.message}
         />
         <ExerciseField className={styles.exerciseField} />
-        <Button disabled={isSubmitting} className={styles.saveWorkoutButton}>
+        <Button
+          type='submit'
+          disabled={isSubmitting}
+          className={styles.saveWorkoutButton}
+        >
           Submit
         </Button>
       </Card>
