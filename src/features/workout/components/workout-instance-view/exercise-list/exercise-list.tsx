@@ -1,11 +1,11 @@
 import { WorkoutInstance } from '@/lib/api/db/workouts/types';
 import clsx from 'clsx';
+import Link from 'next/link';
 import { groupSetsByExercise } from '../../../helpers';
 import styles from './exercise-list.module.css';
 
 type ExerciseListProps = {
   className?: string;
-  currentExerciseIndex?: number;
   workoutInstance?: WorkoutInstance | null;
 };
 
@@ -21,9 +21,14 @@ export default function ExerciseList({
 
   return (
     <ol role='list' className={clsx(styles.container, className)}>
-      {Object.values(exercises).map((exercise) => (
+      {Object.values(exercises).map((exercise, index) => (
         <li key={exercise.id} className={styles.exerciseItem}>
-          <span className='headline6'>{exercise.exerciseName}</span>
+          <Link
+            href={`/workouts/instances/${workoutInstance.id}?index=${index}`}
+            className='headline6'
+          >
+            {exercise.exerciseName}
+          </Link>
           <ol className={styles.setList}>
             {exercise.setTemplates.map((setTemplate) => (
               <li key={setTemplate.id} className={styles.setItem}>

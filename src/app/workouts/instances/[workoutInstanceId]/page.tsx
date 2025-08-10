@@ -8,10 +8,10 @@ export default async function ActiveWorkoutPage({
   searchParams,
 }: {
   params: Promise<{ workoutInstanceId: string }>;
-  searchParams: Promise<{ view?: string | undefined }>;
+  searchParams: Promise<{ index?: string | undefined }>;
 }) {
   const { workoutInstanceId } = await params;
-  const { view } = await searchParams;
+  const { index } = await searchParams;
   const supabase = await createClient();
 
   const { data: workoutInstance } = await getUserWorkoutInstanceById(
@@ -23,7 +23,7 @@ export default async function ActiveWorkoutPage({
     <section className={styles.container}>
       <WorkoutInstanceView
         className={styles.workoutInstanceView}
-        view={view}
+        currentExerciseIndex={index ? parseInt(index) : undefined}
         workoutInstance={workoutInstance}
       />
     </section>

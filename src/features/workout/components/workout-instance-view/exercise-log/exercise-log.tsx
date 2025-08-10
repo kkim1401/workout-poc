@@ -112,13 +112,11 @@ export default function ExerciseLog({
     });
   });
 
-  console.log({ workoutInstance });
-
   return (
     <section className={clsx(styles.container, className)}>
       <div className={styles.header}>
         <Link
-          href={`/workouts/instances/${workoutInstance?.id}?view=list`}
+          href={`/workouts/instances/${workoutInstance?.id}`}
           className='subtitle'
         >
           Back to list
