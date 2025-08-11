@@ -1,5 +1,5 @@
 import { type TypedSupabaseClient } from '@/lib/supabase/types';
-import { USER_PROFILE_SELECT } from './selectors';
+import { USER_PROFILE_SELECT } from '../selectors';
 
 export const getUser = (client: TypedSupabaseClient) => {
   return client.auth.getUser();

@@ -1,6 +1,6 @@
 import { type TypedSupabaseClient } from '@/lib/supabase/types';
+import { EXERCISE_SELECT } from '../selectors';
 import { mapExerciseDTOToExercise } from '../types';
-import { EXERCISE_SELECT } from './selectors';
 
 export const getAllUserExercises = async (client: TypedSupabaseClient) => {
   const result = await client
