@@ -9,7 +9,7 @@ import { useSupabaseBrowser } from '@/lib/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import styles from './exercise-log.module.css';
 import { Field } from './field';
@@ -27,18 +27,7 @@ export default function ExerciseLog({
 }: ExerciseLogProps) {
   const supabase = useSupabaseBrowser();
 
-  const methods = useForm({
-    resolver: zodResolver(logExerciseSchema),
-  });
-
   const [isEditing, setIsEditing] = useState(false);
-
-  const { control, handleSubmit } = methods;
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'sets',
-  });
 
   const exercise = useMemo(
     () =>
@@ -51,26 +40,37 @@ export default function ExerciseLog({
     [workoutInstance, currentExerciseIndex]
   );
 
-  useEffect(() => {
-    if (exercise) {
-      exercise.setTemplates.forEach((setTemplate) => {
-        if (!fields.some((field) => field.set_template_id === setTemplate.id)) {
-          // Find existing set instance for this template
-          const existingSetInstance = exercise.setInstances?.find(
-            (instance) => instance.setTemplateId === setTemplate.id
-          );
+  const initialSets = useMemo(() => {
+    return (
+      exercise?.setTemplates.map((setTemplate) => {
+        const existingSetInstance = exercise.setInstances?.find(
+          (instance) => instance.setTemplateId === setTemplate.id
+        );
 
-          append({
-            set_template_id: setTemplate.id,
-            reps_actual: existingSetInstance?.repsCompleted || null,
-            reps_target: setTemplate.repsTarget,
-            weight_actual: existingSetInstance?.weightUsed || null,
-            weight_target: setTemplate.weightTarget,
-          });
-        }
-      });
-    }
-  }, [append, exercise, fields]);
+        return {
+          set_template_id: setTemplate.id,
+          reps_actual: existingSetInstance?.repsCompleted || null,
+          reps_target: setTemplate.repsTarget,
+          weight_actual: existingSetInstance?.weightUsed || null,
+          weight_target: setTemplate.weightTarget,
+        };
+      }) || []
+    );
+  }, [exercise]);
+
+  const methods = useForm({
+    defaultValues: {
+      sets: initialSets,
+    },
+    resolver: zodResolver(logExerciseSchema),
+  });
+
+  const { control, handleSubmit } = methods;
+
+  const { fields, remove } = useFieldArray({
+    control,
+    name: 'sets',
+  });
 
   const createHandleDeleteSet = (index: number) => () => {
     if (!workoutInstance || !exercise) return;
@@ -98,17 +98,19 @@ export default function ExerciseLog({
     if (!workoutInstance || !exercise) return;
 
     fields.forEach((field, index) => {
-      createSetInstance(supabase, {
-        exercise_id: exercise.id,
-        workout_instance_id: workoutInstance.id,
-        set_template_id: field.set_template_id,
-        weight_actual: data.sets[index].weight_actual,
-        reps_actual: data.sets[index].reps_actual,
-        order_in_workout: index,
-        user_id: workoutInstance.userId,
-      }).catch((error) => {
-        console.error('Error creating set instance:', error);
-      });
+      if (data.sets[index].reps_actual !== null) {
+        createSetInstance(supabase, {
+          exercise_id: exercise.id,
+          workout_instance_id: workoutInstance.id,
+          set_template_id: field.set_template_id,
+          weight_actual: data.sets[index].weight_actual,
+          reps_actual: data.sets[index].reps_actual,
+          order_in_workout: index,
+          user_id: workoutInstance.userId,
+        }).catch((error) => {
+          console.error('Error creating set instance:', error);
+        });
+      }
     });
   });
 
@@ -129,13 +131,7 @@ export default function ExerciseLog({
         {exercise?.exerciseName}
       </h1>
       <FormProvider {...methods}>
-        <form
-          className={styles.form}
-          onSubmit={(e) => {
-            console.log('Form submit event fired');
-            onSubmit(e);
-          }}
-        >
+        <form className={styles.form} onSubmit={onSubmit}>
           {fields.map((field, index) => (
             <Field
               className={styles.field}

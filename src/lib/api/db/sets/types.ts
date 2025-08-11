@@ -1,6 +1,11 @@
 import { Tables, TablesInsert } from '@/lib/supabase/database.types';
+import { ExerciseOutputDTO } from '../exercises/types';
 
-export type SetTemplateDTO = Tables<'set_templates'>;
+export type SetTemplateOutputDTO = Tables<'set_templates'> & {
+  exercises: {
+    name: ExerciseOutputDTO['name'];
+  } | null;
+};
 
 export type SetTemplate = {
   id: string;
@@ -13,24 +18,30 @@ export type SetTemplate = {
 };
 
 export function mapSetTemplateDTOToSetTemplate(
-  set: SetTemplateDTO
+  set: SetTemplateOutputDTO
 ): SetTemplate {
   return {
     id: set.id,
     workoutTemplateId: set.workout_template_id,
     exerciseId: set.exercise_id,
-    exerciseName: set.exercise_name,
+    exerciseName: set.exercises?.name || '',
     repsTarget: set.reps_target,
     weightTarget: set.weight_target,
     rpeTarget: set.rpe_target,
   };
 }
 
-export type SetInstanceDTO = Tables<'set_instances'>;
-export type SetInstanceInsertDTO = TablesInsert<'set_instances'>;
+export type SetInstanceOutputDTO = Tables<'set_instances'> & {
+  exercises: {
+    name: ExerciseOutputDTO['name'];
+  } | null;
+};
+export type SetInstanceInputDTO = TablesInsert<'set_instances'>;
 
 export type SetInstance = {
   id: string;
+  exerciseId: string;
+  exerciseName: string;
   workoutInstanceId: string;
   setTemplateId: string | null;
   repsCompleted: number | null;
@@ -39,10 +50,12 @@ export type SetInstance = {
 };
 
 export function mapSetInstanceDTOToSetInstance(
-  set: SetInstanceDTO
+  set: SetInstanceOutputDTO
 ): SetInstance {
   return {
     id: set.id,
+    exerciseId: set.exercise_id,
+    exerciseName: set.exercises?.name || '',
     workoutInstanceId: set.workout_instance_id,
     setTemplateId: set.set_template_id,
     repsCompleted: set.reps_actual,

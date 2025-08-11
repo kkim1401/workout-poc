@@ -3,12 +3,12 @@ import {
   mapSetInstanceDTOToSetInstance,
   mapSetTemplateDTOToSetTemplate,
   SetInstance,
-  SetInstanceDTO,
+  SetInstanceOutputDTO,
   SetTemplate,
-  SetTemplateDTO,
+  SetTemplateOutputDTO,
 } from '../sets/types';
 
-export type WorkoutTemplateDTO = Tables<'workout_templates'>;
+export type WorkoutTemplateOutputDTO = Tables<'workout_templates'>;
 
 export type WorkoutTemplate = {
   id: string;
@@ -16,7 +16,7 @@ export type WorkoutTemplate = {
 };
 
 export function mapWorkoutTemplateDTOToWorkoutTemplate(
-  workout: WorkoutTemplateDTO
+  workout: WorkoutTemplateOutputDTO
 ): WorkoutTemplate {
   return {
     id: workout.id,
@@ -24,33 +24,33 @@ export function mapWorkoutTemplateDTOToWorkoutTemplate(
   };
 }
 
-export type WorkoutInstanceDTO = Tables<'workout_instances'> & {
-  workout_templates?: {
-    name?: WorkoutTemplateDTO['name'] | null;
-    set_templates?: SetTemplateDTO[];
+export type WorkoutInstanceOutputDTO = Tables<'workout_instances'> & {
+  workout_templates: {
+    name: WorkoutTemplateOutputDTO['name'];
+    set_templates: SetTemplateOutputDTO[] | null;
   } | null;
-  set_instances?: SetInstanceDTO[];
+  set_instances: SetInstanceOutputDTO[] | null;
 };
-export type WorkoutInstanceInsertDTO = TablesInsert<'workout_instances'>;
+export type WorkoutInstanceInputDTO = TablesInsert<'workout_instances'>;
 
 export type WorkoutInstance = {
   id: string;
-  name?: string | null;
+  name: string;
   workoutTemplateId: string;
   userId: string;
   createdAt: string;
   startedAt: string | null;
   completedAt: string | null;
-  setInstances?: SetInstance[] | null;
-  setTemplates?: SetTemplate[] | null;
+  setInstances: SetInstance[] | null;
+  setTemplates: SetTemplate[] | null;
 };
 
 export function mapWorkoutInstanceDTOToWorkoutInstance(
-  workout: WorkoutInstanceDTO
+  workout: WorkoutInstanceOutputDTO
 ): WorkoutInstance {
   return {
     id: workout.id,
-    name: workout?.workout_templates?.name,
+    name: workout?.workout_templates?.name || '',
     workoutTemplateId: workout.workout_template_id,
     userId: workout.user_id,
     createdAt: workout.created_at,

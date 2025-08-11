@@ -16,7 +16,7 @@ export default function ExerciseList({
     return <p>No exercises logged for this workout.</p>;
   }
 
-  const exercises = groupSetTemplatesByExercise(setTemplates || []);
+  const exercises = groupSetTemplatesByExercise(setTemplates);
 
   return (
     <ol role='list' className={clsx(styles.container, className)}>

@@ -1,5 +1,5 @@
 import { type TypedSupabaseClient } from '@/lib/supabase/types';
-import { ProfileInsertDTO, ProfileUpdateDTO } from './types';
+import { ProfileInputDTO, ProfileUpdateDTO } from './types';
 
 export const updateUserProfile = async (
   client: TypedSupabaseClient,
@@ -10,7 +10,7 @@ export const updateUserProfile = async (
 
 export const createUserProfile = async (
   client: TypedSupabaseClient,
-  profile: ProfileInsertDTO
+  profile: ProfileInputDTO
 ) => {
   return client.from('profiles').insert(profile);
 };

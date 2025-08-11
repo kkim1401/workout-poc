@@ -199,7 +199,6 @@ export type Database = {
         Row: {
           created_at: string | null;
           exercise_id: string;
-          exercise_name: string;
           id: string;
           order_in_workout: number | null;
           reps_target: number;
@@ -211,7 +210,6 @@ export type Database = {
         Insert: {
           created_at?: string | null;
           exercise_id: string;
-          exercise_name: string;
           id?: string;
           order_in_workout?: number | null;
           reps_target: number;
@@ -223,7 +221,6 @@ export type Database = {
         Update: {
           created_at?: string | null;
           exercise_id?: string;
-          exercise_name?: string;
           id?: string;
           order_in_workout?: number | null;
           reps_target?: number;
@@ -233,6 +230,13 @@ export type Database = {
           workout_template_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: 'set_templates_exercise_id_fkey';
+            columns: ['exercise_id'];
+            isOneToOne: false;
+            referencedRelation: 'exercises';
+            referencedColumns: ['id'];
+          },
           {
             foreignKeyName: 'set_templates_workout_template_id_fkey';
             columns: ['workout_template_id'];

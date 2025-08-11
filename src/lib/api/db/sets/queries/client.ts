@@ -1,4 +1,5 @@
 import { type TypedSupabaseClient } from '@/lib/supabase/types';
+import { SET_INSTANCE_SELECT, SET_TEMPLATE_SELECT } from '../selectors';
 import { mapSetTemplateDTOToSetTemplate } from '../types';
 
 // Set Template Queries
@@ -8,7 +9,7 @@ export const getUserSetTemplatesByWorkoutTemplateId = async (
 ) => {
   const result = await client
     .from('set_templates')
-    .select('*')
+    .select(SET_TEMPLATE_SELECT)
     .eq('workout_template_id', workoutId);
 
   if (result.error) {
@@ -28,7 +29,7 @@ export const getUserSetTemplateById = async (
 ) => {
   const result = await client
     .from('set_templates')
-    .select('*')
+    .select(SET_TEMPLATE_SELECT)
     .eq('id', setId)
     .single();
 
@@ -50,7 +51,7 @@ export const getUserSetInstancesByWorkoutTemplateId = (
 ) => {
   return client
     .from('set_instances')
-    .select('*')
+    .select(SET_INSTANCE_SELECT)
     .eq('workout_template_id', workoutId);
 };
 getUserSetInstancesByWorkoutTemplateId.getQueryKey = (workoutId: string) => [
@@ -64,7 +65,7 @@ export const getUserSetInstanceById = (
 ) => {
   return client
     .from('set_instances')
-    .select('*')
+    .select(SET_INSTANCE_SELECT)
     .eq('id', setInstanceId)
     .single();
 };

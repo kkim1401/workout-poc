@@ -1,20 +1,19 @@
 import { TypedSupabaseClient } from '@/lib/supabase/types';
-import { mapSetInstanceDTOToSetInstance, SetInstanceInsertDTO } from './types';
+import { SetInstanceInputDTO } from './types';
 
 export const createSetInstance = async (
   client: TypedSupabaseClient,
-  setInstance: SetInstanceInsertDTO
+  setInstance: SetInstanceInputDTO
 ) => {
-  console.log('Creating set instance:', setInstance);
   const result = await client
     .from('set_instances')
     .insert(setInstance)
-    .select()
+    .select('id')
     .single();
 
   if (result.error) {
     throw result.error;
   }
 
-  return mapSetInstanceDTOToSetInstance(result.data);
+  return result.data;
 };

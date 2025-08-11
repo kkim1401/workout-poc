@@ -1,5 +1,9 @@
 import { type TypedSupabaseClient } from '@/lib/supabase/types';
 import {
+  WORKOUT_INSTANCE_SELECT,
+  WORKOUT_TEMPLATE_BASE_SELECT,
+} from '../selectors';
+import {
   mapWorkoutInstanceDTOToWorkoutInstance,
   mapWorkoutTemplateDTOToWorkoutTemplate,
 } from '../types';
@@ -7,7 +11,9 @@ import {
 export const getAllUserWorkoutTemplates = async (
   client: TypedSupabaseClient
 ) => {
-  const result = await client.from('workout_templates').select('*');
+  const result = await client
+    .from('workout_templates')
+    .select(WORKOUT_TEMPLATE_BASE_SELECT);
 
   if (result.error) {
     throw result.error;
@@ -23,7 +29,7 @@ export const getUserWorkoutTemplateById = async (
 ) => {
   const result = await client
     .from('workout_templates')
-    .select('*')
+    .select(WORKOUT_TEMPLATE_BASE_SELECT)
     .eq('id', workoutTemplateId)
     .single();
 
@@ -44,7 +50,7 @@ export const getUserWorkoutInstanceById = async (
 ) => {
   const result = await client
     .from('workout_instances')
-    .select('*, set_instances(*), workout_templates(name, set_templates(*))')
+    .select(WORKOUT_INSTANCE_SELECT)
     .eq('id', workoutInstanceId)
     .single();
 
@@ -65,7 +71,7 @@ export const getActiveUserWorkoutInstanceByWorkoutTemplateId = async (
 ) => {
   const result = await client
     .from('workout_instances')
-    .select('*, workout_templates(name)')
+    .select(WORKOUT_INSTANCE_SELECT)
     .eq('workout_template_id', workoutTemplateId)
     .is('completed_at', null)
     .order('created_at', { ascending: false })

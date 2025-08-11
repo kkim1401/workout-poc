@@ -5,7 +5,7 @@ import { SetTemplate } from '@/lib/api/db/sets/types';
 import { createWorkoutInstance } from '@/lib/api/db/workouts/mutations';
 import {
   WorkoutInstance,
-  WorkoutInstanceInsertDTO,
+  WorkoutInstanceInputDTO,
   WorkoutTemplate,
 } from '@/lib/api/db/workouts/types';
 import { createClient } from '@/lib/supabase/client';
@@ -34,7 +34,7 @@ export default function WorkoutTemplateView({
   const router = useRouter();
 
   const { mutate: startWorkout, isPending } = useMutation({
-    mutationFn: (data: WorkoutInstanceInsertDTO) =>
+    mutationFn: (data: WorkoutInstanceInputDTO) =>
       createWorkoutInstance(supabase, data),
     onSuccess: (data) => {
       router.push(`/workouts/instances/${data.id}`);

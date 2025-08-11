@@ -13,7 +13,7 @@ export default function ExerciseList({
   className,
   workoutInstance,
 }: ExerciseListProps) {
-  if (!workoutInstance || workoutInstance?.setTemplates?.length === 0) {
+  if (!workoutInstance) {
     return <p>No exercises logged for this workout.</p>;
   }
 
@@ -30,12 +30,15 @@ export default function ExerciseList({
             {exercise.exerciseName}
           </Link>
           <ol className={styles.setList}>
-            {exercise.setTemplates.map((setTemplate) => (
-              <li key={setTemplate.id} className={styles.setItem}>
-                <span>{setTemplate.weightTarget} lbs, </span>
-                <span>{setTemplate.repsTarget} reps</span>
-              </li>
-            ))}
+            {exercise.setInstances.map(
+              (setInstance) =>
+                typeof setInstance.repsCompleted === 'number' && (
+                  <li key={setInstance.id} className={styles.setItem}>
+                    <span>{setInstance.weightUsed} lbs, </span>
+                    <span>{setInstance.repsCompleted} reps</span>
+                  </li>
+                )
+            )}
           </ol>
         </li>
       ))}
