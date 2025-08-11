@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "clean": "rm -rf .next",
     "dev": "next dev --turbopack",
     "lint": "next lint",
     "lint-staged": "lint-staged",
@@ -11,7 +12,8 @@
     "pull-env": "vercel env pull",
     "pull-types": "cross-env dotenv -e .env.local -- supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/lib/supabase/database-generated.types.ts",
     "start": "next start",
-    "test": "TZ=UTC jest"
+    "test": "TZ=UTC jest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

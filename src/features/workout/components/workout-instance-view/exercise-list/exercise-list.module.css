@@ -1,0 +1,11 @@
+.container {
+  list-style: none;
+
+  > .exerciseItem:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  > .exerciseItem > .setList {
+    padding: 0 32px;
+  }
+}

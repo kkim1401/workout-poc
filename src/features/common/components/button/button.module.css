@@ -76,6 +76,9 @@
   &.text {
     background-color: transparent;
     color: var(--primary-dark);
+  }
+
+  &.text.large {
     font-size: 1.5rem;
   }
 

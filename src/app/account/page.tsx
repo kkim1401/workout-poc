@@ -1,6 +1,6 @@
 import { SettingsForm } from '@/features/account/components';
 import { Card } from '@/features/common/components';
-import { getUserProfile } from '@/lib/api/db/user/queries/server';
+import { getUser, getUserProfile } from '@/lib/api/db/user/queries/server';
 import { createClient } from '@/lib/supabase/server';
 import clsx from 'clsx';
 import { type Metadata } from 'next';
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function AccountPage() {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await getUser(supabase);
   if (error || !data?.user) {
     redirect('/login');
   }

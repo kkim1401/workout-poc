@@ -2,38 +2,77 @@
 
 import { Button, Card } from '@/features/common/components';
 import { SetTemplate } from '@/lib/api/db/sets/types';
-import { WorkoutTemplate } from '@/lib/api/db/workouts/types';
+import { createWorkoutInstance } from '@/lib/api/db/workouts/mutations';
+import {
+  WorkoutInstance,
+  WorkoutInstanceInputDTO,
+  WorkoutTemplate,
+} from '@/lib/api/db/workouts/types';
+import { createClient } from '@/lib/supabase/client';
+import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
-// import { useRouter } from 'next/navigation';
-// import { useActiveWorkout } from '../../hooks';
+import { useRouter } from 'next/navigation';
 import ExerciseList from './exercise-list';
 import styles from './workout-template-view.module.css';
 
 type WorkoutTemplateViewProps = {
   className?: string;
-  workoutTemplate: WorkoutTemplate | null;
+  userId: string;
   setTemplates: SetTemplate[] | null;
+  workoutInstance: WorkoutInstance | null;
+  workoutTemplate: WorkoutTemplate | null;
 };
 
 export default function WorkoutTemplateView({
   className,
   setTemplates,
+  userId,
+  workoutInstance,
   workoutTemplate,
 }: WorkoutTemplateViewProps) {
-  // const { startWorkout } = useActiveWorkout();
-  // const router = useRouter();
+  const supabase = createClient();
+  const router = useRouter();
 
-  const handleClick = () => {};
+  const { mutate: startWorkout, isPending } = useMutation({
+    mutationFn: (data: WorkoutInstanceInputDTO) =>
+      createWorkoutInstance(supabase, data),
+    onSuccess: (data) => {
+      router.push(`/workouts/instances/${data.id}`);
+      router.refresh();
+    },
+  });
+
+  const handleClick = () => {
+    if (isPending) return;
+
+    if (workoutInstance) {
+      router.push(`/workouts/instances/${workoutInstance.id}`);
+      return;
+    }
+
+    if (workoutTemplate) {
+      startWorkout({
+        user_id: userId,
+        workout_template_id: workoutTemplate.id,
+      });
+    }
+  };
 
   return (
     <Card className={clsx(styles.container, className)}>
-      <h1 className='headline4'>{workoutTemplate?.name}</h1>
+      <h1 className='headline4'>
+        {workoutTemplate?.name || workoutInstance?.name || 'Unknown Workout'}
+      </h1>
       <ExerciseList
         setTemplates={setTemplates}
         className={styles.exerciseList}
       />
-      <Button onClick={handleClick} className={styles.startButton}>
-        Start
+      <Button
+        disabled={isPending}
+        onClick={handleClick}
+        className={styles.startButton}
+      >
+        {workoutInstance ? 'Continue Workout' : 'Start Workout'}
       </Button>
     </Card>
   );

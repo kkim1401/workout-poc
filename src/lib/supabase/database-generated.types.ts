@@ -124,7 +124,6 @@ export type Database = {
           completed_at: string | null;
           created_at: string | null;
           exercise_id: string;
-          exercise_name: string;
           id: string;
           notes: string | null;
           order_in_workout: number;
@@ -142,7 +141,6 @@ export type Database = {
           completed_at?: string | null;
           created_at?: string | null;
           exercise_id: string;
-          exercise_name: string;
           id?: string;
           notes?: string | null;
           order_in_workout: number;
@@ -160,7 +158,6 @@ export type Database = {
           completed_at?: string | null;
           created_at?: string | null;
           exercise_id?: string;
-          exercise_name?: string;
           id?: string;
           notes?: string | null;
           order_in_workout?: number;
@@ -202,7 +199,6 @@ export type Database = {
         Row: {
           created_at: string | null;
           exercise_id: string;
-          exercise_name: string;
           id: string;
           order_in_workout: number | null;
           reps_target: number;
@@ -214,7 +210,6 @@ export type Database = {
         Insert: {
           created_at?: string | null;
           exercise_id: string;
-          exercise_name: string;
           id?: string;
           order_in_workout?: number | null;
           reps_target: number;
@@ -226,7 +221,6 @@ export type Database = {
         Update: {
           created_at?: string | null;
           exercise_id?: string;
-          exercise_name?: string;
           id?: string;
           order_in_workout?: number | null;
           reps_target?: number;
@@ -236,6 +230,13 @@ export type Database = {
           workout_template_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: 'set_templates_exercise_id_fkey';
+            columns: ['exercise_id'];
+            isOneToOne: false;
+            referencedRelation: 'exercises';
+            referencedColumns: ['id'];
+          },
           {
             foreignKeyName: 'set_templates_workout_template_id_fkey';
             columns: ['workout_template_id'];
@@ -251,7 +252,6 @@ export type Database = {
           created_at: string;
           description: string | null;
           id: string;
-          name: string;
           notes: string | null;
           order_in_plan: number | null;
           started_at: string;
@@ -263,7 +263,6 @@ export type Database = {
           created_at?: string;
           description?: string | null;
           id?: string;
-          name: string;
           notes?: string | null;
           order_in_plan?: number | null;
           started_at?: string;
@@ -275,7 +274,6 @@ export type Database = {
           created_at?: string;
           description?: string | null;
           id?: string;
-          name?: string;
           notes?: string | null;
           order_in_plan?: number | null;
           started_at?: string;

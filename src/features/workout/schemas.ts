@@ -30,3 +30,35 @@ export const createWorkoutSchema = z.strictObject({
     .array(workoutExerciseSchema)
     .min(1, 'At least one exercise is required'),
 });
+
+/**
+ * For logging an exercise.
+ */
+
+export const setSchema = z.strictObject({
+  set_template_id: z.string().nullable(),
+  reps_actual: z
+    .number('Reps must be a number')
+    .int('Reps must be an integer')
+    .positive('Reps must be positive')
+    .nullable(),
+  reps_target: z
+    .number('Reps must be a number')
+    .int('Reps must be an integer')
+    .positive('Reps must be positive')
+    .nullable(),
+  weight_actual: z
+    .number('Weight must be a number')
+    .positive('Weight must positive')
+    .nullable(),
+  weight_target: z
+    .number('Weight must be a number')
+    .positive('Weight must positive')
+    .nullable(),
+});
+
+export type SetSchema = z.infer<typeof setSchema>;
+
+export const logExerciseSchema = z.strictObject({
+  sets: z.array(setSchema).min(1, 'At least one set is required'),
+});

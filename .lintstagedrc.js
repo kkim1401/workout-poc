@@ -8,6 +8,9 @@ const buildEslintCommand = (filenames) =>
 const buildPrettierCommand = (filenames) =>
   `prettier --write ${filenames.join(' ')}`;
 
+const buildTypecheckCommand = () => 'tsc --noEmit';
+
 module.exports = {
   '*.{js,jsx,ts,tsx}': [buildEslintCommand, buildPrettierCommand],
+  '*.{ts,tsx}': [buildTypecheckCommand],
 };
