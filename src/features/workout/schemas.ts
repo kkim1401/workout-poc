@@ -36,6 +36,7 @@ export const createWorkoutSchema = z.strictObject({
  */
 
 export const setSchema = z.strictObject({
+  set_instance_id: z.string().nullable(),
   set_template_id: z.string().nullable(),
   reps_actual: z
     .number('Reps must be a number')

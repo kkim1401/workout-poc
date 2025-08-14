@@ -90,15 +90,3 @@ export const groupSetsByExercise = (workoutInstance: WorkoutInstance) => {
 
   return grouped;
 };
-
-export const getExerciseByIndexFromWorkoutInstance = (
-  workoutInstance: WorkoutInstance,
-  index: number
-) => {
-  const exercises = groupSetsByExercise(workoutInstance);
-  const exerciseKeys = Object.keys(exercises);
-  if (index < 0 || index >= exerciseKeys.length) {
-    return null;
-  }
-  return exercises[exerciseKeys[index]];
-};
