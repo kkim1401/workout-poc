@@ -12,6 +12,7 @@ import { createClient } from '@/lib/supabase/client';
 import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
+import { revalidateWorkoutTemplate } from '../../actions';
 import ExerciseList from './exercise-list';
 import styles from './workout-template-view.module.css';
 
@@ -37,8 +38,10 @@ export default function WorkoutTemplateView({
     mutationFn: (data: WorkoutInstanceInputDTO) =>
       createWorkoutInstance(supabase, data),
     onSuccess: (data) => {
+      if (workoutTemplate) {
+        revalidateWorkoutTemplate(workoutTemplate.id);
+      }
       router.push(`/workouts/instances/${data.id}`);
-      router.refresh();
     },
   });
 

@@ -1,7 +1,8 @@
 'use client';
 
 import { Button } from '@/features/common/components';
-import { getExerciseByIndexFromWorkoutInstance } from '@/features/workout/helpers';
+import { revalidateWorkoutInstance } from '@/features/workout/actions';
+import { groupSetsByExercise } from '@/features/workout/helpers';
 import { logExerciseSchema } from '@/features/workout/schemas';
 import { createSetInstance } from '@/lib/api/db/sets/mutations';
 import { WorkoutInstance } from '@/lib/api/db/workouts/types';
@@ -9,7 +10,8 @@ import { useSupabaseBrowser } from '@/lib/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import styles from './exercise-log.module.css';
 import { Field } from './field';
@@ -26,18 +28,38 @@ export default function ExerciseLog({
   workoutInstance,
 }: ExerciseLogProps) {
   const supabase = useSupabaseBrowser();
+  const router = useRouter();
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const exercise = useMemo(
-    () =>
-      workoutInstance
-        ? getExerciseByIndexFromWorkoutInstance(
-            workoutInstance,
-            currentExerciseIndex
-          )
-        : null,
-    [workoutInstance, currentExerciseIndex]
+  const exercises = useMemo(
+    () => (workoutInstance ? groupSetsByExercise(workoutInstance) : null),
+    [workoutInstance]
+  );
+
+  const exercise = useMemo(() => {
+    const exerciseKeys = Object.keys(exercises || {});
+    if (
+      currentExerciseIndex < 0 ||
+      currentExerciseIndex >= exerciseKeys.length
+    ) {
+      return null;
+    }
+    return exercises?.[exerciseKeys[currentExerciseIndex]];
+  }, [exercises, currentExerciseIndex]);
+
+  const exerciseIndex = useMemo(() => {
+    return Object.keys(exercises || {}).indexOf(exercise?.id || '');
+  }, [exercises, exercise]);
+
+  const startSetTemplatesIndex = Object.values(exercises || {}).reduce(
+    (acc, exercise, currIndex) => {
+      if (currIndex >= exerciseIndex) {
+        return acc;
+      }
+      return acc + exercise.setTemplates.length;
+    },
+    0
   );
 
   const initialSets = useMemo(() => {
@@ -49,6 +71,7 @@ export default function ExerciseLog({
 
         return {
           set_template_id: setTemplate.id,
+          set_instance_id: existingSetInstance?.id || null,
           reps_actual: existingSetInstance?.repsCompleted || null,
           reps_target: setTemplate.repsTarget,
           weight_actual: existingSetInstance?.weightUsed || null,
@@ -65,53 +88,74 @@ export default function ExerciseLog({
     resolver: zodResolver(logExerciseSchema),
   });
 
-  const { control, handleSubmit } = methods;
+  const { control, handleSubmit, reset } = methods;
 
   const { fields, remove } = useFieldArray({
     control,
     name: 'sets',
   });
 
-  const createHandleDeleteSet = (index: number) => () => {
+  /**
+   * Reset the form with initial sets when the component mounts.
+   * This ensures that the user will see updated exercise data when they
+   * navigate to the next or previous exercise.
+   */
+  useEffect(() => {
+    reset({ sets: initialSets });
+  }, [reset, initialSets]);
+
+  const createHandleDeleteSet = (index: number) => async () => {
     if (!workoutInstance || !exercise) return;
 
     if (fields.length > 1) {
-      createSetInstance(supabase, {
-        exercise_id: exercise?.id,
-        workout_instance_id: workoutInstance?.id,
-        set_template_id: fields[index].set_template_id,
-        weight_actual: null,
-        reps_actual: null,
-        order_in_workout: index,
-        user_id: workoutInstance.userId,
-      })
-        .then(() => {
-          remove(index);
-        })
-        .catch((error) => {
-          console.error('Error deleting set instance:', error);
+      try {
+        await createSetInstance(supabase, {
+          exercise_id: exercise?.id,
+          workout_instance_id: workoutInstance?.id,
+          set_template_id: fields[index].set_template_id,
+          weight_actual: null,
+          reps_actual: null,
+          order_in_workout: startSetTemplatesIndex + index,
+          user_id: workoutInstance.userId,
         });
+        remove(index);
+        await revalidateWorkoutInstance(workoutInstance.id);
+      } catch (error) {
+        console.error('Error deleting set instance:', error);
+      }
     }
   };
 
   const onSubmit = handleSubmit(async (data) => {
     if (!workoutInstance || !exercise) return;
 
-    fields.forEach((field, index) => {
-      if (data.sets[index].reps_actual !== null) {
-        createSetInstance(supabase, {
+    const promises = fields.map((field, index) => {
+      if (
+        typeof data.sets[index].reps_actual === 'number' &&
+        data.sets[index].set_instance_id === null
+      ) {
+        return createSetInstance(supabase, {
           exercise_id: exercise.id,
           workout_instance_id: workoutInstance.id,
           set_template_id: field.set_template_id,
           weight_actual: data.sets[index].weight_actual,
           reps_actual: data.sets[index].reps_actual,
-          order_in_workout: index,
+          order_in_workout: startSetTemplatesIndex + index,
           user_id: workoutInstance.userId,
-        }).catch((error) => {
-          console.error('Error creating set instance:', error);
         });
       }
+      return Promise.resolve();
     });
+
+    try {
+      await Promise.all(promises);
+      await revalidateWorkoutInstance(workoutInstance.id);
+      router.push(
+        `/workouts/instances/${workoutInstance.id}?index=${exerciseIndex + 1}`
+      );
+    } catch (error) {
+      console.error('Error creating set instances:', error);
+    }
   });
 
   return (
@@ -148,8 +192,8 @@ export default function ExerciseLog({
                 Add
               </Button>
             ) : (
-              <Button type='submit' className={styles.completeButton}>
-                Complete
+              <Button type='submit' className={styles.nextButton}>
+                Next
               </Button>
             )}
           </div>

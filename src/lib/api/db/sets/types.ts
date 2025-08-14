@@ -40,6 +40,7 @@ export type SetInstanceInputDTO = TablesInsert<'set_instances'>;
 
 export type SetInstance = {
   id: string;
+  orderInWorkout: number;
   exerciseId: string;
   exerciseName: string;
   workoutInstanceId: string;
@@ -54,6 +55,7 @@ export function mapSetInstanceDTOToSetInstance(
 ): SetInstance {
   return {
     id: set.id,
+    orderInWorkout: set.order_in_workout,
     exerciseId: set.exercise_id,
     exerciseName: set.exercises?.name || '',
     workoutInstanceId: set.workout_instance_id,

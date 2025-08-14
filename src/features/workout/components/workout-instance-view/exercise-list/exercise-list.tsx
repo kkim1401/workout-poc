@@ -1,3 +1,4 @@
+import { SetInstance } from '@/lib/api/db/sets/types';
 import { WorkoutInstance } from '@/lib/api/db/workouts/types';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -8,6 +9,9 @@ type ExerciseListProps = {
   className?: string;
   workoutInstance?: WorkoutInstance | null;
 };
+
+const sortSetInstances = (setInstances: SetInstance[]) =>
+  setInstances.sort((a, b) => a.orderInWorkout - b.orderInWorkout);
 
 export default function ExerciseList({
   className,
@@ -30,7 +34,7 @@ export default function ExerciseList({
             {exercise.exerciseName}
           </Link>
           <ol className={styles.setList}>
-            {exercise.setInstances.map(
+            {sortSetInstances(exercise.setInstances).map(
               (setInstance) =>
                 typeof setInstance.repsCompleted === 'number' && (
                   <li key={setInstance.id} className={styles.setItem}>
