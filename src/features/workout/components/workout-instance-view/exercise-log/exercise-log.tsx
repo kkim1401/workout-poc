@@ -95,6 +95,11 @@ export default function ExerciseLog({
     name: 'sets',
   });
 
+  /**
+   * Reset the form with initial sets when the component mounts.
+   * This ensures that the user will see updated exercise data when they
+   * navigate to the next or previous exercise.
+   */
   useEffect(() => {
     reset({ sets: initialSets });
   }, [reset, initialSets]);
