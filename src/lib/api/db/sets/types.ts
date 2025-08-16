@@ -1,8 +1,9 @@
+import { TablesUpdate } from '@/lib/supabase/database-generated.types';
 import { Tables, TablesInsert } from '@/lib/supabase/database.types';
 import { ExerciseOutputDTO } from '../exercises/types';
 
 export type SetTemplateOutputDTO = Tables<'set_templates'> & {
-  exercises: {
+  exercises?: {
     name: ExerciseOutputDTO['name'];
   } | null;
 };
@@ -32,11 +33,12 @@ export function mapSetTemplateDTOToSetTemplate(
 }
 
 export type SetInstanceOutputDTO = Tables<'set_instances'> & {
-  exercises: {
+  exercises?: {
     name: ExerciseOutputDTO['name'];
   } | null;
 };
 export type SetInstanceInputDTO = TablesInsert<'set_instances'>;
+export type SetInstanceUpdateDTO = TablesUpdate<'set_instances'>;
 
 export type SetInstance = {
   id: string;

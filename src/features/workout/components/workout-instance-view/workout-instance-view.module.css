@@ -1,0 +1,14 @@
+.container {
+  > .exerciseList {
+    margin-top: 0.5rem;
+  }
+
+  > .completeButton {
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  > .completedAt {
+    margin-top: 1rem;
+  }
+}
