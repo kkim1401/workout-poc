@@ -5,9 +5,15 @@ import { revalidateWorkoutInstance } from '@/features/workout/actions';
 import { groupSetsByExercise } from '@/features/workout/helpers';
 import { logExerciseSchema } from '@/features/workout/schemas';
 import { createSetInstance } from '@/lib/api/db/sets/mutations';
-import { WorkoutInstance } from '@/lib/api/db/workouts/types';
+import { SetInstanceInputDTO } from '@/lib/api/db/sets/types';
+import { updateWorkoutInstance } from '@/lib/api/db/workouts/mutations';
+import {
+  WorkoutInstance,
+  WorkoutInstanceUpdateDTO,
+} from '@/lib/api/db/workouts/types';
 import { useSupabaseBrowser } from '@/lib/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -29,6 +35,20 @@ export default function ExerciseLog({
 }: ExerciseLogProps) {
   const supabase = useSupabaseBrowser();
   const router = useRouter();
+
+  const { mutateAsync: createSet } = useMutation({
+    mutationFn: (data: SetInstanceInputDTO) =>
+      createSetInstance(supabase, data),
+  });
+
+  const { mutateAsync: updateWorkout } = useMutation({
+    mutationFn: (data: WorkoutInstanceUpdateDTO) =>
+      updateWorkoutInstance(
+        supabase,
+        (workoutInstance as WorkoutInstance).id,
+        data
+      ),
+  });
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -129,12 +149,16 @@ export default function ExerciseLog({
   const onSubmit = handleSubmit(async (data) => {
     if (!workoutInstance || !exercise) return;
 
+    let setInstanceCreated = false;
     const promises = fields.map((field, index) => {
+      // Not the right condition. Need to be able to diff the current form data
+      // with the existing set instances to determine if they need to be updated.
       if (
         typeof data.sets[index].reps_actual === 'number' &&
         data.sets[index].set_instance_id === null
       ) {
-        return createSetInstance(supabase, {
+        setInstanceCreated = true;
+        return createSet({
           exercise_id: exercise.id,
           workout_instance_id: workoutInstance.id,
           set_template_id: field.set_template_id,
@@ -146,6 +170,15 @@ export default function ExerciseLog({
       }
       return Promise.resolve();
     });
+
+    if (setInstanceCreated) {
+      promises.push(
+        updateWorkout({
+          id: workoutInstance.id,
+          completed_at: null,
+        })
+      );
+    }
 
     try {
       await Promise.all(promises);
