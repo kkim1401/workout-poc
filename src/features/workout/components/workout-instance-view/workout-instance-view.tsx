@@ -2,10 +2,7 @@
 
 import { Button, Card } from '@/features/common/components';
 import { updateWorkoutInstance } from '@/lib/api/db/workouts/mutations';
-import {
-  WorkoutInstance,
-  WorkoutInstanceUpdateDTO,
-} from '@/lib/api/db/workouts/types';
+import { WorkoutInstance } from '@/lib/api/db/workouts/types';
 import { useSupabaseBrowser } from '@/lib/supabase/client';
 import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
@@ -27,12 +24,8 @@ export default function WorkoutInstanceView({
 }: WorkoutInstanceViewProps) {
   const supabase = useSupabaseBrowser();
   const { mutate: updateWorkout, isPending } = useMutation({
-    mutationFn: (data: WorkoutInstanceUpdateDTO) => {
-      return updateWorkoutInstance(
-        supabase,
-        (workoutInstance as WorkoutInstance).id,
-        data
-      );
+    mutationFn: (data: Parameters<typeof updateWorkoutInstance>[1]) => {
+      return updateWorkoutInstance(supabase, data);
     },
     onSuccess: () => {
       if (workoutInstance) {

@@ -4,17 +4,17 @@ import { Button } from '@/features/common/components';
 import { revalidateWorkoutInstance } from '@/features/workout/actions';
 import { groupSetsByExercise } from '@/features/workout/helpers';
 import { logExerciseSchema } from '@/features/workout/schemas';
-import { createSetInstance } from '@/lib/api/db/sets/mutations';
-import { SetInstanceInputDTO } from '@/lib/api/db/sets/types';
-import { updateWorkoutInstance } from '@/lib/api/db/workouts/mutations';
 import {
-  WorkoutInstance,
-  WorkoutInstanceUpdateDTO,
-} from '@/lib/api/db/workouts/types';
+  createSetInstance,
+  updateSetInstance,
+} from '@/lib/api/db/sets/mutations';
+import { updateWorkoutInstance } from '@/lib/api/db/workouts/mutations';
+import { WorkoutInstance } from '@/lib/api/db/workouts/types';
 import { useSupabaseBrowser } from '@/lib/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
+import { isEmpty } from 'lodash-es';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -37,17 +37,18 @@ export default function ExerciseLog({
   const router = useRouter();
 
   const { mutateAsync: createSet } = useMutation({
-    mutationFn: (data: SetInstanceInputDTO) =>
+    mutationFn: (data: Parameters<typeof createSetInstance>[1]) =>
       createSetInstance(supabase, data),
   });
 
+  const { mutateAsync: updateSet } = useMutation({
+    mutationFn: (data: Parameters<typeof updateSetInstance>[1]) =>
+      updateSetInstance(supabase, data),
+  });
+
   const { mutateAsync: updateWorkout } = useMutation({
-    mutationFn: (data: WorkoutInstanceUpdateDTO) =>
-      updateWorkoutInstance(
-        supabase,
-        (workoutInstance as WorkoutInstance).id,
-        data
-      ),
+    mutationFn: (data: Parameters<typeof updateWorkoutInstance>[1]) =>
+      updateWorkoutInstance(supabase, data),
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -149,15 +150,13 @@ export default function ExerciseLog({
   const onSubmit = handleSubmit(async (data) => {
     if (!workoutInstance || !exercise) return;
 
-    let setInstanceCreated = false;
-    const promises = fields.map((field, index) => {
-      // Not the right condition. Need to be able to diff the current form data
-      // with the existing set instances to determine if they need to be updated.
+    let setDirty = false;
+    const promises: Promise<unknown>[] = fields.map((field, index) => {
       if (
         typeof data.sets[index].reps_actual === 'number' &&
         data.sets[index].set_instance_id === null
       ) {
-        setInstanceCreated = true;
+        setDirty = true;
         return createSet({
           exercise_id: exercise.id,
           workout_instance_id: workoutInstance.id,
@@ -168,10 +167,43 @@ export default function ExerciseLog({
           user_id: workoutInstance.userId,
         });
       }
+
+      if (
+        typeof data.sets[index].reps_actual === 'number' &&
+        data.sets[index].set_instance_id !== null
+      ) {
+        const diffs = {
+          weight_actual:
+            data.sets[index].weight_actual === initialSets[index].weight_actual,
+          reps_actual:
+            data.sets[index].reps_actual === initialSets[index].reps_actual,
+        };
+        if (Object.values(diffs).some((v) => !v)) {
+          const updates = Object.entries(diffs).reduce(
+            (acc, [key, equals]) => {
+              if (!equals) {
+                acc[key as keyof typeof diffs] =
+                  data.sets[index][key as keyof typeof diffs];
+              }
+              return acc;
+            },
+            {} as Partial<Pick<(typeof data.sets)[number], keyof typeof diffs>>
+          );
+          if (!isEmpty(updates)) {
+            setDirty = true;
+            return updateSet({
+              id: data.sets[index].set_instance_id,
+              ...updates,
+            });
+          }
+        }
+      }
+
+      // If the condition reaches here, the set doesn't need to be updated.
       return Promise.resolve();
     });
 
-    if (setInstanceCreated) {
+    if (setDirty) {
       promises.push(
         updateWorkout({
           id: workoutInstance.id,
