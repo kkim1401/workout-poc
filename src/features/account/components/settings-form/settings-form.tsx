@@ -72,7 +72,7 @@ export default function SettingsForm({
   });
 
   const updateMutation = useMutation({
-    mutationFn: (data: ProfileFormData) => {
+    mutationFn: (data: Parameters<typeof updateUserProfile>[1]) => {
       if (initialProfile) {
         return updateUserProfile(supabase, data);
       } else {

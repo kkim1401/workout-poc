@@ -3,11 +3,7 @@
 import { Button, Card } from '@/features/common/components';
 import { SetTemplate } from '@/lib/api/db/sets/types';
 import { createWorkoutInstance } from '@/lib/api/db/workouts/mutations';
-import {
-  WorkoutInstance,
-  WorkoutInstanceInputDTO,
-  WorkoutTemplate,
-} from '@/lib/api/db/workouts/types';
+import { WorkoutInstance, WorkoutTemplate } from '@/lib/api/db/workouts/types';
 import { createClient } from '@/lib/supabase/client';
 import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
@@ -35,7 +31,7 @@ export default function WorkoutTemplateView({
   const router = useRouter();
 
   const { mutate: startWorkout, isPending } = useMutation({
-    mutationFn: (data: WorkoutInstanceInputDTO) =>
+    mutationFn: (data: Parameters<typeof createWorkoutInstance>[1]) =>
       createWorkoutInstance(supabase, data),
     onSuccess: (data) => {
       if (workoutTemplate) {

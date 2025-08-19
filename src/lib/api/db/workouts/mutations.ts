@@ -25,13 +25,14 @@ export const createWorkoutInstance = async (
 
 export const updateWorkoutInstance = async (
   client: TypedSupabaseClient,
-  id: string,
-  updates: WorkoutInstanceUpdateDTO
+  workoutInstance: WorkoutInstanceUpdateDTO
 ) => {
+  if (!workoutInstance?.id) return null;
+
   const result = await client
     .from('workout_instances')
-    .update(updates)
-    .eq('id', id)
+    .update(workoutInstance)
+    .eq('id', workoutInstance.id)
     .select(WORKOUT_INSTANCE_BASE_SELECT)
     .single();
 
